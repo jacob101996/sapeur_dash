@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Basic page needs
+    ============================================ -->
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="">
+
+    <!-- Google web fonts
+    ============================================ -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{ asset('bootstrap/') }}css/animate.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/') }}css/fontello.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/') }}css/bootstrap.min.css">
+
+    <!-- Theme CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{ asset('bootstrap/') }}js/layerslider/css/layerslider.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/') }}js/owlcarousel/owl.carousel.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/') }}js/colorpicker/colorpicker.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/') }}js/arcticmodal/jquery.arcticmodal.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/') }}css/style.css">
+
+    <!-- Old IE stylesheet
+    ============================================ -->
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/') }}css/oldie.css">
+    <![endif]-->
+</head>
+<body class="front_page">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=194364450619191";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+<div class="wide_layout">
+
+    <!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->
+
+    {% include '_header_home.html.twig' %}
+
+    <!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
+
+    <!-- - - - - - - - - - - - - - Layer slider - - - - - - - - - - - - - - - - -->
+
+    {% include '_slider_home.html.twig' %}
+
+    <!-- - - - - - - - - - - - - - End of layer slider - - - - - - - - - - - - - - - - -->
+
+    <!-- - - - - - - - - - - - - - Page Wrapper - - - - - - - - - - - - - - - - -->
+
+    <div class="page_wrapper">
+
+        <div class="container">
+
+        {% include '_category_home.html.twig' %}
+
+            <div class="row">
+
+            {% block content %}{% endblock %}
+
+            </div><!--/ .row-->
+
+        </div><!--/ .container-->
+
+    </div><!--/ .page_wrapper-->
+
+    <!-- - - - - - - - - - - - - - End Page Wrapper - - - - - - - - - - - - - - - - -->
+
+    <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
+
+    {% include '_footer_home.html.twig' %}
+
+    <!-- - - - - - - - - - - - - - End Footer - - - - - - - - - - - - - - - - -->
+
+</div><!--/ [layout]-->
+
+<!-- - - - - - - - - - - - - - End Main Wrapper - - - - - - - - - - - - - - - - -->
+
+<!-- JS Libs
+    ============================================ -->
+<script src="{{ asset('bootstrap/') }}js/modernizr.js"></script>
+<script src="{{ asset('bootstrap/') }}js/jquery-2.1.1.min.js"></script>
+<script src="{{ asset('bootstrap/') }}js/queryloader2.min.js"></script>
+
+<script src="{{ asset('bootstrap/') }}js/modernizr.js"></script>
+
+<!-- Include Libs & Plugins
+============================================ -->
+<script src="{{ asset('bootstrap/') }}js/layerslider/js/greensock.js"></script>
+<script src="{{ asset('bootstrap/') }}js/layerslider/js/layerslider.transitions.js"></script>
+<script src="{{ asset('bootstrap/') }}js/layerslider/js/layerslider.kreaturamedia.jquery.js"></script>
+<script src="{{ asset('bootstrap/') }}js/jquery.appear.js"></script>
+<script src="{{ asset('bootstrap/') }}js/owlcarousel/owl.carousel.min.js"></script>
+<script src="{{ asset('bootstrap/') }}js/jquery.countdown.plugin.min.js"></script>
+<script src="{{ asset('bootstrap/') }}js/jquery.countdown.min.js"></script>
+<script src="{{ asset('bootstrap/') }}js/arcticmodal/jquery.arcticmodal.js"></script>
+<script src="{{ asset('bootstrap/') }}twitter/jquery.tweet.min.js"></script>
+<script src="{{ asset('bootstrap/') }}js/colorpicker/colorpicker.js"></script>
+<script src="{{ asset('bootstrap/') }}js/retina.min.js"></script>
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js"></script>
+
+<!-- Theme files
+============================================ -->
+<script src="{{ asset('bootstrap/') }}js/theme.styleswitcher.js"></script>
+<script src="{{ asset('bootstrap/') }}js/theme.plugins.js"></script>
+<script src="{{ asset('bootstrap/') }}js/theme.core.js"></script>
+
+</body>
+</html>

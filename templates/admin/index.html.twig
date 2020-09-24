@@ -1,0 +1,55 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}SAPEUR DE BABY - ADMIN{% endblock %}
+
+{% block content %}
+    <section class="mb-5">
+
+        <!-- Card -->
+        <div class="card card-cascade narrower">
+
+            <!-- Section: Chart -->
+            <section>
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-xl-5 col-lg-12 mr-0 pb-2">
+
+                        <!-- Chart -->
+                        <div class="view view-cascade gradient-card-header white">
+
+                            <h4 class="text-dark text-uppercase">Histogramme des ventes par mois sur 12 mois glissants</h4>
+
+                            <canvas id="barChart" height="200px"></canvas>
+
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-xl-7 col-lg-12 mb-4 pb-2">
+
+                        <!-- Chart -->
+                        <div class="view view-cascade gradient-card-header blue-gradient">
+
+                            <canvas id="lineChart" height="175"></canvas>
+
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </section>
+            <!-- Section: Chart -->
+
+        </div>
+        <!-- Card -->
+
+    </section>
+{% endblock %}
