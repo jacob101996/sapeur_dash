@@ -1,4 +1,4 @@
-<div id="slide-out" class="side-nav fixed">
+<div class="side-nav fixed" style="box-shadow: none!important;">
     <ul class="custom-scrollbar">
 
         <!-- Logo -->
@@ -21,7 +21,7 @@
                     <div class="collapsible-body">
                         <ul>
                             <li>
-                                <a href="#" class="waves-effect"><i class="far fa-plus-square orange-text"></i>Nouveau produit</a>
+                                <a href="{{ path('product_add') }}" class="waves-effect"><i class="far fa-plus-square orange-text"></i>Nouveau produit</a>
                             </li>
                             <li>
                                 <a href="#" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des produit</a>
@@ -52,7 +52,7 @@
                     <div class="collapsible-body">
                         <ul>
                             <li>
-                                <a href="html/pages/login.html" class="waves-effect"><i class="fas fa-user-plus orange-text"></i>Nouveau compte</a>
+                                <a href="{{ path('partner_add') }}" class="waves-effect"><i class="fas fa-user-plus orange-text"></i>Nouveau compte</a>
                             </li>
                             <li>
                                 <a href="html/pages/register.html" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des partenaires</a>

@@ -1,0 +1,62 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}SAPEUR DE BABY - ADMIN{% endblock %}
+
+{% block content %}
+
+    <section class="mb-5">
+        <div class="row">
+            <div class="col left">Accueil > Partner > <span class="grey-text">Ajout de partenaire</span></div>
+        </div>
+
+        {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+            {% for message in messages %}
+                <div style="font-size: 17px !important;" class="alert alert-{{ label }} p-3 alert-dismissible fade show text-left" role="alert" id="alertMsg">
+                    {{ message|raw }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" class="text-dark">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <!-- Card -->
+        <div class="card card-cascade narrower p-5">
+
+            <div class="card-body">
+                <h2 class="text-uppercase">Ajout de partenaire</h2>
+                <hr class="mb-5 bg-white"/>
+                {{ form_start(form) }}
+                <!-- Grid row -->
+                <div class="row border p-2 pt-4">
+                    <div class="col-md-5 form-group">{{ form_row(form.civility) }}</div>
+                    <div class="col-md-7 form-group">{{ form_row(form.partner_shop_name) }}</div>
+                    <div class="col-md-6 form-group">{{ form_row(form.partner_firstname) }}</div>
+                    <div class="col-md-6 form-group">{{ form_row(form.partner_lastname) }}</div>
+                    <div class="col-md-5 form-group">{{ form_row(form.partner_phone) }}</div>
+                    <div class="col-md-7 form-group">{{ form_row(form.partner_residence) }}</div>
+                    <div class="col-md-9 form-group">{{ form_row(form.partner_code) }}</div>
+                    <div class="col-md-3 form-group"><button class="btn btn-info" style="margin-top: 35px">Générer un code</button></div>
+                    <div class="col-md-12">{{ form_row(form.email) }}</div>
+                    <div class="col-md-6">{{ form_row(form.password.first) }}</div>
+                    <div class="col-md-6">{{  form_row(form.password.second) }}</div>
+                </div>
+                <div class="row border p-2 mt-3">
+                    <div class="col-md-5 form-group">{{ form_row(form.type_room) }}</div>
+                    <div class="col-md-7 form-group">{{ form_row(form.partner_nroom) }}</div>
+                    <div class="col-md-6 form-group">{{ form_row(form.partner_room_1) }}</div>
+                    <div class="col-md-6 form-group">{{ form_row(form.partner_room_2) }}</div>
+
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-check-circle mr-2"></i>Enregistrer</button>
+                    </div>
+                </div>
+                <!-- Grid row -->
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+        <!-- Card -->
+
+    </section>
+{% endblock %}

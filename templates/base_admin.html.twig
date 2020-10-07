@@ -14,7 +14,20 @@
     <link rel="stylesheet" href="{{ asset('sapeuradmin/') }}css/mdb.min.css">
     <!-- Your custom styles (optional) -->
     <style>
-
+        .form-control{
+            background-color: #f8f8f8;
+            font-size: 17px;
+        }
+        textarea.form-control{
+            height: 100%!important;
+            background-color: #f8f8f8;
+        }
+        .card{
+            box-shadow: none!important;
+        }
+        .md-form{
+            margin-top: 0!important;
+        }
     </style>
 </head>
 
@@ -38,10 +51,6 @@
 <main>
 
     <div class="container-fluid">
-
-        <!-- Section: Intro -->
-        {% include '_intro_admin.html.twig' %}
-        <!-- Section: Intro -->
 
         <!-- Section: Main panel -->
         {% block content %}{% endblock %}
