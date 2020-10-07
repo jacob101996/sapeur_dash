@@ -120,18 +120,6 @@ class Product
         return $this->id;
     }
 
-    public function getPartner(): ?Partner
-    {
-        return $this->partner;
-    }
-
-    public function setPartner(?Partner $partner): self
-    {
-        $this->partner = $partner;
-
-        return $this;
-    }
-
     public function getSubCategory(): ?SubCategoryProduct
     {
         return $this->sub_category;
