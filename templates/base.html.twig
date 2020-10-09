@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,7 +15,9 @@
 
     <!-- Favicon
     ============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/icon.jpg') }}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
     <!-- Google web fonts
     ============================================ -->
@@ -71,30 +61,17 @@
     {% include '_header_home.html.twig' %}
 
     <!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
+    {% block nav %}{% include 'nav_home.html.twig' %}{% endblock %}
 
     <!-- - - - - - - - - - - - - - Layer slider - - - - - - - - - - - - - - - - -->
-
-    {% include '_slider_home.html.twig' %}
+    {% block slider %}{% include '_slider_home.html.twig' %}{% endblock %}
 
     <!-- - - - - - - - - - - - - - End of layer slider - - - - - - - - - - - - - - - - -->
 
+
     <!-- - - - - - - - - - - - - - Page Wrapper - - - - - - - - - - - - - - - - -->
 
-    <div class="page_wrapper">
-
-        <div class="container">
-
-        {% include '_category_home.html.twig' %}
-
-            <div class="row">
-
-            {% block content %}{% endblock %}
-
-            </div><!--/ .row-->
-
-        </div><!--/ .container-->
-
-    </div><!--/ .page_wrapper-->
+    {% block content %}{% endblock %}
 
     <!-- - - - - - - - - - - - - - End Page Wrapper - - - - - - - - - - - - - - - - -->
 

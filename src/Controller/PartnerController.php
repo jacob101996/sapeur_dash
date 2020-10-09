@@ -26,19 +26,6 @@ class PartnerController extends AbstractController
         {
             $data   = $form->getData();
 
-            $path = $_ENV["DIR_IMG_PRODUCT"];
-
-            $image1     = $file->uploadFile($form['partner_room_1']->getData(), $path);
-            $image2     = $file->uploadFile($form['partner_room_2']->getData(), $path);
-
-            if (!is_null($image1) && $image1 != ""){
-                $data->setProductImage($image1);
-            }
-            if (!is_null($image2) && $image2 != ""){
-                $data->setProductImage1($image2);
-            }
-
-            dd($data);
         }
         return $this->render('partner/add.html.twig', [
             'form' => $form->createView(),

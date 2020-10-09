@@ -6,11 +6,18 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     errorPath="email",
+ *     message="Cette adresse email existe déjà")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -36,6 +43,8 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type(type="string")
+     * @Assert\Length(min = 4, minMessage="Le mot de passe doit contenir au minimum 4 caractères")
      */
     private $password;
 
@@ -71,6 +80,7 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 8, max = 8, minMessage="Numero de telephone invalide")
      */
     private $partner_phone;
 
@@ -88,16 +98,6 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $partner_nroom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $partner_room_1;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $partner_room_2;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -253,38 +253,6 @@ class User
     /**
      * @return mixed
      */
-    public function getPartnerRoom1()
-    {
-        return $this->partner_room_1;
-    }
-
-    /**
-     * @param mixed $partner_room_1
-     */
-    public function setPartnerRoom1($partner_room_1): void
-    {
-        $this->partner_room_1 = $partner_room_1;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPartnerRoom2()
-    {
-        return $this->partner_room_2;
-    }
-
-    /**
-     * @param mixed $partner_room_2
-     */
-    public function setPartnerRoom2($partner_room_2): void
-    {
-        $this->partner_room_2 = $partner_room_2;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPartnerResidence()
     {
         return $this->partner_residence;
@@ -330,7 +298,10 @@ class User
 
     public function getRoles(): ?array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        //$roles[] = 'ROLE_USER';
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
@@ -436,5 +407,51 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->roles,
+            $this->username,
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->roles,
+            $this->username
+            ) = unserialize($serialized, ['allowed_classes' => true]);
     }
 }

@@ -19,17 +19,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
-    private $transformer;
-
     /**
-     * UserType constructor.
-     * @param FileToStringTransformer $transformer
+     * @param FormBuilderInterface $builder
+     * @param array $options
      */
-    public function __construct(FileToStringTransformer $transformer)
-    {
-        $this->transformer = $transformer;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -44,7 +37,7 @@ class UserType extends AbstractType
                 'required'          => true,
                 'type'              => PasswordType::class,
                 'first_options'     => ['label' => 'Mot de passe'],
-                'second_options'    => ['label' => 'Confrmez votre mot de passe'],
+                'second_options'    => ['label' => 'Confrmez'],
             ])
             ->add('partner_firstname', TextType::class, [
                 "label"     => "Nom",
@@ -64,12 +57,6 @@ class UserType extends AbstractType
                     "placeholder"   => "..."
                 ]
             ])
-            ->add('partner_code', TelType::class, [
-                "label"     => "ID",
-                "attr"      => [
-                    "placeholder"   => "..."
-                ]
-            ])
             ->add('partner_shop_name', TextType::class, [
                 "label"     => "Nom de la boutique",
                 "attr"      => [
@@ -78,18 +65,6 @@ class UserType extends AbstractType
             ])
             ->add('partner_nroom', TextType::class, [
                 "label"     => "N° Pièce",
-                "attr"      => [
-                    "placeholder"   => "..."
-                ]
-            ])
-            ->add('partner_room_1', FileType::class, [
-                "label"     => "Fichier Recto (jepg,jpg)",
-                "attr"      => [
-                    "placeholder"   => "..."
-                ]
-            ])
-            ->add('partner_room_2', FileType::class, [
-                "label"     => "Fichier verso (jepg,jpg)",
                 "attr"      => [
                     "placeholder"   => "..."
                 ]
@@ -111,7 +86,7 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('type_room', EntityType::class, [
-                "label"         => "Type",
+                "label"         => "Type de pièce",
                 "placeholder"   => "...",
                 "class"         => TypeRoom::class,
                 "choice_label"  => "libelle_fr",
@@ -121,10 +96,6 @@ class UserType extends AbstractType
                 ]
             ])
         ;
-        $builder
-            ->get('partner_room_1')->addModelTransformer($this->transformer);
-        $builder
-            ->get('partner_room_2')->addModelTransformer($this->transformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)
