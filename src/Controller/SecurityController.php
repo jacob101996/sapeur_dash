@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\DemandePartenariatType;
 use App\Form\UserType;
 use App\Services\UploadFile;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,40 +26,30 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/creation-de-compte", name="security_register")
+     * @Route("/demande-de-partenariat", name="security_demande")
      * @param Request $request
-     * @param UploadFile $file
-     * @param UserPasswordEncoderInterface $encoder
      * @return Response
      * @throws \Exception
      */
-    public function register(Request $request, UploadFile $file, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request)
     {
-        $form   = $this->createForm(UserType::class, null);
+        $form   = $this->createForm(DemandePartenariatType::class, null);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
             $data       = $form->getData();
 
-            $data->setUserAt(new \DateTime('now'));
-
-            $passwordEncode  = $encoder->encodePassword($data, $data->getPassword());
-
-            $data->setPassword($passwordEncode);
-            $data->setRoles(["ROLE_PARTNER"]);
-            $data->setPartnerCode($this->generateUniqueCode());
-            $data->setUsername(strtolower(substr($data->getPartnerLastname(), 0,1)."_".$data->getPartnerFirstname()));
-
             $this->em->persist($data);
             $this->em->flush();
 
             // Message flash
-            $this->addFlash("success", "<i class='fas fa-check' style='color: white'></i> Félicitation votre compte est enregistré avec succès, merci pour votre fidélité !");
-            return $this->redirectToRoute("security_login");
+            $this->addFlash("success", "<i class='fas fa-check' style='color: white'></i> Félicitation votre demande est enregistré avec succès et est en 
+                cours de traitement nous vous contacterons pour la suite merci !");
+            return $this->redirectToRoute("home_index");
         }
 
-        return $this->render('security/register.html.twig', [
+        return $this->render('security/demande_partenariat.html.twig', [
             'form'      => $form->createView()
         ]);
     }

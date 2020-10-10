@@ -25,11 +25,6 @@ class Command
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commands")
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $ref_cmd;
@@ -92,18 +87,6 @@ class Command
     public function setStatus(?StatusCommand $status): self
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }

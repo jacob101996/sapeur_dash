@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ACCUEIL - CREATION DE COMPTE{% endblock %}
+
+{% block slider %}{% endblock %}
+{% block nav %}{% endblock %}
+
+{% block content %}
+
+<div class="page_wrapper">
+
+    <div class="container">
+        <h1 class="bold">Demande de partenariat</h1>
+        <hr/>
+        <div class="row" style="margin-top: 30px">
+
+            {{ form_start(form) }}
+
+            <div class="col-md-12 form-group" style="margin-top: 30px;">
+                <h3>Informations personnelles</h3>
+            </div>
+
+            <div class="col-md-12 form-group">{{ form_row(form.civility) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_firstname) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_lastname) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.datenaissance) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_phone) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_residence) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_fonction) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.type_room) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_nroom) }}</div>
+            <div class="col-md-12 form-group" style="margin-top: 20px; margin-bottom: 20px">
+                <h3>Informations supplementaires</h3>
+            </div>
+
+            <div class="col-md-12 form-group">{{ form_row(form.partner_shop_name) }}</div>
+            <div class="col-md-6 form-group">
+                <label for="is_ent">Êtes-vous une entreprise ?</label>
+                <select name="is_entreprise" id="is_ent" required="required">
+                    <option value="yes">Oui</option>
+                    <option value="no">Non</option>
+                </select>
+            </div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_nregistre) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.contact_enterprise) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.siege_social) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_email) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.partner_site) }}</div>
+
+            <div class="col-md-12" style="margin-top: 30px">
+                <hr>
+            </div>
+            <div class="col-sm-12" style="margin-top: 20px">
+                <button class="border" id="btnCreateAccount" type="submit" style="background-color: #febd2b; padding: 10px; border-radius: 4px; color: white; font-weight: bold">
+                    <i class="fas fa-sign-out-alt" style="margin-top: 4px"></i> Soumettre ma demande</i>
+                </button>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

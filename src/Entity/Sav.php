@@ -18,11 +18,6 @@ class Sav
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="savs")
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $nfacture;
@@ -55,18 +50,6 @@ class Sav
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getNfacture(): ?string
