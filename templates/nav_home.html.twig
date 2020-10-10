@@ -459,11 +459,18 @@
 
                     <!-- - - - - - - - - - - - - - Navigation item - - - - - - - - - - - - - - - - -->
 
-                    <div class="nav_item size_4">
+                    {% if app.user is defined and app.user is not null %}
 
-                        <a href="#" class="open_button"><i class="fas fa-user fa-2x"></i></a>
+                        <div class="nav_item size_4">
 
-                    </div><!--/ .nav_item-->
+                            <span class="current open_" id="user"><i class="fas fa-user fa-2x" style="margin-top: 15px; cursor: pointer"></i><span class="caret"></span></span>
+                            <ul class="dropdown site_setting_list language">
+                                <li class="animated_item"><a href="#">Mon compte</a></li>
+                                <li class="animated_item"><a href="{{ path('logout') }}">Déconnexion</a></li>
+                            </ul>
+
+                        </div><!--/ .nav_item-->
+                    {% endif %}
 
                     <div class="nav_item size_4">
 
