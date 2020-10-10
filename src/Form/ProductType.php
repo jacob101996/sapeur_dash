@@ -90,7 +90,7 @@ class ProductType extends AbstractType
                 'choice_value'      => 'id',
                 'choice_label'      => 'libelle_fr',
                 'label'             => 'Catégorie produit',
-                'placeholder'       => 'Veuillez choisir le partenaire',
+                'placeholder'       => 'Veuillez choisir la catégorie',
                 'attr'              => [
                     'class'         =>'browser-default custom-select'
                 ]
@@ -99,8 +99,8 @@ class ProductType extends AbstractType
                 'class'             => SubCategoryProduct::class,
                 'choice_value'      => 'id',
                 'choice_label'      => 'libelle_fr',
-                'label'             => 'Catégorie produit',
-                'placeholder'       => 'Veuillez choisir le partenaire',
+                'label'             => 'Sous-catégorie',
+                'placeholder'       => 'Sous-catégorie',
                 'attr'              => [
                     'class'         =>'browser-default custom-select'
                 ]
