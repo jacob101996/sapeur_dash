@@ -75,11 +75,6 @@ class Partner
     private $datenaissance;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $is_enterprise;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $contact_enterprise;
@@ -100,9 +95,14 @@ class Partner
     private $siege_social;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity=Activity::class, inversedBy="partners")
      */
-    private $partner_nregistre;
+    private $activity;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $status_demand;
 
 
     public function getId(): ?int
@@ -284,18 +284,6 @@ class Partner
         return $this;
     }
 
-    public function getIsEnterprise(): ?bool
-    {
-        return $this->is_enterprise;
-    }
-
-    public function setIsEnterprise(bool $is_enterprise): self
-    {
-        $this->is_enterprise = $is_enterprise;
-
-        return $this;
-    }
-
     public function getContactEnterprise(): ?string
     {
         return $this->contact_enterprise;
@@ -344,14 +332,27 @@ class Partner
         return $this;
     }
 
-    public function getPartnerNregistre(): ?string
+
+    public function getActivity(): ?Activity
     {
-        return $this->partner_nregistre;
+        return $this->activity;
     }
 
-    public function setPartnerNregistre(?string $partner_nregistre): self
+    public function setActivity(?Activity $activity): self
     {
-        $this->partner_nregistre = $partner_nregistre;
+        $this->activity = $activity;
+
+        return $this;
+    }
+
+    public function getStatusDemand(): ?string
+    {
+        return $this->status_demand;
+    }
+
+    public function setStatusDemand(string $status_demand): self
+    {
+        $this->status_demand = $status_demand;
 
         return $this;
     }

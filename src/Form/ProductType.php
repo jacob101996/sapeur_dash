@@ -32,13 +32,13 @@ class ProductType extends AbstractType
 
         $builder
             ->add('product_name', TextType::class, [
-                'label'             => 'Nom du produit',
+                'label'             => 'Nom du produit (*)',
                 'attr'              => [
                     'placeholder'   => '...',
                 ]
             ])
             ->add('product_price', MoneyType::class, [
-                'label'             => 'Prix',
+                'label'             => 'Prix (*)',
                 'attr'              => [
                     'placeholder'   => '...',
                 ],
@@ -50,46 +50,54 @@ class ProductType extends AbstractType
                     'placeholder'   => 'Veuillez saisir la description du produit',
                     'rows'          => 4,
                 ],
+                "required"          => false
             ])
-            ->add('product_size', ChoiceType::class, [
+            ->add('product_size', TextType::class, [
                 'label'             => 'Taille(s) disponible',
+
+                'attr'              => [
+                    'placeholder'   => 'X,XL,XXL,M',
+                ],
+                "required"          => false
+            ] )
+            ->add('quality_product', ChoiceType::class, [
+                'label'             => 'Qualité du produit',
                 'choices'           => [
-                    'M'             => 'M',
-                    'L'             => 'L',
-                    'X'             => 'X',
-                    'XL'            => 'XL',
-                    'XXL'           => 'XXL',
+                    'Friperie'             => 'medium_quality',
+                    'Haut de gamme'        => 'best_quality',
                 ],
                 'attr'              => [
                     'placeholder'   => 'Veuillez saisir la description du produit',
-                    'class'         =>'mdb-select md-form',
-                    'multiple'      => 'multiple'
-
+                    'class'         =>'browser-default custom-select',
                 ],
-            ] )
+                "required"          => false
+            ])
             ->add('product_color', TextType::class, [
                 'label'             => 'Couleur(s) disponible',
                 'attr'              => [
                     'placeholder'   => 'Rouge,bleu',
-                ]
+                ],
+                "required"          => false
             ])
             ->add('product_reduction', IntegerType::class, [
                 'label'             => 'Appliquer une reduction(%)',
                 'attr'              => [
                     'max'           => 0,
-                ]
+                ],
+                "required"          => false
             ])
             ->add('product_stock', IntegerType::class, [
-                'label'             => 'Stock disponible',
+                'label'             => 'Stock disponible (*)',
                 'attr'              => [
                     'min'           => 0,
-                ]
+                ],
+                "required"          => false
             ])
             ->add('category', EntityType::class, [
                 'class'             => CategoryProduct::class,
                 'choice_value'      => 'id',
                 'choice_label'      => 'libelle_fr',
-                'label'             => 'Catégorie produit',
+                'label'             => 'Catégorie produit (*)',
                 'placeholder'       => 'Veuillez choisir la catégorie',
                 'attr'              => [
                     'class'         =>'browser-default custom-select'
@@ -99,18 +107,17 @@ class ProductType extends AbstractType
                 'class'             => SubCategoryProduct::class,
                 'choice_value'      => 'id',
                 'choice_label'      => 'libelle_fr',
-                'label'             => 'Sous-catégorie',
+                'label'             => 'Sous-catégorie (*)',
                 'placeholder'       => 'Sous-catégorie',
                 'attr'              => [
                     'class'         =>'browser-default custom-select'
                 ]
             ])
             ->add('product_image', FileType::class, [
-                'label'             => 'Image principale',
+                'label'             => 'Image principale (*)',
                 'attr'              => [
                     'placeholder'   => 'Veuillez choisir une image'
                 ],
-                "required"          => false
             ])
             ->add('product_image1', FileType::class, [
                 'label'             => 'Image 1',

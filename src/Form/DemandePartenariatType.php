@@ -2,8 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Activity;
 use App\Entity\Partner;
-use Cassandra\Date;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -61,9 +62,9 @@ class DemandePartenariatType extends AbstractType
                 ]
             ])
             ->add('partner_shop_name', TextType::class, [
-                "label"         => "Nom Entreprise/Boutique",
+                "label"         => "Raison social",
                 "attr"          => [
-                    "placeholder" =>  "Nom de famille"
+                    "placeholder" =>  "Nom Entreprise/Boutique"
                 ]
             ])
             ->add('partner_nroom', TextType::class, [
@@ -112,10 +113,14 @@ class DemandePartenariatType extends AbstractType
                     "placeholder" =>  "Où est situé l'entreprise/la boutique ?"
                 ]
             ])
-            ->add('partner_nregistre', TextType::class, [
-                "label"         => "Numéro du registre de commerce",
+            ->add('activity', EntityType::class, [
+                "label"         => "Votre activité",
+                "class"         => Activity::class,
+                "choice_label"  => 'libelle',
+                "choice_value"  => 'id',
                 "attr"          => [
-                    "placeholder" =>  "N° du registre"
+                    "placeholder" =>  "Activité",
+                    'class'         =>'browser-default custom-select'
                 ],
                 "required"      => true
             ])

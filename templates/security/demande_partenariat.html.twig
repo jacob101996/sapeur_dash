@@ -12,6 +12,16 @@
     <div class="container">
         <h1 class="bold">Demande de partenariat</h1>
         <hr/>
+        {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+            {% for message in messages %}
+                <div style="font-size: 17px !important;padding: 10px; color: white ;background-color: green;" class="alert-dismissible fade show text-left" role="alert" id="alertMsg">
+                    {{ message|raw }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" class="text-dark">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endfor %}
         <div class="row" style="margin-top: 30px">
 
             {{ form_start(form) }}
@@ -34,18 +44,11 @@
             </div>
 
             <div class="col-md-12 form-group">{{ form_row(form.partner_shop_name) }}</div>
-            <div class="col-md-6 form-group">
-                <label for="is_ent">Êtes-vous une entreprise ?</label>
-                <select name="is_entreprise" id="is_ent" required="required">
-                    <option value="yes">Oui</option>
-                    <option value="no">Non</option>
-                </select>
-            </div>
-            <div class="col-md-6 form-group">{{ form_row(form.partner_nregistre) }}</div>
+            <div class="col-md-6 form-group">{{ form_row(form.activity) }}</div>
             <div class="col-md-6 form-group">{{ form_row(form.contact_enterprise) }}</div>
             <div class="col-md-6 form-group">{{ form_row(form.siege_social) }}</div>
             <div class="col-md-6 form-group">{{ form_row(form.partner_email) }}</div>
-            <div class="col-md-6 form-group">{{ form_row(form.partner_site) }}</div>
+            <div class="col-md-12 form-group">{{ form_row(form.partner_site) }}</div>
 
             <div class="col-md-12" style="margin-top: 30px">
                 <hr>

@@ -66,8 +66,10 @@ class ProductController extends AbstractController
             $data->setProductAt(new \DateTime("now"));
 
             $this->em->persist($data);
+            $this->em->flush();
+
             $this->addFlash("success", "<i class='fas fa-check-circle'></i> Produit enregistré avec succès !");
-            $this->redirectToRoute("product_add");
+            return $this->redirectToRoute("product_add");
 
         }
         return $this->render('product/add.html.twig', [

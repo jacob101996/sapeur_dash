@@ -40,7 +40,7 @@ class Product
     private $product_price;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $product_description;
 
@@ -60,7 +60,7 @@ class Product
     private $product_reduction;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $product_nb_cmd;
 
@@ -70,7 +70,7 @@ class Product
     private $product_stock;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $product_ref;
 
@@ -108,6 +108,11 @@ class Product
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $product_image3;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $quality_product;
 
     public function __construct()
     {
@@ -365,6 +370,18 @@ class Product
     public function setProductImage3(?string $product_image3): self
     {
         $this->product_image3 = $product_image3;
+
+        return $this;
+    }
+
+    public function getQualityProduct(): ?string
+    {
+        return $this->quality_product;
+    }
+
+    public function setQualityProduct(string $quality_product): self
+    {
+        $this->quality_product = $quality_product;
 
         return $this;
     }

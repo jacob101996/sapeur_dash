@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Activity;
 use App\Entity\User;
 use App\Form\DemandePartenariatType;
 use App\Form\UserType;
@@ -31,7 +32,7 @@ class SecurityController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function register(Request $request)
+    public function demand(Request $request)
     {
         $form   = $this->createForm(DemandePartenariatType::class, null);
         $form->handleRequest($request);
@@ -40,13 +41,18 @@ class SecurityController extends AbstractController
         {
             $data       = $form->getData();
 
+            $data->setActivity($this->em->getRepository(Activity::class)->find($data->getActivity()));
+
+            $data->setPartnerCode("SAP".random_int(1000,9999));
+            $data->setStatusDemand("En attente");
+
             $this->em->persist($data);
             $this->em->flush();
 
             // Message flash
-            $this->addFlash("success", "<i class='fas fa-check' style='color: white'></i> Félicitation votre demande est enregistré avec succès et est en 
+            $this->addFlash("success", "<i class='fas fa-check' style='color: white; margin-right: 10px'></i> Félicitation votre demande est enregistré avec succès et est en 
                 cours de traitement nous vous contacterons pour la suite merci !");
-            return $this->redirectToRoute("home_index");
+            return $this->redirectToRoute("security_demande");
         }
 
         return $this->render('security/demande_partenariat.html.twig', [

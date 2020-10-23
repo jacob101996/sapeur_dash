@@ -118,14 +118,12 @@
                                 <div class="open_categories">Categories</div>
 
                                 <ul class="categories_list dropdown">
+                                    {% if cats is defined and cats is not null %}
 
-                                    <li class="animated_item"><a href="#">Medicine &amp; Health</a></li>
-                                    <li class="animated_item"><a href="#">Beauty</a></li>
-                                    <li class="animated_item"><a href="#">Personal Care</a></li>
-                                    <li class="animated_item"><a href="#">Vitamins &amp; Supplements</a></li>
-                                    <li class="animated_item"><a href="#">Baby Needs</a></li>
-                                    <li class="animated_item"><a href="#">Diet &amp; Fitness</a></li>
-                                    <li class="animated_item"><a href="#">Sexual Well-being</a></li>
+                                        {% for cat in cats %}
+                                            <li class="animated_item"><a href="#">{{ cat.libelleFr }}</a></li>
+                                        {% endfor %}
+                                    {% endif %}
 
                                 </ul>
 
