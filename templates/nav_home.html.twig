@@ -24,305 +24,284 @@
 
                                 {% for cat in cats %}
 
-                                    <li class="has_megamenu animated_item">
+                                    {% if cat.id == 1 %}
+                                        <li class="has_megamenu animated_item">
 
-                                        <a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">{{ cat.libelleFr|capitalize }}</a>
+                                            <a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">{{ cat.libelleFr|capitalize }}</a>
 
-                                        <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
+                                            <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
 
-                                        <div class="mega_menu type_2 clearfix">
+                                            <div class="mega_menu type_2 clearfix">
 
-                                            <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
 
-                                            <div class="mega_menu_item">
+                                                <div class="mega_menu_item">
 
-                                                <h6><b>Friperie</b></h6>
+                                                    <h6><b>Friperie</b></h6>
 
-                                                <ul class="list_of_links">
+                                                    <ul class="list_of_links">
 
-                                                    {% for subcat in cat.subCategory%}
+                                                        {% for subcat in cat.subCategory%}
 
-                                                        <li><a href="#">{{ subcat.libelleFr }}</a></li>
+                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                                    {{ subcat.libelleFr }}</a></li>
 
-                                                    {% endfor %}
+                                                        {% endfor %}
 
-                                                </ul>
+                                                    </ul>
 
-                                            </div><!--/ .mega_menu_item-->
+                                                </div><!--/ .mega_menu_item-->
 
-                                            <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
-                                            <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
 
-                                            <div class="mega_menu_item">
+                                                <div class="mega_menu_item">
 
-                                                <h6><b>Haut de gamme</b></h6>
+                                                    <h6><b>Haut de gamme</b></h6>
 
-                                                <ul class="list_of_links">
+                                                    <ul class="list_of_links">
 
-                                                    {% for subcat in cat.subCategory%}
+                                                        {% for subcat in cat.subCategory%}
 
-                                                        <li><a href="#">{{ subcat.libelleFr }}</a></li>
+                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                                    {{ subcat.libelleFr }}</a></li>
 
-                                                    {% endfor %}
+                                                        {% endfor %}
 
-                                                </ul>
+                                                    </ul>
 
-                                            </div><!--/ .mega_menu_item-->
+                                                </div><!--/ .mega_menu_item-->
 
-                                            <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
-                                            <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
 
-                                            <div class="mega_menu_item">
+                                                <div class="mega_menu_item">
 
-                                                <a href="#">
-                                                    <img src="{{ asset('bootstrap/') }}images/mega_menu_img_1.jpg" alt="">
-                                                </a>
+                                                    <a href="#">
+                                                        <img src="{{ asset('bootstrap/') }}images/bhomme.png"
+                                                             class="img-fluid" alt="" width="360px">
+                                                    </a>
 
-                                            </div><!--/ .mega_menu_item-->
+                                                </div><!--/ .mega_menu_item-->
 
-                                            <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
 
-                                        </div><!--/ .mega_menu-->
+                                            </div><!--/ .mega_menu-->
 
-                                        <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
+                                            <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
+                                        </li>
+                                    {% elseif cat.id == 2 %}
+                                        <li class="has_megamenu animated_item">
 
-                                    </li>
+                                            <a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">{{ cat.libelleFr|capitalize }}</a>
+
+                                            <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
+
+                                            <div class="mega_menu type_2 clearfix">
+
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <div class="mega_menu_item">
+
+                                                    <h6><b>Friperie</b></h6>
+
+                                                    <ul class="list_of_links">
+
+                                                        {% for subcat in cat.subCategory%}
+
+                                                            <li><a href="#">{{ subcat.libelleFr }}</a></li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                </div><!--/ .mega_menu_item-->
+
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <div class="mega_menu_item">
+
+                                                    <h6><b>Haut de gamme</b></h6>
+
+                                                    <ul class="list_of_links">
+
+                                                        {% for subcat in cat.subCategory%}
+
+                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                                    {{ subcat.libelleFr }}</a></li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                </div><!--/ .mega_menu_item-->
+
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <div class="mega_menu_item">
+
+                                                    <a href="#">
+                                                        <img src="{{ asset('bootstrap/') }}images/SB3+.png"
+                                                             class="img-fluid" alt="" width="360px">
+                                                    </a>
+
+                                                </div><!--/ .mega_menu_item-->
+
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                            </div><!--/ .mega_menu-->
+
+                                            <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
+                                        </li>
+                                    {% elseif cat.id == 3 %}
+                                        <li class="has_megamenu animated_item">
+
+                                            <a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">{{ cat.libelleFr|capitalize }}</a>
+
+                                            <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
+
+                                            <div class="mega_menu type_2 clearfix">
+
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <div class="mega_menu_item">
+
+                                                    <h6><b>Friperie</b></h6>
+
+                                                    <ul class="list_of_links">
+
+                                                        {% for subcat in cat.subCategory%}
+
+                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                                    {{ subcat.libelleFr }}</a></li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                </div><!--/ .mega_menu_item-->
+
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <div class="mega_menu_item">
+
+                                                    <h6><b>Haut de gamme</b></h6>
+
+                                                    <ul class="list_of_links">
+
+                                                        {% for subcat in cat.subCategory%}
+
+                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                                    {{ subcat.libelleFr }}</a></li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                </div><!--/ .mega_menu_item-->
+
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                <div class="mega_menu_item">
+
+                                                    <a href="#">
+                                                        <img src="{{ asset('bootstrap/') }}images/SB4 ENF+.png"
+                                                             class="img-fluid" alt="" width="360px">
+                                                    </a>
+
+                                                </div><!--/ .mega_menu_item-->
+
+                                                <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                            </div><!--/ .mega_menu-->
+
+                                            <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
+                                        </li>
+
+                                        {% elseif cat.id == 4 %}
+
+                                            <li class="has_megamenu animated_item">
+
+                                                <a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">{{ cat.libelleFr|capitalize }}</a>
+
+                                                <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
+
+                                                <div class="mega_menu type_2 clearfix">
+
+                                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                    <div class="mega_menu_item">
+
+                                                        <h6><b>Friperie</b></h6>
+
+                                                        <ul class="list_of_links">
+
+                                                            {% for subcat in cat.subCategory%}
+
+                                                                <li><a href="#">{{ subcat.libelleFr }}</a></li>
+
+                                                            {% endfor %}
+
+                                                        </ul>
+
+                                                    </div><!--/ .mega_menu_item-->
+
+                                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                    <div class="mega_menu_item">
+
+                                                        <h6><b>Haut de gamme</b></h6>
+
+                                                        <ul class="list_of_links">
+
+                                                            {% for subcat in cat.subCategory%}
+
+                                                                <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                                        {{ subcat.libelleFr }}</a></li>
+
+                                                            {% endfor %}
+
+                                                        </ul>
+
+                                                    </div><!--/ .mega_menu_item-->
+
+                                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                    <div class="mega_menu_item">
+
+                                                        <a href="#">
+                                                            <img src="{{ asset('bootstrap/') }}images/SB4 ENF+.png"
+                                                                 class="img-fluid" alt="" width="360px">
+                                                        </a>
+
+                                                    </div><!--/ .mega_menu_item-->
+
+                                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
+
+                                                </div><!--/ .mega_menu-->
+
+                                                <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
+                                            </li>
+
+                                    {% endif %}
+
                                 {% endfor %}
                             {% endif %}
-                            {#
-                            <li class="has_megamenu animated_item">
 
-                                <a href="#">Catégorie femme</a>
-
-                                <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
-
-                                <div class="mega_menu type_2 clearfix">
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <h6><b>Friperie</b></h6>
-
-                                        <ul class="list_of_links">
-
-                                            <li><a href="#">Vêtement</a></li>
-                                            <li><a href="#">Accessoire</a></li>
-                                            <li><a href="#">Vêtement traditionnel</a></li>
-                                            <li><a href="#">Accessoire traditionnel</a></li>
-
-                                            <!-- <li><a href="#">Costumes</a></li>
-                                            <li><a href="#">Blazers</a></li>
-                                            <li><a href="#">Manteaux</a></li>
-                                            <li><a href="#">Vestons</a></li>
-                                            <li><a href="#">Chemises</a></li>
-                                            <li><a href="#">Polos</a></li>
-                                            <li><a href="#">Pulls</a></li>
-                                            <li><a href="#">Pantalons</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Culottes</a></li>
-                                            <li><a href="#">Thee-short</a></li>
-                                            <li><a href="#">Body</a></li>
-                                            <li><a href="#">Chaussures</a></li>
-                                            <li><a href="#">Montres</a></li>
-                                            <li><a href="#">Portefeuilles</a></li>
-                                            <li><a href="#">Pochettes</a></li>
-                                            <li><a href="#">Ceinture</a></li>
-                                            <li><a href="#">Lunettes</a></li>
-                                            <li><a href="#">Chapeau</a></li>
-                                            <li><a href="#">Bazins</a></li>
-                                            <li><a href="#">Boubous</a></li>
-                                            <li><a href="#">Pagnes</a></li>
-                                            <li><a href="#">Vêtement et accessoire traditionnel</a></li>
-                                            <li><a href="#">Parfums</a></li>
-                                            <li><a href="#">Sacs</a></li> -->
-
-                                        </ul>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <h6><b>Haut de gamme</b></h6>
-
-                                        <ul class="list_of_links">
-
-                                            <li><a href="#">Vêtement</a></li>
-                                            <li><a href="#">Accessoire</a></li>
-                                            <li><a href="#">Vêtement traditionnel</a></li>
-                                            <li><a href="#">Accessoire traditionnel</a></li>
-
-                                        </ul>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <a href="#">
-                                            <img src="{{ asset('bootstrap/') }}images/mega_menu_img_1.jpg" alt="">
-                                        </a>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                </div><!--/ .mega_menu-->
-
-                                <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
-
-                            </li>
-                            <li class="has_megamenu animated_item">
-
-                                <a href="#">Catégorie enfant</a>
-
-                                <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
-
-                                <div class="mega_menu type_2 clearfix">
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <h6><b>Garçons</b></h6>
-
-                                        <ul class="list_of_links">
-
-                                            <li><a href="#">Vêtement</a></li>
-                                            <li><a href="#">Accessoire</a></li>
-                                            <li><a href="#">Vêtement traditionnel</a></li>
-                                            <li><a href="#">Accessoire traditionnel</a></li>
-
-                                        </ul>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <h6><b>Filles</b></h6>
-
-                                        <ul class="list_of_links">
-
-                                            <li><a href="#">Vêtement</a></li>
-                                            <li><a href="#">Accessoire</a></li>
-                                            <li><a href="#">Vêtement traditionnel</a></li>
-                                            <li><a href="#">Accessoire traditionnel</a></li>
-
-                                        </ul>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <a href="#">
-                                            <img src="{{ asset('bootstrap/') }}images/mega_menu_img_1.jpg" alt="">
-                                        </a>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                </div><!--/ .mega_menu-->
-
-                                <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
-
-                            </li>
-                            <li class="has_megamenu animated_item">
-
-                                <a href="#">Catégorie sport</a>
-
-                                <!-- - - - - - - - - - - - - - Mega menu - - - - - - - - - - - - - - - - -->
-
-                                <div class="mega_menu type_2 clearfix">
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <h6><b>Friperie</b></h6>
-
-                                        <ul class="list_of_links">
-
-                                            <li><a href="#">Maillot</a></li>
-                                            <li><a href="#">Thee-short</a></li>
-                                            <li><a href="#">Short</a></li>
-                                            <li><a href="#">Pantalon</a></li>
-                                            <li><a href="#">Maillot de bain</a></li>
-                                            <li><a href="#">Chaussure de sport</a></li>
-                                            <li><a href="#">Sacs de sport</a></li>
-                                            <li><a href="#">Vêtement de sport</a></li>
-                                            <li><a href="#">Ballon</a></li>
-                                            <li><a href="#">Protège tibias</a></li>
-                                            <li><a href="#">Valise</a></li>
-                                            <li><a href="#">Chasuble</a></li>
-
-                                        </ul>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <h6><b>Haut de gamme</b></h6>
-
-                                        <ul class="list_of_links">
-
-                                            <li><a href="#">Maillot</a></li>
-                                            <li><a href="#">Thee-short</a></li>
-                                            <li><a href="#">Short</a></li>
-                                            <li><a href="#">Pantalon</a></li>
-                                            <li><a href="#">Maillot de bain</a></li>
-                                            <li><a href="#">Chaussure de sport</a></li>
-                                            <li><a href="#">Sacs de sport</a></li>
-                                            <li><a href="#">Vêtement de sport</a></li>
-                                            <li><a href="#">Ballon</a></li>
-                                            <li><a href="#">Protège tibias</a></li>
-                                            <li><a href="#">Valise</a></li>
-                                            <li><a href="#">Chasuble</a></li>
-
-                                        </ul>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
-                                    <div class="mega_menu_item">
-
-                                        <a href="#">
-                                            <img src="{{ asset('bootstrap/') }}images/mega_menu_img_1.jpg" alt="">
-                                        </a>
-
-                                    </div><!--/ .mega_menu_item-->
-
-                                    <!-- - - - - - - - - - - - - - End of mega menu item - - - - - - - - - - - - - - - - -->
-
-                                </div><!--/ .mega_menu-->
-
-                                <!-- - - - - - - - - - - - - - End of mega menu - - - - - - - - - - - - - - - - -->
-
-                            </li>#}
                         </ul>
 
                         <!-- - - - - - - - - - - - - - End of main navigation - - - - - - - - - - - - - - - - -->
