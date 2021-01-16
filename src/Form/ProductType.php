@@ -90,10 +90,10 @@ class ProductType extends AbstractType
                 "required"          => false
             ])
             ->add('product_stock', IntegerType::class, [
+                'label_attr'    => ['class' => 'label_required'],
                 'label'             => 'Stock disponible',
                 'attr'              => [
                     'min'           => 0,
-                    'class'        => 'label_required'
                 ],
                 "required"          => false
             ])
