@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ProductType;
+use App\Repository\ProductRepository;
 use App\Services\UploadFile;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,5 +76,36 @@ class ProductController extends AbstractController
         return $this->render('product/add.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/product/list-product/", name="product_list")
+     * @param ProductRepository $repository
+     * @return Response
+     */
+    public function listProduct(ProductRepository $repository)
+    {
+        //dd($repository->findAll());
+        return $this->render('product/list.html.twig', [
+            'items' => $repository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/product/product/edit/{{id}}", name="product_edit")
+     * @return Response
+     */
+    public function editProduct(){
+        //dd($repository->findAll());
+        return $this->render('product/edit.html.twig', [
+            'items' => "",
+        ]);
+    }
+
+    /**
+     * @Route("/product/product/delete/{{id}}", name="product_delete")
+     * @return Response
+     */
+    public function deleteProduct(){
     }
 }

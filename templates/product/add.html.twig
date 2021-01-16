@@ -5,9 +5,6 @@
 {% block content %}
 
     <section class="mb-5">
-        <div class="row">
-            <div class="col left">Accueil > Produit > <span class="grey-text">Ajout de produit</span></div>
-        </div>
 
         {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
             {% for message in messages %}
@@ -24,8 +21,13 @@
         <div class="card card-cascade narrower p-5">
 
             <div class="card-body">
-                <h2>Ajout de produit</h2>
-                <hr class="mb-5"/>
+                <div class="row text-dark">
+                    <div class="col-md-8"><h4 class="dark-grey-text">Liste des produits</h4></div>
+                    <div class="col-md-4 mt-2 text-right">
+                        <a href="{{ path('product_list') }}" title="Liste des produits"><i class="fas fa-list-alt text-danger" style="font-size: 25px"></i></a>
+                    </div>
+                </div>
+                <hr/>
                 {{ form_start(form) }}
                 <!-- Grid row -->
                 <div class="row border p-2 pt-4">

@@ -36,20 +36,17 @@
                                             <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
 
                                             <div class="image_wrap">
-
-                                                <img src="{{ asset('product/')~item.productImage }}" alt="" style="width: 243px!important;">
+                                                <a href="">
+                                                    <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt=""
+                                                         style="width: 224px!important; height: 187px!important;">
+                                                </a>
 
                                                 <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
                                                 <div class="actions_wrap">
 
-                                                    <div class="centered_buttons">
-
-                                                        <a href="#" class="button_blue middle_btn add_to_cart">Ajout au panier</a>
-
-                                                    </div><!--/ .centered_buttons -->
-
-                                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container"><span class="tooltip right">Ajout en favori</span></a>
+                                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn
+                                                    add_to_wishlist tooltip_container"><span class="tooltip right">Ajout en favori</span></a>
 
                                                 </div><!--/ .actions_wrap-->
 
@@ -77,14 +74,13 @@
 
                                             <div class="description">
 
-                                                {% if item.productDescription is defined and item.productDescription is not null and item.productDescription|length != 0 %}
-                                                    <a href="#">{{ item.productDescription|raw }}</a>
-                                                {% endif %}
+                                                <h1>{{ item.productName }}</h1>
 
                                                 <div class="clearfix product_info">
 
                                                     {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s> <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
+                                                            <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
                                                     {% else %}
                                                         <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
                                                     {% endif %}

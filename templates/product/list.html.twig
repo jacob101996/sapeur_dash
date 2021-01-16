@@ -1,0 +1,69 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}SAPEUR DE BABY - ADMIN{% endblock %}
+
+{% block content %}
+
+    <section>
+
+        <!-- Gird column -->
+        <div class="col-md-12">
+
+            <div class="card">
+                {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+                    {% for message in messages %}
+                        <div style="font-size: 17px !important;" class="alert alert-{{ label }} p-3 alert-dismissible fade show text-left" role="alert" id="alertMsg">
+                            {{ message|raw }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true" class="text-dark">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <div class="card-body">
+                    <div class="row text-dark">
+                        <div class="col-md-8"><h4 class="dark-grey-text">Liste des produits</h4></div>
+                        <div class="col-md-4 mt-2 text-right">
+                            <a href="{{ path('product_add') }}" title="Ajout de produit"><i class="fas fa-plus-circle text-info mr-3" style="font-size: 25px"></i></a>
+                            <a href="{{ path('product_list') }}" title="Liste des produits"><i class="fas fa-list-alt text-danger" style="font-size: 25px"></i></a>
+                        </div>
+                    </div>
+                    <hr/>
+                    <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th width="15%">Catégorie</th>
+                            <th width="15%">Nom du produit</th>
+                            <th>Prix</th>
+                            <th>Stock</th>
+                            <th width="15%">#Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for produit in items %}
+                            <tr>
+                                <td><img src="{{ asset('sapeuradmin/product/')~produit.productImage }}"
+                                         alt="" style="width: 60px"></td>
+                                <td>{{ produit.category.libelleFr }}</td>
+                                <td> {{ produit.productName }} </td>
+                                <td> {{ produit.productPrice|number_format() }} </td>
+                                <td> {{ produit.productStock }} </td>
+                                <td>
+                                    <a href="{{ path('product_edit', {'id': produit.id}) }}"><i class="fas fa-pen-alt text-info mr-4 mt-2" title="Modifier" style="font-size: 20px"></i></a>
+                                    <a href="{{ path('product_delete', {'id': produit.id}) }}"><i class="far fa-trash-alt text-danger mt-2" style="font-size: 20px"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- Gird column -->
+
+    </section>
+    <!-- Section: Basic examples -->
+{% endblock %}

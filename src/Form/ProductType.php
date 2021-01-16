@@ -32,13 +32,15 @@ class ProductType extends AbstractType
 
         $builder
             ->add('product_name', TextType::class, [
-                'label'             => 'Nom du produit (*)',
+                'label_attr'    => ['class' => 'label_required'],
+                'label'             => 'Nom du produit',
                 'attr'              => [
                     'placeholder'   => '...',
                 ]
             ])
             ->add('product_price', MoneyType::class, [
-                'label'             => 'Prix (*)',
+                'label_attr'    => ['class' => 'label_required'],
+                'label'             => 'Prix',
                 'attr'              => [
                     'placeholder'   => '...',
                 ],
@@ -61,6 +63,7 @@ class ProductType extends AbstractType
                 "required"          => false
             ] )
             ->add('quality_product', ChoiceType::class, [
+                'label_attr'    => ['class' => 'label_required'],
                 'label'             => 'Qualité du produit',
                 'choices'           => [
                     'Friperie'             => 'medium_quality',
@@ -82,14 +85,15 @@ class ProductType extends AbstractType
             ->add('product_reduction', IntegerType::class, [
                 'label'             => 'Appliquer une reduction(%)',
                 'attr'              => [
-                    'max'           => 0,
+                    'min'           => 0,
                 ],
                 "required"          => false
             ])
             ->add('product_stock', IntegerType::class, [
-                'label'             => 'Stock disponible (*)',
+                'label'             => 'Stock disponible',
                 'attr'              => [
                     'min'           => 0,
+                    'class'        => 'label_required'
                 ],
                 "required"          => false
             ])
@@ -97,26 +101,29 @@ class ProductType extends AbstractType
                 'class'             => CategoryProduct::class,
                 'choice_value'      => 'id',
                 'choice_label'      => 'libelle_fr',
-                'label'             => 'Catégorie produit (*)',
+                'label'             => 'Catégorie produit',
                 'placeholder'       => 'Veuillez choisir la catégorie',
                 'attr'              => [
                     'class'         =>'browser-default custom-select'
-                ]
+                ],
+                'label_attr'    => ['class' => 'label_required'],
             ])
             ->add('sub_category', EntityType::class, [
                 'class'             => SubCategoryProduct::class,
                 'choice_value'      => 'id',
                 'choice_label'      => 'libelle_fr',
-                'label'             => 'Sous-catégorie (*)',
+                'label'             => 'Sous-catégorie',
                 'placeholder'       => 'Sous-catégorie',
                 'attr'              => [
                     'class'         =>'browser-default custom-select'
-                ]
+                ],
+                'label_attr'    => ['class' => 'label_required'],
             ])
             ->add('product_image', FileType::class, [
-                'label'             => 'Image principale (*)',
+                'label_attr'    => ['class' => 'label_required'],
+                'label'             => 'Image principale',
                 'attr'              => [
-                    'placeholder'   => 'Veuillez choisir une image'
+                    'placeholder'   => 'Veuillez choisir une image',
                 ],
             ])
             ->add('product_image1', FileType::class, [

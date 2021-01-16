@@ -13,6 +13,8 @@
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href="{{ asset('sapeuradmin/') }}css/mdb.min.css">
     <!-- Your custom styles (optional) -->
+    <link href="{{ asset('sapeuradmin/css/addons/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('sapeuradmin/css/addons/datatables-select.min.css') }}" rel="stylesheet">
     <style>
         .form-control{
             background-color: #f8f8f8;
@@ -27,6 +29,11 @@
         }
         .md-form{
             margin-top: 0!important;
+        }
+        .label_required::after{
+            content: ' *';
+            color: red;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -82,6 +89,9 @@
 <script type="text/javascript" src="{{ asset('sapeuradmin/') }}js/bootstrap.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{{ asset('sapeuradmin/') }}js/mdb.min.js"></script>
+<script type="text/javascript" src="{{ asset('sapeuradmin/js/addons/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('sapeuradmin/js/addons/datatables-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('sapeuradmin/js/tinymce/tinymce.min.js') }}"></script>
 
 <!-- Initializations -->
 <script>
@@ -107,6 +117,13 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+    $(document).ready(function () {
+        $('#dtMaterialDesignExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+    // TinyMCE Initialization
+    tinymce.init({ selector:'#product_product_description', menubar: true, height : "250" });
 
 </script>
 
