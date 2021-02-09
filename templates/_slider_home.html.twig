@@ -1,92 +1,87 @@
-<div class="layerslider" style="width:100%; height: 522px;">
 
-    <!-- - - - - - - - - - - - - - Slide 1 - - - - - - - - - - - - - - - - -->
+{% if app.request.get('_route')  == "view_product_by_category" %}
 
-    <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+    <div class="layerslider" style="width:100%; height: 522px;">
 
-        <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_2.png" alt="">
+        <!-- - - - - - - - - - - - - - Slide 1 - - - - - - - - - - - - - - - - -->
 
-        <!--
-       <div class="ls-l layer_1" style="left: 738px; top:150px;" data-ls="offsetxin: -60; durationin: 650; easingin: easeOutBack;">
-           <div class="ls_layer_bg style_2">
-               <span>up to</span>
-               <div class="ls_title"><h3>20% OFF</h3></div>
-               <span class="sp_type_2">on Selected Beds</span>
-               <a href="#" class="button_blue huge_btn">Shop Now!</a>
-           </div>
-       </div>-->
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
 
-    </div>
+            <img class="ls-bg" src="{{ asset('bootstrap/images/banniere1.jpeg') }}" alt="">
 
-    <!-- - - - - - - - - - - - - - End of slide 1 - - - - - - - - - - - - - - - - -->
+        </div>
 
-    <!-- - - - - - - - - - - - - - Slide 2 - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - End of slide 1 - - - - - - - - - - - - - - - - -->
 
-    <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+        <!-- - - - - - - - - - - - - - Slide 2 - - - - - - - - - - - - - - - - -->
 
-        <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_4.png" alt="">
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
 
-        <!--<div class="ls-l layer_6" style="left: 0; top: 185px;" data-ls="durationin: 650; easingin: easeOutBack; delayin: 150;">
-            Create a Productive Environment <br> With Our Collection
-        </div>-->
+            <img class="ls-bg" src="{{ asset('bootstrap/images/banniere2.jpeg') }}" alt="">
 
-        <!--<a href="#" class="ls-l button_blue huge_btn" style="left: 50%; top: 347px;"
-        data-ls="offsetxin: -60; durationin: 650; easingin: easeOutBack; delayin: 450; ">Find Out More</a>-->
+        </div>
 
-    </div>
+        <!-- - - - - - - - - - - - - - End of slide 2 - - - - - - - - - - - - - - - - -->
 
-    <!-- - - - - - - - - - - - - - End of slide 2 - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Slide 3 - - - - - - - - - - - - - - - - -->
 
-    <!-- - - - - - - - - - - - - - Slide 3 - - - - - - - - - - - - - - - - -->
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
 
-    <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+            <img class="ls-bg" src="{{ asset('bootstrap/images/banniere3.jpeg') }}" alt="">
 
-        <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_3.png" alt="">
-
-        <!--
-       <div class="ls-l layer_1" style="left: 738px; top:150px;" data-ls="offsetxin: -60; durationin: 650; easingin: easeOutBack;">
-           <div class="ls_layer_bg style_2">
-               <span>up to</span>
-               <div class="ls_title"><h3>20% OFF</h3></div>
-               <span class="sp_type_2">on Selected Beds</span>
-               <a href="#" class="button_blue huge_btn">Shop Now!</a>
-           </div>
-       </div>-->
-
-    </div>
-    <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
-
-        <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_4.png" alt="">
-
-        <!--
-        <div class="ls-l layer_1" style="left: 738px; top:150px;" data-ls="offsetxin: -60; durationin: 650; easingin: easeOutBack;">
-            <div class="ls_layer_bg style_2">
-                <span>up to</span>
-                <div class="ls_title"><h3>20% OFF</h3></div>
-                <span class="sp_type_2">on Selected Beds</span>
-                <a href="#" class="button_blue huge_btn">Shop Now!</a>
-            </div>
-        </div>-->
-
-    </div>
-
-    <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
-
-        <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_5.png" alt="">
-
-        <!--
-       <div class="ls-l layer_1" style="left: 738px; top:150px;" data-ls="offsetxin: -60; durationin: 650; easingin: easeOutBack;">
-           <div class="ls_layer_bg style_2">
-               <span>up to</span>
-               <div class="ls_title"><h3>20% OFF</h3></div>
-               <span class="sp_type_2">on Selected Beds</span>
-               <a href="#" class="button_blue huge_btn">Shop Now!</a>
-           </div>
-       </div>-->
-
-   </div>
+        </div>
 
 
-   <!-- - - - - - - - - - - - - - End of slide 3 - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - End of slide 3 - - - - - - - - - - - - - - - - -->
 
-</div><!--/ #layerslider-->
+    </div><!--/ #layerslider-->
+
+{% else %}
+
+    <div class="layerslider" style="width:100%; height: 522px;">
+
+        <!-- - - - - - - - - - - - - - Slide 1 - - - - - - - - - - - - - - - - -->
+
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+
+            <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_2.png" alt="">
+
+        </div>
+
+        <!-- - - - - - - - - - - - - - End of slide 1 - - - - - - - - - - - - - - - - -->
+
+        <!-- - - - - - - - - - - - - - Slide 2 - - - - - - - - - - - - - - - - -->
+
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+
+            <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_4.png" alt="">
+
+        </div>
+
+        <!-- - - - - - - - - - - - - - End of slide 2 - - - - - - - - - - - - - - - - -->
+
+        <!-- - - - - - - - - - - - - - Slide 3 - - - - - - - - - - - - - - - - -->
+
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+
+            <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_3.png" alt="">
+
+        </div>
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+
+            <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_4.png" alt="">
+
+        </div>
+
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+
+            <img class="ls-bg" src="{{ asset('bootstrap/images/') }}slide_5.png" alt="">
+
+        </div>
+
+
+        <!-- - - - - - - - - - - - - - End of slide 3 - - - - - - - - - - - - - - - - -->
+
+    </div><!--/ #layerslider-->
+
+{% endif %}

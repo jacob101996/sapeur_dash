@@ -1,0 +1,52 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}SAPEUR DE BABY - ADMIN{% endblock %}
+
+{% block content %}
+
+    <section class="mb-5">
+        <!-- Card -->
+        <div class="card card-cascade narrower p-5">
+
+            <div class="card-body">
+                <div class="row text-dark">
+                    <div class="col-md-12">
+                        {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+                            {% for message in messages %}
+                                <div style="font-size: 17px !important;" class="alert alert-{{ label }} p-3 alert-dismissible fade show text-left" role="alert" id="alertMsg">
+                                    {{ message|raw }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true" class="text-dark">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div><div class="row text-dark">
+                    <div class="col-md-8"><h4 class="dark-grey-text">Edition d'utilisateurs</h4></div>
+                    <div class="col-md-4 mt-2 text-right">
+                        <a href="{{ path('user_list') }}" title="Liste des utilisateurs"><i class="fas fa-list-alt text-danger" style="font-size: 25px"></i></a>
+                    </div>
+                </div>
+                <hr/>
+                {{ form_start(form) }}
+                <!-- Grid row -->
+
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.username) }}</div>
+                    <div class="col-md-6">{{ form_row(form.roles) }}</div>
+                    <div class="col-md-12">{{ form_row(form.email) }}</div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                    <button type="submit" class="btn btn-warning"><i class="fas fa-check-circle mr-2"></i>Enregistrer</button>
+                </div>
+                <!-- Grid row -->
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+        <!-- Card -->
+
+    </section>
+{% endblock %}

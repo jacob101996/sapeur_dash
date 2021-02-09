@@ -21,7 +21,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/add-product/", name="product_add")
+     * @Route("/my/account/product/add-product/", name="product_add")
      * @param Request $request
      * @param UploadFile $file
      * @return Response
@@ -58,12 +58,6 @@ class ProductController extends AbstractController
                 $data->setProductImage3($image4);
             }
 
-            if (!is_null($this->getUser()) && $this->getUser()->getRoles()[0] == "ROLE_PARTNER" )
-            {
-                $data->setProductRef($this->getUser()->getPartnerCode());
-            }else
-                $data->setProductRef("");
-
             $data->setProductAt(new \DateTime("now"));
 
             $this->em->persist($data);
@@ -79,7 +73,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/list-product/", name="product_list")
+     * @Route("/my/account/product/list-product/", name="product_list")
      * @param ProductRepository $repository
      * @return Response
      */
@@ -92,7 +86,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/product/edit/{{id}}", name="product_edit")
+     * @Route("/my/account/product/product/edit/{{id}}", name="product_edit")
      * @return Response
      */
     public function editProduct(){
@@ -103,7 +97,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/product/delete/{{id}}", name="product_delete")
+     * @Route("/my/account/product/product/delete/{{id}}", name="product_delete")
      * @return Response
      */
     public function deleteProduct(){

@@ -30,58 +30,61 @@
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fas fa-users orange-text"></i>Gestion des comptes<i class="fas fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li>
-                                <a href="html/pages/login.html" class="waves-effect"><i class="fas fa-user-plus orange-text"></i>Nouveau compte</a>
-                            </li>
-                            <li>
-                                <a href="html/pages/register.html" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des comptes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                {% if app.user.roles.0 in ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] %}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-th-list orange-text"></i>Gestion des catégories<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="html/profile/basic-1.html" class="waves-effect"><i class="far fa-plus-square orange-text"></i>Nouvelle catégorie</a>
+                                </li>
+                                <li>
+                                    <a href="html/profile/basic-2.html" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des catégories</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
 
-                <li>
-                    <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fas fa-users orange-text"></i>Gestion des partenaires <i class="fas fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li>
-                                <a href="{{ path('partner_add') }}" class="waves-effect"><i class="fas fa-user-plus orange-text"></i>Nouveau compte</a>
-                            </li>
-                            <li>
-                                <a href="html/pages/register.html" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des partenaires</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-users orange-text"></i>Gestion des comptes<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ path('user_add') }}" class="waves-effect"><i class="fas fa-user-plus orange-text"></i>Nouveau compte</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('user_list') }}" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des comptes</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-users orange-text"></i>Gestion des partenaires <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ path('partner_add') }}" class="waves-effect"><i class="fas fa-user-plus orange-text"></i>Nouveau compte</a>
+                                </li>
+                                <li>
+                                    <a href="html/pages/register.html" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des partenaires</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                {% endif %}
 
                 <li>
                     <a href="html/alerts/alerts.html" class="collapsible-header waves-effect"><i
                                 class="fas fa-users orange-text"></i>Gestion des clients</a>
                 </li>
 
-                <li>
-                    <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fas fa-th-list orange-text"></i>Gestion des catégories<i class="fas fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li>
-                                <a href="html/profile/basic-1.html" class="waves-effect"><i class="far fa-plus-square orange-text"></i>Nouvelle catégorie</a>
-                            </li>
-                            <li>
-                                <a href="html/profile/basic-2.html" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des catégories</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
                 <li>
                     <a class="collapsible-header waves-effect arrow-r">
                         <i class="fas fa-shopping-basket orange-text"></i>Gestion des commandes<i class="fas fa-angle-down rotate-icon"></i>
@@ -111,12 +114,6 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-
-                <!-- Simple link-->
-                <li>
-                    <a href="html/alerts/alerts.html" class="collapsible-header waves-effect">
-                        <i class="far fa-paper-plane orange-text"></i>Abonnés newsletter</a>
                 </li>
 
             </ul>

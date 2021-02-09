@@ -27,40 +27,6 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/demande-de-partenariat", name="security_demande")
-     * @param Request $request
-     * @return Response
-     * @throws \Exception
-     */
-    public function demand(Request $request)
-    {
-        $form   = $this->createForm(DemandePartenariatType::class, null);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $data       = $form->getData();
-
-            $data->setActivity($this->em->getRepository(Activity::class)->find($data->getActivity()));
-
-            $data->setPartnerCode("SAP".random_int(1000,9999));
-            $data->setStatusDemand("En attente");
-
-            $this->em->persist($data);
-            $this->em->flush();
-
-            // Message flash
-            $this->addFlash("success", "<i class='fas fa-check' style='color: white; margin-right: 10px'></i> Félicitation votre demande est enregistré avec succès et est en 
-                cours de traitement nous vous contacterons pour la suite merci !");
-            return $this->redirectToRoute("security_demande");
-        }
-
-        return $this->render('security/demande_partenariat.html.twig', [
-            'form'      => $form->createView()
-        ]);
-    }
-
-    /**
      * @Route("/connexion-espace", name="security_login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response

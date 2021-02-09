@@ -319,9 +319,9 @@
                             <ul>
 
                                 <li><a href="{{ path('home_index') }}">Accueil</a></li>
-                                <li><a href="{{ path('security_demande') }}">Demande de partenariat</a></li>
+                                <!--<li><a href="#">Demande de partenariat</a></li>
                                 <li><a href="shop_my_account.html">Confection de vêtement</a></li>
-                                <li><a href="shop_shopping_cart.html">A propos</a></li>
+                                <li><a href="shop_shopping_cart.html">A propos</a></li>-->
 
                             </ul>
 
@@ -339,7 +339,9 @@
 
                             <span class="current open_" id="user"><i class="fas fa-user fa-2x" style="margin-top: 15px; cursor: pointer"></i><span class="caret"></span></span>
                             <ul class="dropdown site_setting_list language">
-                                <li class="animated_item"><a href="#">Mon compte</a></li>
+                                {% if app.user.roles.0 in ['ROLE_PARTNER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] %}
+                                    <li class="animated_item"><a href="{{ path('admin_index') }}">Mon compte</a></li>
+                                {% endif %}
                                 <li class="animated_item"><a href="{{ path('logout') }}">Déconnexion</a></li>
                             </ul>
 

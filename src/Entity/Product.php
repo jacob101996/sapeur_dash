@@ -70,11 +70,6 @@ class Product
     private $product_stock;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $product_ref;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $product_at;
@@ -114,10 +109,26 @@ class Product
      */
     private $quality_product;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Marque::class, inversedBy="products")
+     */
+    private $marque;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Partner::class, inversedBy="products")
+     */
+    private $partner;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="product")
+     */
+    private $avis;
+
     public function __construct()
     {
         $this->panierProducts = new ArrayCollection();
         $this->command = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,18 +252,6 @@ class Product
     public function setProductStock(int $product_stock): self
     {
         $this->product_stock = $product_stock;
-
-        return $this;
-    }
-
-    public function getProductRef(): ?string
-    {
-        return $this->product_ref;
-    }
-
-    public function setProductRef(string $product_ref): self
-    {
-        $this->product_ref = $product_ref;
 
         return $this;
     }
@@ -385,4 +384,59 @@ class Product
 
         return $this;
     }
+
+    public function getMarque(): ?Marque
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marque $marque): self
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    public function getPartner(): ?Partner
+    {
+        return $this->partner;
+    }
+
+    public function setPartner(?Partner $partner): self
+    {
+        $this->partner = $partner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getProduct() === $this) {
+                $avi->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -47,4 +47,47 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findRandomProd(){
+        $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
+        $sql = "SELECT * FROM product ORDER BY RAND() LIMIT 2";
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
+            ->getResult();
+    }
+
+    public function findRandomProdMan(){
+        $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
+        $sql = "SELECT * FROM product WHERE category_id =:cat ORDER BY RAND() LIMIT 12";
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
+            ->setParameter("cat", 1)
+            ->getResult();
+    }
+
+    public function findRandomProdWife(){
+        $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
+        $sql = "SELECT * FROM product WHERE category_id =:cat ORDER BY RAND() LIMIT 12";
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
+            ->setParameter("cat", 2)
+            ->getResult();
+    }
+
+    public function findRandomProdEnfant(){
+        $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
+        $sql = "SELECT * FROM product WHERE category_id =:cat ORDER BY RAND() LIMIT 12";
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
+            ->setParameter("cat", 3)
+            ->getResult();
+    }
+    public function findRandomProdSport(){
+        $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
+        $sql = "SELECT * FROM product WHERE category_id =:cat ORDER BY RAND() LIMIT 12";
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
+            ->setParameter("cat", 4)
+            ->getResult();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\CategoryProduct;
+use App\Entity\Marque;
 use App\Entity\Partner;
 use App\Entity\Product;
 use App\Entity\SubCategoryProduct;
@@ -85,7 +86,7 @@ class ProductType extends AbstractType
             ->add('product_reduction', IntegerType::class, [
                 'label'             => 'Appliquer une reduction(%)',
                 'attr'              => [
-                    'min'           => 0,
+                    'max'           => 0,
                 ],
                 "required"          => false
             ])
@@ -103,6 +104,27 @@ class ProductType extends AbstractType
                 'choice_label'      => 'libelle_fr',
                 'label'             => 'Catégorie produit',
                 'placeholder'       => 'Veuillez choisir la catégorie',
+                'attr'              => [
+                    'class'         =>'browser-default custom-select'
+                ],
+                'label_attr'    => ['class' => 'label_required'],
+            ])
+            ->add('marque', EntityType::class, [
+                'class'             => Marque::class,
+                'choice_value'      => 'id',
+                'choice_label'      => 'libelle',
+                'label'             => 'Choisir la marque',
+                'placeholder'       => 'Veuillez choisir la marque',
+                'attr'              => [
+                    'class'         =>'browser-default custom-select'
+                ],
+                'required'          => false
+            ])->add('partner', EntityType::class, [
+                'class'             => Partner::class,
+                'choice_value'      => 'id',
+                'choice_label'      => 'partner_code',
+                'label'             => 'Partner',
+                'placeholder'       => 'choisir le partenaire',
                 'attr'              => [
                     'class'         =>'browser-default custom-select'
                 ],

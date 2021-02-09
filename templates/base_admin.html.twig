@@ -125,6 +125,39 @@
     // TinyMCE Initialization
     tinymce.init({ selector:'#product_product_description', menubar: true, height : "250" });
 
+    $('.partnerCode').click(function () {
+
+        let name      = $('#partner_partner_firstname').val();
+        let last_name = $('#partner_partner_lastname').val();
+
+
+        let pathFeed = "/generate-unique-partner-code";
+
+        $.ajax({
+            url: pathFeed,
+            type: "post",
+            dataType: "json",
+            data: {
+                name: name,
+                last_name: last_name
+            },
+            async: true,
+            success: function (data) {
+
+                // Ajout de la valeur a partner_code
+
+                $('#partner_code').val(data.code)
+
+            },
+            error: function(data){
+
+            }
+        });
+
+
+
+    })
+
 </script>
 
 <!-- Charts -->

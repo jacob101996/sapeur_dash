@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <!-- Basic page needs
     ============================================ -->
@@ -50,6 +50,39 @@
             content: '\e8c8';
             font-size: 10px;
         }
+        .label_required::after{
+            content: " *";
+            color: red;
+            font-weight: bold;
+        }
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .alert {
+            position: relative;
+            padding: .75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-radius: .25rem;
+        }
+        .close {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+        }
+        body {
+            font-family: "Roboto",sans-serif;
+            font-weight: 300;
+        }
     </style>
 </head>
 <body class="front_page">
@@ -72,11 +105,12 @@
     <!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
     {% block nav %}{% include 'nav_home.html.twig' %}{% endblock %}
 
-    <!-- - - - - - - - - - - - - - Layer slider - - - - - - - - - - - - - - - - -->
-    {% block slider %}{% include '_slider_home.html.twig' %}{% endblock %}
+    {% if app.request.get('_route') != "view_product_detail" %}
+        <!-- - - - - - - - - - - - - - Layer slider - - - - - - - - - - - - - - - - -->
+        {% block slider %}{% include '_slider_home.html.twig' %}{% endblock %}
 
-    <!-- - - - - - - - - - - - - - End of layer slider - - - - - - - - - - - - - - - - -->
-
+        <!-- - - - - - - - - - - - - - End of layer slider - - - - - - - - - - - - - - - - -->
+    {% endif %}
 
     <!-- - - - - - - - - - - - - - Page Wrapper - - - - - - - - - - - - - - - - -->
 

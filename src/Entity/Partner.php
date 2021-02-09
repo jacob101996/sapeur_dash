@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PartnerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,16 +19,6 @@ class Partner
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $civility;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type_room;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -60,27 +52,7 @@ class Partner
     private $partner_nroom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $partner_residence;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $partner_fonction;
-
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $datenaissance;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $contact_enterprise;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $partner_email;
 
@@ -100,46 +72,35 @@ class Partner
     private $activity;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="datetime")
      */
-    private $status_demand;
+    private $datecrea;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="partner")
+     */
+    private $products;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Civility::class, inversedBy="partners")
+     */
+    private $civility;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeRoom::class, inversedBy="partners")
+     */
+    private $type_room;
+
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCivility()
-    {
-        return $this->civility;
-    }
-
-    /**
-     * @param mixed $civility
-     */
-    public function setCivility($civility): void
-    {
-        $this->civility = $civility;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTypeRoom()
-    {
-        return $this->type_room;
-    }
-
-    /**
-     * @param mixed $type_room
-     */
-    public function setTypeRoom($type_room): void
-    {
-        $this->type_room = $type_room;
     }
 
     /**
@@ -238,64 +199,6 @@ class Partner
         $this->partner_nroom = $partner_nroom;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPartnerResidence()
-    {
-        return $this->partner_residence;
-    }
-
-    /**
-     * @param mixed $partner_residence
-     */
-    public function setPartnerResidence($partner_residence): void
-    {
-        $this->partner_residence = $partner_residence;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPartnerFonction()
-    {
-        return $this->partner_fonction;
-    }
-
-    /**
-     * @param mixed $partner_fonction
-     */
-    public function setPartnerFonction($partner_fonction): void
-    {
-        $this->partner_fonction = $partner_fonction;
-    }
-
-
-
-    public function getDatenaissance(): ?\DateTimeInterface
-    {
-        return $this->datenaissance;
-    }
-
-    public function setDatenaissance(?\DateTimeInterface $datenaissance): self
-    {
-        $this->datenaissance = $datenaissance;
-
-        return $this;
-    }
-
-    public function getContactEnterprise(): ?string
-    {
-        return $this->contact_enterprise;
-    }
-
-    public function setContactEnterprise(string $contact_enterprise): self
-    {
-        $this->contact_enterprise = $contact_enterprise;
-
-        return $this;
-    }
-
     public function getPartnerEmail(): ?string
     {
         return $this->partner_email;
@@ -345,15 +248,70 @@ class Partner
         return $this;
     }
 
-    public function getStatusDemand(): ?string
+    public function getDatecrea(): ?\DateTimeInterface
     {
-        return $this->status_demand;
+        return $this->datecrea;
     }
 
-    public function setStatusDemand(string $status_demand): self
+    public function setDatecrea(\DateTimeInterface $datecrea): self
     {
-        $this->status_demand = $status_demand;
+        $this->datecrea = $datecrea;
 
         return $this;
     }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setPartner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getPartner() === $this) {
+                $product->setPartner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCivility(): ?Civility
+    {
+        return $this->civility;
+    }
+
+    public function setCivility(?Civility $civility): self
+    {
+        $this->civility = $civility;
+
+        return $this;
+    }
+
+    public function getTypeRoom(): ?TypeRoom
+    {
+        return $this->type_room;
+    }
+
+    public function setTypeRoom(?TypeRoom $type_room): self
+    {
+        $this->type_room = $type_room;
+
+        return $this;
+    }
+
 }

@@ -14,20 +14,98 @@
 
             <main class="col-md-12 col-sm-12">
 
-                <!-- - - - - - - - - - - - - - Medicine & Health - - - - - - - - - - - - - - - - -->
-
-                <section class="section_offset animated transparent" data-animation="fadeInDown">
+                <section class="section_offset">
 
                     <div class="widget-head">
-                        <h3 class="offset_title">Nouvelle collection</h3>
+                        <h3 class="offset_title">Produits aléatoires</h3>
                     </div>
 
-                    <div class="tabs type_3 products">
+                    <div class="owl_carousel other_products">
 
-                        <div class="row">
-                            {% if products is defined and products is not null %}
+                        <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
 
-                                {% for item in products %}
+                        {% if products is defined and products is not null %}
+
+                            {% for item in products %}
+
+                                <div class="product_item">
+
+                                    <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                    <div class="image_wrap">
+
+                                        <a href="{{ path('view_product_detail', {'id': item.id }) }}" class="">
+                                            <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt=""
+                                                 style="">
+                                        </a>
+
+                                        <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                        {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+
+                                            <div class="label_offer percentage">
+
+                                                <div>{{ item.productReduction }}%</div>OFF
+
+                                            </div>
+
+                                        {% endif %}
+
+                                        <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                                    </div><!--/. image_wrap-->
+
+                                    <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                    <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+
+                                    <div class="description">
+
+                                        <h1>{{ item.productName }}</h1>
+
+                                        <a href="#">Enzymatic Therapy CoQ10, 100mg, Softgels 120 ea</a>
+
+                                        <div class="clearfix product_info">
+
+                                            {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+                                                <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
+                                                    <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                            {% else %}
+                                                <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+
+                                </div><!--/ .product_item-->
+
+                            {% endfor %}
+
+                        {% endif %}
+
+                        <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+
+                    </div><!--/ .owl_carousel -->
+
+                </section><!--/ .section_offset -->
+
+
+                <!-- - - - - - - - - - - - - - Collection Homme - - - - - - - - - - - - - - - - -->
+
+                {% if collection_man is defined and collection_man|length >0 %}
+                    <section class="section_offset animated transparent" data-animation="fadeInDown">
+
+                        <div class="widget-head">
+                            <h3 class="offset_title">Collection Homme</h3>
+                        </div>
+
+                        <div class="tabs type_3 products">
+
+                            <div class="row">
+                                {% for item in collection_man %}
 
                                     <div class="col-md-3">
 
@@ -36,21 +114,10 @@
                                             <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
 
                                             <div class="image_wrap">
-                                                <a href="">
-                                                    <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt=""
-                                                         style="width: 224px!important; height: 187px!important;">
+
+                                                <a href="{{ path('view_product_detail', {'id': item.id}) }}" class="">
+                                                    <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt="">
                                                 </a>
-
-                                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
-
-                                                <div class="actions_wrap">
-
-                                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn
-                                                    add_to_wishlist tooltip_container"><span class="tooltip right">Ajout en favori</span></a>
-
-                                                </div><!--/ .actions_wrap-->
-
-                                                <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
 
                                                 <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
 
@@ -110,130 +177,304 @@
                                     </div>
 
                                 {% endfor %}
+                            </div>
 
-                            {% endif %}
                         </div>
 
-                    </div>
+                    </section>
+                {% endif %}
 
-                </section>
+                <!-- - - - - - - - - - - - - - End collection homme - - - - - - - - - - - - - - - - -->
 
-                <!-- - - - - - - - - - - - - - End of Medicine & Health - - - - - - - - - - - - - - - - -->
 
-                <!-- - - - - - - - - - - - - - New arrivals - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Collection Femme - - - - - - - - - - - - - - - - -->
+
+                {% if collection_wife is defined and collection_wife|length >0 %}
+                    <section class="section_offset animated transparent" data-animation="fadeInDown">
+
+                        <div class="widget-head">
+                            <h3 class="offset_title">Collection Femme</h3>
+                        </div>
+
+                        <div class="tabs type_3 products">
+
+                            <div class="row">
+                                {% for item in collection_wife %}
+
+                                    <div class="col-md-3">
+
+                                        <div class="product_item">
+
+                                            <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                            <div class="image_wrap">
+
+                                                <a href="{{ path('view_product_detail', {'id': item.id}) }}" class="">
+                                                    <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt="">
+                                                </a>
+
+                                                <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+                                                {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+
+                                                    <div class="label_offer percentage">
+
+                                                        <div>{{ item.productReduction }}%</div>OFF
+
+                                                    </div>
+
+                                                {% endif %}
+
+                                                <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
+
+                                            </div><!--/. image_wrap-->
+
+                                            <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                            <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+
+                                            <div class="description">
+
+                                                <h1>{{ item.productName }}</h1>
+
+                                                <div class="clearfix product_info">
+
+                                                    {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
+                                                            <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                    {% else %}
+                                                        <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                    {% endif %}
+
+                                                    <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+
+                                                    <ul class="rating alignright">
+
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li></li>
+
+                                                    </ul>
+
+                                                    <!-- - - - - - - - - - - - - - End of product rating - - - - - - - - - - - - - - - - -->
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- - - - - - - - - - - - - - Product price & actions (only for list view) - - - - - - - - - - - - - - - - -->
+
+                                        </div><!--/ .product_item-->
+
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                    </section>
+                {% endif %}
+
+                <!-- - - - - - - - - - - - - - End collection femme - - - - - - - - - - - - - - - - -->
+
+                <!-- - - - - - - - - - - - - - Collection Enfant - - - - - - - - - - - - - - - - -->
+
+                {% if collection_baby is defined and collection_baby|length >0 %}
+                    <section class="section_offset animated transparent" data-animation="fadeInDown">
+
+                        <div class="widget-head">
+                            <h3 class="offset_title">Collection Enfant</h3>
+                        </div>
+
+                        <div class="tabs type_3 products">
+
+                            <div class="row">
+                                {% for item in collection_baby %}
+
+                                    <div class="col-md-3">
+
+                                        <div class="product_item">
+
+                                            <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                            <div class="image_wrap">
+
+                                                <a href="{{ path('view_product_detail', {'id': item.id}) }}" class="">
+                                                    <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt="">
+                                                </a>
+
+                                                <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+                                                {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+
+                                                    <div class="label_offer percentage">
+
+                                                        <div>{{ item.productReduction }}%</div>OFF
+
+                                                    </div>
+
+                                                {% endif %}
+
+                                                <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
+
+                                            </div><!--/. image_wrap-->
+
+                                            <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                            <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+
+                                            <div class="description">
+
+                                                <h1>{{ item.productName }}</h1>
+
+                                                <div class="clearfix product_info">
+
+                                                    {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
+                                                            <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                    {% else %}
+                                                        <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                    {% endif %}
+
+                                                    <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+
+                                                    <ul class="rating alignright">
+
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li></li>
+
+                                                    </ul>
+
+                                                    <!-- - - - - - - - - - - - - - End of product rating - - - - - - - - - - - - - - - - -->
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- - - - - - - - - - - - - - Product price & actions (only for list view) - - - - - - - - - - - - - - - - -->
+
+                                        </div><!--/ .product_item-->
+
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                    </section>
+                {% endif %}
+
+                <!-- - - - - - - - - - - - - - End collection Enfant - - - - - - - - - - - - - - - - -->
+
+
+                <!-- - - - - - - - - - - - - - Collection Sport - - - - - - - - - - - - - - - - -->
+
+                {% if collection_sport is defined and collection_sport|length >0 %}
+                    <section class="section_offset animated transparent" data-animation="fadeInDown">
+
+                        <div class="widget-head">
+                            <h3 class="offset_title">Collection Sport</h3>
+                        </div>
+
+                        <div class="tabs type_3 products">
+
+                            <div class="row">
+                                {% for item in collection_sport %}
+
+                                    <div class="col-md-3">
+
+                                        <div class="product_item">
+
+                                            <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                            <div class="image_wrap">
+
+                                                <a href="{{ path('view_product_detail', {'id': item.id}) }}" class="">
+                                                    <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt="">
+                                                </a>
+
+                                                <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+                                                {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+
+                                                    <div class="label_offer percentage">
+
+                                                        <div>{{ item.productReduction }}%</div>OFF
+
+                                                    </div>
+
+                                                {% endif %}
+
+                                                <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
+
+                                            </div><!--/. image_wrap-->
+
+                                            <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                            <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+
+                                            <div class="description">
+
+                                                <h1>{{ item.productName }}</h1>
+
+                                                <div class="clearfix product_info">
+
+                                                    {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
+                                                            <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                    {% else %}
+                                                        <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                    {% endif %}
+
+                                                    <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+
+                                                    <ul class="rating alignright">
+
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li class="active"></li>
+                                                        <li></li>
+
+                                                    </ul>
+
+                                                    <!-- - - - - - - - - - - - - - End of product rating - - - - - - - - - - - - - - - - -->
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- - - - - - - - - - - - - - Product price & actions (only for list view) - - - - - - - - - - - - - - - - -->
+
+                                        </div><!--/ .product_item-->
+
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                    </section>
+                {% endif %}
+
+                <!-- - - - - - - - - - - - - - End collection sport - - - - - - - - - - - - - - - - -->
+
 
                 <section class="section_offset animated transparent" data-animation="fadeInDown">
-
-                    <div class="widget-head">
-                        <h3>Nos meilleurs ventes</h3>
-                    </div>
-
-
-                </section><!--/ .section_offset-->
-
-                <!-- - - - - - - - - - - - - - End of new arrivals - - - - - - - - - - - - - - - - -->
-
-                <!-- - - - - - - - - - - - - - Latest News - - - - - - - - - - - - - - - - -->
-
-                <section class="section_offset animated transparent" data-animation="fadeInDown">
-
-                    <div class="widget-head">
-                        <h3>Latest News</h3>
-                    </div>
 
                     <div class="table_layout">
 
-                        <div class="table_row">
+                        <div class="table_row text-center">
 
-                            <!-- - - - - - - - - - - - - - Entry - - - - - - - - - - - - - - - - -->
-
-                            <div class="table_cell">
-
-                                <article class="entry">
-
-                                    <a href="#" class="thumbnail entry_image">
-
-                                        <img src="{{ asset('bootstrap/') }}images/news_img_1.jpg" alt="">
-
-                                    </a>
-
-                                    <h5 class="entry_title"><a href="#"><b>Vestibulum sed ante</b></a></h5>
-
-                                    <div class="entry_meta">
-
-                                        <span><i class="icon-calendar"></i> 2014-08-05 07:01:49</span>
-
-                                        <span><a href="#" class="comments"><i class="icon-comment"></i> 3</a></span>
-
-                                    </div><!--/ .byline-->
-
-                                    <p>Ut tellus dolor, dapibus eget,elem vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat...</p>
-
-                                </article><!--/ .entry-->
-
-                            </div>
-
-                            <!-- - - - - - - - - - - - - - End of entry - - - - - - - - - - - - - - - - -->
-
-                            <!-- - - - - - - - - - - - - - Entry - - - - - - - - - - - - - - - - -->
-
-                            <div class="table_cell">
-
-                                <article class="entry">
-
-                                    <a href="#" class="thumbnail entry_image">
-
-                                        <img src="{{ asset('bootstrap/') }}images/news_img_2.jpg" alt="">
-
-                                    </a>
-
-                                    <h5 class="entry_title"><a href="#"><b>Donec porta diam eu massa</b></a></h5>
-
-                                    <div class="entry_meta">
-
-                                        <span><i class="icon-calendar"></i> 2014-08-05 07:01:49</span>
-
-                                        <span><a href="#" class="comments"><i class="icon-comment"></i> 5</a></span>
-
-                                    </div><!--/ .byline-->
-
-                                    <p>Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit...</p>
-
-                                </article><!--/ .entry-->
-
-                            </div>
-
-                            <!-- - - - - - - - - - - - - - End of entry - - - - - - - - - - - - - - - - -->
-
-                            <!-- - - - - - - - - - - - - - Entry - - - - - - - - - - - - - - - - -->
-
-                            <div class="table_cell">
-
-                                <article class="entry">
-
-                                    <a href="#" class="thumbnail entry_image">
-
-                                        <img src="{{ asset('bootstrap/') }}images/news_img_3.jpg" alt="">
-
-                                    </a>
-
-                                    <h5 class="entry_title"><a href="#"><b>Sed ut perspiciatis unde omnis</b></a></h5>
-
-                                    <div class="entry_meta">
-
-                                        <span><i class="icon-calendar"></i> 2014-08-05 07:01:49</span>
-
-                                        <span><a href="#" class="comments"><i class="icon-comment"></i> 0</a></span>
-
-                                    </div><!--/ .byline-->
-
-                                    <p>Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, eleifend, elit. Aenean auctor wisi...</p>
-
-                                </article><!--/ .entry-->
-
-                            </div>
-
-                            <!-- - - - - - - - - - - - - - End of entry - - - - - - - - - - - - - - - - -->
+                            <h2><b>Sapeur2baby</b>, la plateforme des sapeurs, numero 1 en Côte d'Ivoire, Trouver vos produits à moidre coût.</h2>
 
                         </div>
 

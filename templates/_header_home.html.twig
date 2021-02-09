@@ -12,7 +12,7 @@
 
                     <!-- - - - - - - - - - - - - - Login - - - - - - - - - - - - - - - - -->
 
-                    <p><a href="{{ path('security_login') }}">Mon Espace Partenaire</a></p>
+                    <p class="c_info_location">Cocody Saint Jean , Abidjan, Côte d'Ivoire</p>
 
                     <!-- - - - - - - - - - - - - - End login - - - - - - - - - - - - - - - - -->
 
@@ -110,26 +110,6 @@
                         <form class="clearfix search">
 
                             <input type="text" name="" tabindex="1" placeholder="Recherche..." class="alignleft">
-
-                            <!-- - - - - - - - - - - - - - Categories - - - - - - - - - - - - - - - - -->
-
-                            <div class="search_category alignleft">
-
-                                <div class="open_categories">Categories</div>
-
-                                <ul class="categories_list dropdown">
-                                    {% if cats is defined and cats is not null %}
-
-                                        {% for cat in cats %}
-                                            <li class="animated_item"><a href="#">{{ cat.libelleFr }}</a></li>
-                                        {% endfor %}
-                                    {% endif %}
-
-                                </ul>
-
-                            </div><!--/ .search_category.alignleft-->
-
-                            <!-- - - - - - - - - - - - - - End of categories - - - - - - - - - - - - - - - - -->
 
                             <button class="button_blue def_icon_btn alignleft"></button>
 

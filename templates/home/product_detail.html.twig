@@ -1,0 +1,641 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ACCUEIL - BIENVENUE{% endblock %}
+
+
+{% block content %}
+    <div class="secondary_page_wrapper">
+
+        <div class="container">
+
+            <!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
+            <ul class="breadcrumbs">
+
+                <li><a href="{{ path('home_index') }}">Accueil</a></li>
+                <li><a href="#">Détail</a></li>
+                <li><a href="#">Produit</a></li>
+                <li>{{ product.productName }}</li>
+
+            </ul>
+
+            <!-- - - - - - - - - - - - - - End of breadcrumbs - - - - - - - - - - - - - - - - -->
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+                        {% for message in messages %}
+                            <div style="font-size: 17px !important;" class="alert alert-{{ label }} p-3 alert-dismissible fade show text-left" role="alert" id="alertMsg">
+                                {{ message|raw }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true" class="text-dark">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+
+                <main class="col-md-9 col-sm-8">
+
+                    <!-- - - - - - - - - - - - - - Product images & description - - - - - - - - - - - - - - - - -->
+
+                    <section class="section_offset">
+
+                        <div class="clearfix">
+
+                            <!-- - - - - - - - - - - - - - Product image column - - - - - - - - - - - - - - - - -->
+
+                            <div class="single_product">
+
+                                <!-- - - - - - - - - - - - - - Image preview container - - - - - - - - - - - - - - - - -->
+
+                                <div class="image_preview_container">
+
+                                    <img id="img_zoom" data-zoom-image="{{ asset('sapeuradmin/product')~product.productImage }}"
+                                         src="{{ asset('sapeuradmin/product/')~product.productImage }}" alt="">
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End of image preview container - - - - - - - - - - - - - - - - -->
+
+                                <!-- - - - - - - - - - - - - - Prodcut thumbs carousel - - - - - - - - - - - - - - - - -->
+
+                                <div class="product_preview">
+
+                                    <div class="owl_carousel" id="thumbnails">
+
+                                        {% if product.productImage1 is defined and product.productImage|length > 0 %}
+                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product.productImage1 }}"
+                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product.productImage1 }}">
+
+                                                <img src="{{ asset('sapeuradmin/product/')~product.productImage1 }}" width="74px" height="74px"
+                                                     data-large-image="{{ asset('sapeuradmin/product/')~product.productImage1 }}" alt="">
+                                            </a>
+                                        {% endif %}
+
+                                        {% if product.productImage2 is defined and product.productImage2|length > 0 %}
+                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product.productImage2 }}"
+                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product.productImage2 }}">
+
+                                                <img src="{{ asset('sapeuradmin/product/')~product.productImage2 }}" width="74px" height="74px"
+                                                     data-large-image="{{ asset('sapeuradmin/product/')~product.productImage2 }}" alt="">
+                                            </a>
+                                        {% endif %}
+
+                                        {% if product.productImage3 is defined and product.productImage3|length > 0 %}
+                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product.productImage3 }}"
+                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product.productImage3}}">
+
+                                                <img src="{{ asset('sapeuradmin/product/')~product.productImage3 }}" width="74px" height="74px"
+                                                     data-large-image="{{ asset('sapeuradmin/product/')~product.productImage3 }}" alt="">
+                                            </a>
+                                        {% endif %}
+
+
+                                    </div><!--/ .owl-carousel-->
+
+                                </div><!--/ .product_preview-->
+
+                                <!-- - - - - - - - - - - - - - End of prodcut thumbs carousel - - - - - - - - - - - - - - - - -->
+
+                            </div>
+
+                            <!-- - - - - - - - - - - - - - End of product image column - - - - - - - - - - - - - - - - -->
+
+                            <!-- - - - - - - - - - - - - - Product description column - - - - - - - - - - - - - - - - -->
+
+                            <div class="single_product_description">
+
+                                <h3 class="offset_title"><a href="#">{{ product.productName }}</a></h3>
+
+                                <!-- - - - - - - - - - - - - - Page navigation - - - - - - - - - - - - - - - - -->
+
+                                <div class="page-nav">
+
+                                    <a href="#" class="page-prev"></a>
+                                    <a href="#" class="page-next"></a>
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End of page navigation - - - - - - - - - - - - - - - - -->
+
+                                <div class="description_section v_centered">
+
+                                    <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+
+                                    <ul class="rating">
+
+                                        <li class="active"></li>
+                                        <li class="active"></li>
+                                        <li class="active"></li>
+                                        <li></li>
+                                        <li></li>
+
+                                    </ul>
+
+                                    <!-- - - - - - - - - - - - - - End of product rating - - - - - - - - - - - - - - - - -->
+
+                                    <!-- - - - - - - - - - - - - - Reviews menu - - - - - - - - - - - - - - - - -->
+
+                                    <ul class="topbar">
+
+                                        <li><a href="#">{{ avis|length }} Avis(s)</a></li>
+                                    </ul>
+
+                                    <!-- - - - - - - - - - - - - - End of reviews menu - - - - - - - - - - - - - - - - -->
+
+                                </div>
+
+                                <div class="description_section">
+
+                                    <table class="product_info">
+
+                                        <tbody>
+                                        <tr>
+
+                                            <td>Marque: </td>
+                                            <td>
+                                                {% if product.marque is defined and product.marque is not null %}
+                                                    <span>{{ product.marque.libelle }}</span>
+                                                {% else %}
+                                                    <span>Non défini</span>
+                                                {% endif %}
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>Disponibilité: </td>
+                                            <td>
+                                                {% if product.productStock >= 1 %}
+                                                    <span class="in_stock">En stock</span> {{ product.productStock }} element(s)
+                                                {% elseif product.productStock == 0 %}
+                                                    <span class="out_of_stock">Stock épuisé</span> {{ product.productStock }} element(s)
+                                                {% endif %}
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>Code du produit: </td>
+                                            <td>
+                                                {{ product.partner.partnerCode }}
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                                {% if product.productDescription is defined and product.productDescription is not null %}
+                                    <hr>
+
+                                    <div class="description_section">
+
+                                        <p>
+                                            {{ product.productDescription|raw }}
+                                        </p>
+
+                                    </div>
+
+                                    <hr>
+                                {% endif %}
+
+                                <p class="product_price">
+                                    {% if product.productReduction is defined and product.productReduction is not null %}
+                                        {% set prixReduction = (product.productReduction * product.productPrice)/100 %}
+                                        <s>{{ product.productPrice }} CFA</s>
+                                        <b class="theme_color">{{ product.productPrice - prixReduction }} CFA</b>
+                                    {% else %}
+                                        <b class="theme_color">{{ product.productPrice }} CFA</b>
+                                    {% endif %}
+                                </p>
+
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                <div class="buttons_row">
+
+                                    {% if product.productStock >= 1 %}
+                                        <button class="button_blue middle_btn">Ajout au panier</button>
+
+                                        <button class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container"><span class="tooltip top">Favori</span></button>
+                                    {% elseif product.productStock == 0 %}
+                                        <button class="button_blue middle_btn disabled">Ajout au panier</button>
+                                        <button class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container disabled"><span class="tooltip top">Favori</span></button>
+                                        <span class="out_of_stock">Stock épuisé</span> {{ product.productStock }} element(s)
+                                    {% endif %}
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                            </div>
+
+                            <!-- - - - - - - - - - - - - - End of product description column - - - - - - - - - - - - - - - - -->
+
+                        </div>
+
+                    </section><!--/ .section_offset -->
+
+                    <!-- - - - - - - - - - - - - - End of product images & description - - - - - - - - - - - - - - - - -->
+
+                    <!-- - - - - - - - - - - - - - Tabs - - - - - - - - - - - - - - - - -->
+
+                    <div class="section_offset">
+
+                        <div class="tabs type_2">
+
+                            <!-- - - - - - - - - - - - - - Navigation of tabs - - - - - - - - - - - - - - - - -->
+
+                            <ul class="tabs_nav clearfix">
+
+                                <li><a href="#description">Description</a></li>
+                                <li><a href="#avis">Avis ({{ avis|length }})</a></li>
+
+                            </ul>
+
+                            <!-- - - - - - - - - - - - - - End navigation of tabs - - - - - - - - - - - - - - - - -->
+
+                            <!-- - - - - - - - - - - - - - Tabs container - - - - - - - - - - - - - - - - -->
+
+                            <div class="tab_containers_wrap">
+
+                                <!-- - - - - - - - - - - - - - Tab - - - - - - - - - - - - - - - - -->
+
+                                <div id="description" class="tab_container">
+
+                                    <p>
+                                        {{ product.productDescription|raw }}
+                                    </p>
+
+                                </div><!--/ #tab-1-->
+
+                                <!-- - - - - - - - - - - - - - End tab - - - - - - - - - - - - - - - - -->
+
+                                <!-- - - - - - - - - - - - - - Tab - - - - - - - - - - - - - - - - -->
+
+                                <div id="avis" class="tab_container">
+
+                                    <section class="section_offset">
+
+                                        <h3>Avis des clients</h3>
+
+                                        <ul class="reviews">
+
+                                            {% if avis is defined and avis|length >0  %}
+
+                                                {% for avi in avis  %}
+
+
+                                                    <li>
+
+                                                        <!-- - - - - - - - - - - - - - Review - - - - - - - - - - - - - - - - -->
+
+                                                        <article class="review">
+
+                                                            <!-- - - - - - - - - - - - - - Review body - - - - - - - - - - - - - - - - -->
+
+                                                            <div class="review-body">
+
+                                                                <div class="review-meta">
+
+                                                                    <h5 class="bold">{{ avi.titreAvis }}</h5>
+
+                                                                    Ecris par <a href="#" class="bold">{{ avi.name|capitalize }}</a> le {{ avi.datecrea|date('d/m/Y') }}
+
+                                                                </div>
+
+                                                                <p>
+                                                                    {{ avi.commentaire|raw }}
+                                                                </p>
+
+                                                            </div>
+
+                                                            <!-- - - - - - - - - - - - - - End of review body - - - - - - - - - - - - - - - - -->
+
+                                                        </article>
+
+                                                        <!-- - - - - - - - - - - - - - End of review - - - - - - - - - - - - - - - - -->
+
+                                                    </li>
+
+                                                {% endfor %}
+
+                                            {% else %}
+
+                                                <p class="italic">Aucun commentaire !</p>
+
+                                            {% endif %}
+
+                                        </ul>
+
+                                    </section><!--/ .section_offset -->
+
+                                    <section class="section_offset">
+
+                                        <h3>Que pensez-vous du produit</h3>
+
+                                        <div class="row">
+
+                                            <div class="col-lg-6">
+
+                                                <p><b>Vous commentez: </b>Comment évaluez-vous ce produit?</p>
+
+
+                                                <!-- - - - - - - - - - - - - - End of rate the - - - - - - - - - - - - - - - - -->
+
+                                            </div><!--/ [col]-->
+
+                                            <div class="col-lg-6">
+
+                                                <p class="subcaption">Tous les champs sont requis.</p>
+
+                                                <!-- - - - - - - - - - - - - - Review form - - - - - - - - - - - - - - - - -->
+
+                                                {{ form_start(form) }}
+
+                                                    <ul>
+
+                                                        <li class="row">
+
+                                                            <div class="col-sm-6">
+                                                                {{ form_row(form.name) }}
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                {{ form_row(form.titre_avis) }}
+                                                            </div>
+
+
+                                                        </li>
+
+                                                        <li class="row">
+
+                                                            <div class="col-xs-12">
+                                                                {{ form_row(form.commentaire) }}
+                                                            </div>
+
+                                                        </li>
+
+                                                        <li class="row">
+
+                                                            <div class="col-xs-12">
+
+                                                                <button class="button_dark_grey middle_btn">Poster le commentaire</button>
+
+                                                            </div>
+
+                                                        </li>
+
+                                                    </ul>
+
+                                                {{ form_end(form) }}
+
+                                                <!-- - - - - - - - - - - - - - End of review form - - - - - - - - - - - - - - - - -->
+
+                                            </div>
+
+                                        </div><!--/ .row -->
+
+                                    </section><!--/ .section_offset -->
+
+                                </div><!--/ #tab-3-->
+
+                                <!-- - - - - - - - - - - - - - End tab - - - - - - - - - - - - - - - - -->
+                            </div><!--/ .tab_containers_wrap -->
+
+                            <!-- - - - - - - - - - - - - - End of tabs containers - - - - - - - - - - - - - - - - -->
+
+                        </div><!--/ .tabs-->
+
+                    </div><!--/ .section_offset -->
+
+                    <!-- - - - - - - - - - - - - - End of tabs - - - - - - - - - - - - - - - - -->
+
+                    <!-- - - - - - - - - - - - - - End of related products - - - - - - - - - - - - - - - - -->
+
+                    <section class="section_offset">
+
+                        <h3 class="offset_title">Autres produits de ce vendeur</h3>
+
+                        <div class="owl_carousel other_products">
+
+                            <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+
+                            {% if products is defined and products|length > 0 %}
+
+                                {% for item in products %}
+
+                                    <div class="product_item">
+
+                                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                        <div class="image_wrap">
+
+                                            <a href="{{ path('view_product_detail', {'id': item.id }) }}" class="">
+                                                <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt=""
+                                                     style="">
+                                            </a>
+
+                                            <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                            {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+
+                                                <div class="label_offer percentage">
+
+                                                    <div>{{ item.productReduction }}%</div>OFF
+
+                                                </div>
+
+                                            {% endif %}
+
+                                            <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                                        </div><!--/. image_wrap-->
+
+                                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+
+                                        <div class="description">
+
+                                            <h1>{{ item.productName }}</h1>
+
+                                            <p>
+                                                {{ (item.productDescription|raw) }}
+                                            </p>
+
+                                            <div class="clearfix product_info">
+
+                                                {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+                                                    <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
+                                                        <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                {% else %}
+                                                    <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                {% endif %}
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+
+                                    </div><!--/ .product_item-->
+
+                                {% endfor %}
+
+                            {% endif %}
+
+
+                            <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+
+                            <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+
+                        </div><!--/ .owl_carousel -->
+
+                    </section><!--/ .section_offset -->
+
+                </main><!--/ [col]-->
+
+                <aside class="col-md-3 col-sm-4">
+
+                    <!-- - - - - - - - - - - - - - Seller Information - - - - - - - - - - - - - - - - -->
+
+                    <section class="section_offset">
+
+                        <h3>Information du vendeur</h3>
+
+                        <div class="theme_box">
+
+                            <div class="seller_info clearfix">
+
+                                <div class="wrapper">
+
+                                    <a href="#"><b>{{ partner.partnerLastname|capitalize }} {{ partner.partnerFirstname|upper }} </b></a>
+
+                                    <p class="seller_category">{{ partner.activity.libelle }}</p>
+
+                                </div>
+
+                            </div><!--/ .seller_info-->
+
+                            <ul class="seller_stats">
+
+                                <li>
+
+                                    <ul class="topbar">
+
+                                        <li>{{ partner.siegeSocial }}, Côte d'Ivoire</li>
+
+                                        <li><a href="#">{{ partner.partnerShopName }}</a></li>
+
+                                    </ul>
+
+                                </li>
+
+                            </ul>
+
+                            <div class="v_centered">
+                                <a href="#" class="button_blue mini_btn">Contact du vendeur</a>
+                            </div>
+
+                        </div><!--/ .theme_box -->
+
+                        <footer class="bottom_box">
+
+                            <a href="#" class="button_grey middle_btn">Voir les produits de ce vendeur</a>
+
+                        </footer>
+
+                    </section>
+
+                    <!-- - - - - - - - - - - - - - End of seller information - - - - - - - - - - - - - - - - -->
+
+                    <!-- - - - - - - - - - - - - - Infoblock - - - - - - - - - - - - - - - - -->
+
+                    <div class="section_offset">
+
+                        <section class="infoblock type_2">
+
+                            <i class="icon-money"></i>
+
+                            <h4 class="caption"><b>100% REMBOURSEMENT GARANTI</b></h4>
+
+                            <p>Chez nous vous êtes satisfaire ou remboursé, </p>
+
+                        </section><!--/ .infoblock.type_2-->
+
+                    </div>
+
+                    <section class="section_offset">
+
+                        <h3>Produits aléatoires</h3>
+
+                        <ul class="products_list_widget">
+
+                            <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+
+                            {% for prod_al in prod  %}
+
+                                <li>
+
+                                    <a href="#" class="product_thumb">
+
+                                        <a href="{{ path('view_product_detail', {'id': prod_al.id }) }}">
+                                            <img src="{{ asset('sapeuradmin/product/')~prod_al.productImage }}" alt=""
+                                                 style="">
+                                        </a>
+
+                                    </a>
+
+                                    <div class="wrapper">
+
+                                        <a href="#" class="product_title">
+                                            {{ prod_al.productDescription|raw }}
+                                        </a>
+
+                                        <div class="clearfix product_info">
+
+                                            {% if prod_al.productReduction is defined and prod_al.productReduction is not null and prod_al.productReduction|length != 0 %}
+                                                <small class="product_price alignleft"><s style="margin-right: 10px!important;">{{ prod_al.productPrice }} CFA</s>
+                                                    <b style="">{{ (((prod_al.productPrice * prod_al.productReduction)/100) +   prod_al.productPrice) }} CFA</b></small>
+                                            {% else %}
+                                                <small class="product_price alignleft"><b>{{ prod_al.productPrice }} CFA</b></small>
+                                            {% endif %}
+
+                                            <ul class="rating alignright">
+
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li></li>
+
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+                                </li>
+
+                            {% endfor %}
+
+
+                        </ul><!--/ .list_of_products-->
+
+                    </section>
+
+
+
+                </aside><!--/ [col]-->
+
+            </div><!--/ .row-->
+
+        </div><!--/ .container-->
+
+    </div><!--/ .page_wrapper-->
+{% endblock %}

@@ -96,9 +96,6 @@
                                 <div class="buttons_row">
 
                                     <button type="submit" class="button_blue middle_btn">Search</button>
-
-                                    <button type="reset" class="button_grey middle_btn filter_reset">Reset</button>
-
                                 </div>
 
                             </footer>
@@ -127,7 +124,7 @@
 
                     <section class="section_offset">
 
-                        <h3>Already Viewed Products</h3>
+                        <h3>Produits déjà consultés</h3>
 
                         <ul class="products_list_widget">
 
@@ -179,124 +176,65 @@
 
                     <section class="section_offset">
 
-                        <h3>Compare Products</h3>
+                        <h3>Produits aléatoires</h3>
 
                         <ul class="products_list_widget">
 
                             <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
 
-                            <li>
+                            {% for item in prod  %}
 
-                                <a href="#" class="product_thumb">
+                                <li>
 
-                                    <img src="{{ asset('bootstrap/') }}images/product_thumb_10.jpg" alt="">
+                                    <a href="#" class="product_thumb">
 
-                                </a>
+                                        <a href="{{ path('view_product_detail', {'id': item.id }) }}">
+                                            <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt=""
+                                                 style="">
+                                        </a>
 
-                                <div class="wrapper">
+                                    </a>
 
-                                    <a href="#" class="product_title">Integer rutrum ante eu lacus...</a>
+                                    <div class="wrapper">
 
-                                    <div class="clearfix product_info">
+                                        <a href="#" class="product_title">
+                                            {{ item.productDescription|raw }}
+                                        </a>
 
-                                        <p class="product_price alignleft"><s>$29.99</s> <b>$21.99</b></p>
+                                        <div class="clearfix product_info">
 
-                                    </div>
+                                            {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+                                                <small class="product_price alignleft"><s style="margin-right: 10px!important;">{{ item.productPrice }} CFA</s>
+                                                    <b style="">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></small>
+                                            {% else %}
+                                                <small class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></small>
+                                            {% endif %}
 
-                                </div>
+                                            <ul class="rating alignright">
 
-                            </li>
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li></li>
 
-                            <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
+                                            </ul>
 
-                            <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
-
-                            <li>
-
-                                <a href="#" class="product_thumb">
-
-                                    <img src="{{ asset('bootstrap/') }}images/product_thumb_11.jpg" alt="">
-
-                                </a>
-
-                                <div class="wrapper">
-
-                                    <a href="#" class="product_title">Vestibulum ante ipsum primis in...</a>
-
-                                    <div class="clearfix product_info">
-
-                                        <p class="product_price alignleft"><b>$13.99</b></p>
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                </li>
 
-                            </li>
+                            {% endfor %}
+
 
                             <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
                         </ul><!--/ .list_of_products-->
 
-                        <footer class="bottom_box">
-
-                            <a href="shop_product_comparison.html" class="button_grey middle_btn">Go to Compare</a>
-
-                        </footer>
 
                     </section>
-
-                    <!-- - - - - - - - - - - - - - End of compare products - - - - - - - - - - - - - - - - -->
-
-                    <!-- - - - - - - - - - - - - - Tags - - - - - - - - - - - - - - - - -->
-
-                    <section class="section_offset">
-
-                        <h3>Tags</h3>
-
-                        <div class="tags_container">
-
-                            <ul class="tags_cloud">
-
-                                <li><a href="#" class="button_grey">allergy</a></li>
-                                <li><a href="#" class="button_grey">baby</a></li>
-                                <li><a href="#" class="button_grey">beauty</a></li>
-                                <li><a href="#" class="button_grey">ear care</a></li>
-                                <li><a href="#" class="button_grey">for her</a></li>
-                                <li><a href="#" class="button_grey">for him</a></li>
-                                <li><a href="#" class="button_grey">first aid</a></li>
-                                <li><a href="#" class="button_grey">gift sets</a></li>
-                                <li><a href="#" class="button_grey">spa</a></li>
-                                <li><a href="#" class="button_grey">hair care</a></li>
-                                <li><a href="#" class="button_grey">herbs</a></li>
-                                <li><a href="#" class="button_grey">medicine</a></li>
-                                <li><a href="#" class="button_grey">natural</a></li>
-                                <li><a href="#" class="button_grey">oral care</a></li>
-                                <li><a href="#" class="button_grey">pain</a></li>
-                                <li><a href="#" class="button_grey">pedicure</a></li>
-                                <li><a href="#" class="button_grey">personal care</a></li>
-                                <li><a href="#" class="button_grey">probiotics</a></li>
-
-                            </ul><!--/ .tags_cloud-->
-
-                        </div><!--/ .tags_container-->
-
-                    </section>
-
-                    <!-- - - - - - - - - - - - - - End of tags - - - - - - - - - - - - - - - - -->
-
-                    <!-- - - - - - - - - - - - - - Banner - - - - - - - - - - - - - - - - -->
-
-                    <div class="section_offset">
-
-                        <a href="#" class="banner">
-
-                            <img src="{{ asset('bootstrap/') }}images/banner_img_11.png" alt="">
-
-                        </a>
-
-                    </div>
-
-                    <!-- - - - - - - - - - - - - - End of banner - - - - - - - - - - - - - - - - -->
 
                 </aside>
 
@@ -321,7 +259,7 @@
 
                                 {% if products is defined and products is not null %}
 
-                                    {% for item in products %}
+                                    {% for prod in products %}
 
                                         <div class="col-md-3">
 
@@ -331,25 +269,18 @@
 
                                                 <div class="image_wrap">
 
-                                                    <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt="" style="width: 243px!important;">
-
-                                                    <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
-
-                                                    <div class="actions_wrap">
-
-                                                        <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container"><span class="tooltip right">Ajout en favori</span></a>
-                                                        
-                                                    </div><!--/ .actions_wrap-->
-
-                                                    <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                                                    <a href="{{ path('view_product_detail', {'id': prod.id }) }}">
+                                                        <img src="{{ asset('sapeuradmin/product/')~prod.productImage }}" alt=""
+                                                             style="">
+                                                    </a>
 
                                                     <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
 
-                                                    {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+                                                    {% if prod.productReduction is defined and prod.productReduction is not null and prod.productReduction|length != 0 %}
 
                                                         <div class="label_offer percentage">
 
-                                                            <div>{{ item.productReduction }}%</div>OFF
+                                                            <div>{{ prod.productReduction }}%</div>OFF
 
                                                         </div>
                                                         
@@ -365,14 +296,14 @@
 
                                                 <div class="description">
 
-                                                    <h1>{{ item.productName }}</h1>
+                                                    <h1>{{ prod.productName }}</h1>
 
                                                     <div class="clearfix product_info">
 
-                                                        {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                            <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s> <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        {% if prod.productReduction is defined and prod.productReduction is not null and prod.productReduction|length != 0 %}
+                                                            <p class="product_price alignleft"><s>{{ prod.productPrice }} CFA</s> <b>{{ (((prod.productPrice * prod.productReduction)/100) +   prod.productPrice) }} CFA</b></p>
                                                         {% else %}
-                                                            <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                            <p class="product_price alignleft"><b>{{ prod.productPrice }} CFA</b></p>
                                                         {% endif %}
 
                                                         <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
@@ -407,30 +338,6 @@
                             </div><!--/ .table_row -->
 
                         </div><!--/ .table_layout -->
-
-                        <footer class="bottom_box on_the_sides">
-
-                            <div class="left_side">
-
-                                <p>Showing 1 to 3 of 45 (15 Pages)</p>
-
-                            </div>
-
-                            <div class="right_side">
-
-                                <ul class="pags">
-
-                                    <li><a href="#"></a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#"></a></li>
-
-                                </ul>
-
-                            </div>
-
-                        </footer>
 
                     </div>
 
