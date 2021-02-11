@@ -36,15 +36,14 @@ class SubCategoryProductRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?SubCategoryProduct
+
+    public function findOneBySubCat($value): ?SubCategoryProduct
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
+            ->andWhere('s.libelle_fr = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

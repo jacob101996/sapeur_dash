@@ -94,6 +94,7 @@ class UserController extends AbstractController
             $this->em->flush();
 
             // Message flash et redirection
+            $this->addFlash("success", "Félicitation, information(s) modifiée(s) avec succes !");
             return $this->redirectToRoute('user_list');
         }
         return $this->render('user/edit.html.twig', [

@@ -1,0 +1,86 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}SAPEUR DE BABY - ADMIN{% endblock %}
+
+{% block content %}
+
+    <section class="mb-5">
+        <!-- Card -->
+        <div class="card card-cascade narrower p-5">
+
+            <div class="card-body">
+                <div class="row text-dark">
+                    <div class="col-md-12">
+                        {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+                            {% for message in messages %}
+                                <div style="font-size: 17px !important;" class="alert alert-{{ label }} p-3 alert-dismissible fade show text-left" role="alert" id="alertMsg">
+                                    {{ message|raw }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true" class="text-dark">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row text-dark">
+                    <div class="col-md-8"><h4 class="dark-grey-text">Modification du produit</h4></div>
+                    <div class="col-md-4 mt-2 text-right">
+                        <a href="{{ path('product_list') }}" title="Liste des produits"><i class="fas fa-list-alt text-danger" style="font-size: 25px"></i></a>
+                    </div>
+                </div>
+                <hr/>
+                {{ form_start(form) }}
+                <!-- Grid row -->
+                <div class="row border p-2 pt-4">
+                    <div class="col-md-4 form-group">{{ form_row(form.category) }}</div>
+                    <div class="col-md-4 form-group">{{ form_row(form.sub_category) }}</div>
+                    <div class="col-md-4 form-group">{{ form_row(form.product_name) }}</div>
+                    <div class="col-md-3 form-group">{{ form_row(form.quality_product) }}</div>
+                    <div class="col-md-3 form-group">{{ form_row(form.product_reduction) }}</div>
+                    <div class="col-md-6 form-group">{{ form_row(form.product_price) }}</div>
+                    <div class="col-md-3 form-group">{{ form_row(form.product_size) }}</div>
+                    <div class="col-md-6 form-group">{{ form_row(form.product_color) }}</div>
+                    <div class="col-md-3 form-group">{{ form_row(form.product_stock) }}</div>
+                    <div class="col-md-6 form-group">{{ form_row(form.marque) }}</div>
+                    <div class="col-md-6 form-group">{{ form_row(form.partner) }}</div>
+                    <div class="col-md-12 form-group">{{ form_row(form.product_description) }}</div>
+                </div>
+                <div class="row border p-2 pt-4 mt-4">
+                    <div class="col-md-6 form-group">
+                        {% if product.productImage is defined and product.productImage|length > 0 %}
+                            <img src="{{ asset('sapeuradmin/product/')~product.productImage }}" alt="" width="50px" class="img-thumbnail">
+                        {% endif %}
+                        {{ form_row(form.product_image, {'attr': {'value': product.productImage }}) }}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        {% if product.productImage1 is defined and product.productImage1|length > 0 %}
+                            <img src="{{ asset('sapeuradmin/product/')~product.productImage1 }}" alt="" width="50px" class="img-thumbnail">
+                        {% endif %}
+                        {{ form_row(form.product_image1) }}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        {% if product.productImage2 is defined and product.productImage2|length > 0 %}
+                            <img src="{{ asset('sapeuradmin/product/')~product.productImage2 }}" alt="" width="50px" class="img-thumbnail">
+                        {% endif %}
+                        {{ form_row(form.product_image2) }}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        {% if product.productImage3 is defined and product.productImage3|length > 0 %}
+                            <img src="{{ asset('sapeuradmin/product/')~product.productImage3 }}" alt="" width="50px" class="img-thumbnail">
+                        {% endif %}
+                        {{ form_row(form.product_image3) }}
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <button type="submit" class="btn btn-green btn-md"><i class="fas fa-check-circle mr-2"></i>Mettre à jour</button>
+                </div>
+                <!-- Grid row -->
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+        <!-- Card -->
+
+    </section>
+{% endblock %}

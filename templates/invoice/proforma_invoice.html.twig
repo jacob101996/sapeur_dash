@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Latest compiled and minified CSS -->
+    <title></title>
+    <!-- Font Awesome -->
+
+    <style>
+        .table{
+            width: 100%;
+            margin-bottom: .5rem;
+            color: #212529;
+            border-collapse: collapse;
+            display: table;
+            border-color: grey;
+        }
+        table.table thead th {
+            border-top: none;
+        }
+        table.table td, table.table th {
+            padding-top: .5rem;
+            padding-bottom: .7rem;
+        }
+        .table thead th {
+            vertical-align: bottom;
+            /* border-bottom: 2px solid #dee2e6; */
+        }
+        .table td, .table th {
+            /* padding: .75rem; */
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+        table th {
+            font-size: .9rem;
+            font-weight: 400;
+        }
+        th {
+            text-align: inherit;
+        }
+        th {
+            display: table-cell;
+            vertical-align: inherit;
+            font-weight: bold;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0,0,0,.05);
+        }
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+        .font-weight-bold{
+            font-weight: bold;
+            font-size: 17px;
+        }
+    </style>
+</head>
+
+<body>
+
+<table class="table">
+    <tr>
+        <td style="text-align: center;border-top: none!important;" colspan="2">
+            <h3 style="font-weight: bold; text-transform: uppercase; font-size: 35px">
+                <u>Facture Proforma</u>
+            </h3>
+        </td>
+    </tr>
+</table>
+
+<table class="table" style="margin-top: 10px">
+    <tr>
+        <td style="text-align: left; border-top: none!important;">N° FACTURE</td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ numero }}</td>
+    </tr>
+    <tr>
+        <td style="text-align: left;border-top: none!important;">Nom & Prénom(s)</td>
+        <td style="text-align: left;border-top: none!important; font-weight: bold">{{ name|upper }}</td>
+    </tr>
+    <tr>
+        <td style="text-align: left; border-top: none!important;">Contact </td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ tel }}</td>
+    </tr>
+    <tr>
+        <td style="text-align: left; border-top: none!important;">Lieu de livraison </td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ lieu|upper }}</td>
+    </tr>
+    <tr>
+        <td style="text-align: left; border-top: none!important;">Date de commande</td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ date_cmd|date('Y/m/d H:i:s') }}</td>
+    </tr>
+    <tr>
+        <td style="text-align: left; border-top: none!important;">Facture reglée par :</td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ moyen_buy }}</td>
+    </tr>
+
+</table>
+
+<table class="table">
+    <tr>
+        <td colspan="2" style="border-top: none!important;">
+            <hr style="margin-top: 0!important;">
+        </td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nom produit</th>
+        <th>Ref produit</th>
+        <th>Quantité</th>
+        <th>Montant (CFA)</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.product.productName }}</td>
+            <td>{{ item.product.partner.partnerCode }}</td>
+            <td>{{ item.qte }}</td>
+            <td>
+                {% if item.product.productReduction|length != 0 %}
+                     {% set priceReduction = (item.product.productPrice * item.product.productReduction)/100 %}
+                    {{ ((item.product.productPrice + priceReduction) * item.qte)|number_format(0,' ', ' ') }}
+                {% else %}
+                    {{ (item.product.productPrice * item.qte)|number_format(0,' ', ' ') }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="3" style="text-transform: uppercase">Montant HT</td>
+        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ sub_total|number_format(0,' ', ' ') }}</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-transform: uppercase">Taux TVA</td>
+        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ tva }} %</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-transform: uppercase">Montant TTC:</td>
+        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ mnt_ttc|number_format(0,' ', ' ') }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<table style="margin-top: 10px">
+    <tr>
+        <td colspan="2" style="color: red;"><span style="font-weight: bold">NB:</span>
+            <small>Cette facture n'est valide que si elle comporte le cachet et/ou la signature du responsable. **</small>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: right;font-weight: bold">Signature/Cachet</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: right; font-weight: bold">
+            <img src="{{ qr_code }}" alt="" style="width: 150px!important;">
+        </td>
+    </tr>
+</table>
+
+<!-- Latest compiled and minified JavaScript -->
+</body>
+
+</html>

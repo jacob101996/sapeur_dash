@@ -43,7 +43,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -64,7 +64,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -111,7 +111,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="#">{{ subcat.libelleFr }}</a></li>
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">{{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
 
@@ -131,7 +131,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -178,7 +178,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -199,7 +199,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -248,7 +248,7 @@
 
                                                             {% for subcat in cat.subCategory%}
 
-                                                                <li><a href="#">{{ subcat.libelleFr }}</a></li>
+                                                                <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">{{ subcat.libelleFr }}</a></li>
 
                                                             {% endfor %}
 
@@ -268,7 +268,7 @@
 
                                                             {% for subcat in cat.subCategory%}
 
-                                                                <li><a href="{{ path('view_product_by_category', {'slug':cat.libelleFr|lower}) }}">
+                                                                <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
                                                                         {{ subcat.libelleFr }}</a></li>
 
                                                             {% endfor %}
@@ -350,7 +350,7 @@
 
                     <div class="nav_item size_4">
 
-                        <a href="#" class="wishlist_button" data-amount="7"></a>
+                        <a href="{{ path('my_wishlist') }}" id="heart" class="wishlist_button" data-amount="{{ nbfavori }}"></a>
 
                     </div><!--/ .nav_item-->
 
@@ -360,106 +360,12 @@
 
                     <div class="nav_item size_3">
 
-                        <button id="open_shopping_cart" class="open_button" data-amount="3">
-                            <b class="title">Mon panier</b>
-                            <b class="total_price">$999.00</b>
-                        </button>
+                        <a href="{{ path('my_cart') }}">
 
-                        <!-- - - - - - - - - - - - - - Products list - - - - - - - - - - - - - - - - -->
-
-                        <div class="shopping_cart dropdown">
-
-                            <div class="animated_item">
-
-                                <p class="title">Recently added item(s)</p>
-
-                                <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
-
-                                <div class="clearfix sc_product">
-
-                                    <a href="#" class="product_thumb"><img src="{{ asset('bootstrap/') }}images/sc_img_1.jpg" alt=""></a>
-
-                                    <a href="#" class="product_name">Leo vel metus nulla facilisi etiam cursus...</a>
-
-                                    <p>1 x $499.00</p>
-
-                                    <button class="close"></button>
-
-                                </div><!--/ .clearfix.sc_product-->
-
-                                <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
-
-                            </div><!--/ .animated_item-->
-
-                            <div class="animated_item">
-
-                                <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
-
-                                <div class="clearfix sc_product">
-
-                                    <a href="#" class="product_thumb"><img src="{{ asset('bootstrap/') }}images/sc_img_2.jpg" alt=""></a>
-
-                                    <a href="#" class="product_name">Donec porta diam eu massa...</a>
-
-                                    <p>1 x $499.00</p>
-
-                                    <button class="close"></button>
-
-                                </div><!--/ .clearfix.sc_product-->
-
-                                <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
-
-                            </div><!--/ .animated_item-->
-
-                            <div class="animated_item">
-
-                                <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
-
-                                <div class="clearfix sc_product">
-
-                                    <a href="#" class="product_thumb"><img src="{{ asset('bootstrap/') }}images/sc_img_3.jpg" alt=""></a>
-
-                                    <a href="#" class="product_name">Sed in lacus ut enim<br>adipiscing aliquet 30 ea</a>
-
-                                    <p>1 x $499.00</p>
-
-                                    <button class="close"></button>
-
-                                </div><!--/ .clearfix.sc_product-->
-
-                                <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
-
-                            </div><!--/ .animated_item-->
-
-                            <div class="animated_item">
-
-                                <!-- - - - - - - - - - - - - - Total info - - - - - - - - - - - - - - - - -->
-
-                                <ul class="total_info">
-
-                                    <li><span class="price">Tax:</span> $0.00</li>
-
-                                    <li><span class="price">Discount:</span> $37.00</li>
-
-                                    <li class="total"><b><span class="price">Total:</span> $999.00</b></li>
-
-                                </ul>
-
-                                <!-- - - - - - - - - - - - - - End of total info - - - - - - - - - - - - - - - - -->
-
-                            </div><!--/ .animated_item-->
-
-                            <div class="animated_item">
-
-                                <a href="#" class="button_grey">View Cart</a>
-
-                                <a href="#" class="button_blue">Checkout</a>
-
-                            </div><!--/ .animated_item-->
-
-                        </div><!--/ .shopping_cart.dropdown-->
-
-                        <!-- - - - - - - - - - - - - - End of products list - - - - - - - - - - - - - - - - -->
+                            <button id="open_shopping_cart" style="margin-top: 15px" data-amount="{{ nbprod }}">
+                                <b class="title">Panier</b>
+                            </button>
+                        </a>
 
                     </div><!--/ .nav_item-->
 

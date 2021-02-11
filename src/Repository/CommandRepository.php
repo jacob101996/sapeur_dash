@@ -47,4 +47,13 @@ class CommandRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function dataCommand(){
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT substring(c.date_delivery,1,7) as date_data, COUNT(c) FROM App\Entity\Command c
+                  GROUP BY date_data
+                  ORDER BY date_data DESC"
+        );
+        return $query->setMaxResults(12)->getResult();
+    }
 }

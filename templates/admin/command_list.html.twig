@@ -1,0 +1,82 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}SAPEUR DE BABY - ADMIN{% endblock %}
+
+{% block content %}
+
+    <section>
+
+        <!-- Gird column -->
+        <div class="col-md-12">
+
+            <div class="card">
+                {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+                    {% for message in messages %}
+                        <div style="font-size: 17px !important;" class="alert alert-{{ label }} p-3 alert-dismissible fade show text-left" role="alert" id="alertMsg">
+                            {{ message|raw }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true" class="text-dark">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <div class="card-body">
+                    <div class="row text-dark">
+                        {% if app.request.get('_route') == "admin_cmd_to_day" %}
+                            <div class="col-md-8"><h4 class="dark-grey-text">Commandes du jour</h4></div>
+                            <div class="col-md-4 mt-2 text-right">
+                                <a href="{{ path('admin_cmd_all') }}" title="Toutes les commandes"><i class="far fa-calendar-alt mr-2 gold-text" style="font-size: 25px"></i></a>
+                            </div>
+                        {% elseif app.request.get('_route') == "admin_cmd_all" %}
+                            <div class="col-md-8"><h4 class="dark-grey-text">Toute les commandes</h4></div>
+                            <div class="col-md-4 mt-2 text-right">
+                                <a href="{{ path('admin_cmd_to_day') }}" title="Toutes les commandes"><i class="fas fa-calendar-day mr-2 gold-text" style="font-size: 25px"></i></a>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <hr/>
+                    <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Nom client</th>
+                            <th>Contact</th>
+                            <th>Lieu de livraion</th>
+                            <th>Ref commande</th>
+                            <th>Montant TTC</th>
+                            <th>Payé par ?</th>
+                            <th>Facture</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for cmd in commands %}
+                            <tr>
+                                <td>{{ cmd.nameClt }}</td>
+                                <td>{{ cmd.telClt }}</td>
+                                <td>{{ cmd.deliveryLocation }}</td>
+                                <td>{{ cmd.refCmd }}</td>
+                                <td class="font-weight-bold">{{ (cmd.mntTtc|round)|number_format(0," ", " ") }} CFA</td>
+                                <td>{{ cmd.buyedBy }}</td>
+                                <td class="text-center">
+                                    <a href="{{ asset('/invoice/')~cmd.factureName }}" target="_blank">
+                                        <i class="far fa-file-pdf fa-2x" style="color: #ff5252!important"></i>
+                                    </a>
+                                </td>
+                                <td>{{ cmd.dateDelivery|date('Y/m/d H:i:s') }}</td>
+                                <td><span class="badge badge-info">{{ cmd.status.libelle }} ...</span></td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- Gird column -->
+
+    </section>
+    <!-- Section: Basic examples -->
+{% endblock %}

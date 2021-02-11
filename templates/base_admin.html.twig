@@ -35,6 +35,22 @@
             color: red;
             font-weight: bold;
         }
+        .gold-text{
+            color: #cb9700!important;
+        }
+        a.dropdown-item:hover{
+            background-color: #cb9700!important;
+            color: white!important;
+        }
+        .white-skin .side-nav .sidenav-bg.mask-strong:after, .white-skin .side-nav .sidenav-bg:after {
+            background: none!important;
+        }
+        a{
+            color: white!important;
+        }
+        a.dropdown-item{
+            color: #3e4551!important;
+        }
     </style>
 </head>
 
@@ -73,7 +89,7 @@
     <!-- Copyright -->
     <div class="footer-copyright py-3 text-center">
         <div class="container-fluid">
-            © 2020 Copyright - Developer by <a href="https://oztech-ci.com" target="_blank">OZTECH-CI </a>
+            © 2021 Copyright - Developer by <a href="https://oztech-ci.com" target="_blank">OZTECH-CI </a>
         </div>
     </div>
 
@@ -95,6 +111,16 @@
 
 <!-- Initializations -->
 <script>
+
+
+    let pathUrl = "{{ app.request.get('_route')}}";
+
+    if ( pathUrl === 'product_edit' )
+    {
+        $('#product_product_image').prop('required', false);
+    }
+
+
     // SideNav Initialization
     $(".button-collapse").sideNav();
 
@@ -153,8 +179,6 @@
 
             }
         });
-
-
 
     })
 

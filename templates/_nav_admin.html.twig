@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+<nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav" style="background-color: #cb9700; color: white">
 
     <!-- SideNav slide-out button -->
     <div class="float-left">
@@ -6,7 +6,7 @@
     </div>
 
     <!-- Breadcrumb -->
-    <div class="breadcrumb-dn mr-auto">
+    <div class="breadcrumb-dn mr-auto font-weight-bold">
         <p>Tableau de bord</p>
     </div>
 
@@ -19,23 +19,18 @@
             <li class="nav-item">
                 <a class="nav-link waves-effect" id="navbarDropdownMenuLink"
                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-shopping-basket"></i><sup class="badge rounded-circle red">3</sup>
+                    <i class="fas fa-shopping-basket text-white"></i><sup class="badge rounded-circle" style="background-color: #ff5252!important">3</sup>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link waves-effect"><i class="far fa-comments"></i> <span
-                            class="clearfix d-none d-sm-inline-block">Support</span></a>
-            </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle waves-effect text-white font-weight-bold" href="#" id="userDropdown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Profile</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">Accéder à la page d'accueil</a>
-                    <a class="dropdown-item" href="#">Mon profile</a>
-                    <a class="dropdown-item" href="#">Se déconnecter</a>
+                    <a class="dropdown-item" href="{{ path('home_index') }}" target="_blank"><i class="fab fa-internet-explorer mr-2"></i>Accéder à la page d'accueil</a>
+                    <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt mr-2"></i>Se déconnecter</a>
                 </div>
             </li>
 

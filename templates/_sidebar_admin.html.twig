@@ -1,4 +1,4 @@
-<div class="side-nav fixed" id="slide-out" style="box-shadow: none!important;">
+<div class="side-nav fixed" id="slide-out" style="box-shadow: none!important; background-color: #3e4551">
 
     <ul class="custom-scrollbar">
 
@@ -17,31 +17,32 @@
 
                 <li>
                     <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fab fa-product-hunt orange-text"></i>Gestion des produits<i class="fas fa-angle-down rotate-icon"></i>
+                        <i class="fab fa-product-hunt gold-text"></i>Gestion des produits<i class="fas fa-angle-down rotate-icon"></i>
                     </a>
                     <div class="collapsible-body">
                         <ul>
                             <li>
-                                <a href="{{ path('product_add') }}" class="waves-effect"><i class="far fa-plus-square orange-text"></i>Nouveau produit</a>
+                                <a href="{{ path('product_add') }}" class="waves-effect"><i class="far fa-plus-square gold-text"></i>Nouveau produit</a>
                             </li>
                             <li>
-                                <a href="{{ path('product_list') }}" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des produit</a>
+                                <a href="{{ path('product_list') }}" class="waves-effect"><i class="far fa-list-alt gold-text"></i>Liste des produit</a>
                             </li>
                         </ul>
                     </div>
                 </li>
                 {% if app.user.roles.0 in ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] %}
+
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-th-list orange-text"></i>Gestion des catégories<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-users gold-text"></i>Gestion des comptes<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a href="html/profile/basic-1.html" class="waves-effect"><i class="far fa-plus-square orange-text"></i>Nouvelle catégorie</a>
+                                    <a href="{{ path('user_add') }}" class="waves-effect"><i class="fas fa-user-plus gold-text"></i>Nouveau compte</a>
                                 </li>
                                 <li>
-                                    <a href="html/profile/basic-2.html" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des catégories</a>
+                                    <a href="{{ path('user_list') }}" class="waves-effect"><i class="far fa-list-alt gold-text"></i>Liste des comptes</a>
                                 </li>
                             </ul>
                         </div>
@@ -49,68 +50,49 @@
 
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-users orange-text"></i>Gestion des comptes<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-users gold-text"></i>Gestion des partenaires <i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a href="{{ path('user_add') }}" class="waves-effect"><i class="fas fa-user-plus orange-text"></i>Nouveau compte</a>
+                                    <a href="{{ path('partner_add') }}" class="waves-effect"><i class="fas fa-user-plus gold-text"></i>Nouveau compte</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('user_list') }}" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des comptes</a>
+                                    <a href="{{ path('partner_list') }}" class="waves-effect"><i class="far fa-list-alt gold-text"></i>Liste des partenaires</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li>
-                        <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-users orange-text"></i>Gestion des partenaires <i class="fas fa-angle-down rotate-icon"></i>
-                        </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a href="{{ path('partner_add') }}" class="waves-effect"><i class="fas fa-user-plus orange-text"></i>Nouveau compte</a>
-                                </li>
-                                <li>
-                                    <a href="html/pages/register.html" class="waves-effect"><i class="far fa-list-alt orange-text"></i>Liste des partenaires</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
                 {% endif %}
 
                 <li>
-                    <a href="html/alerts/alerts.html" class="collapsible-header waves-effect"><i
-                                class="fas fa-users orange-text"></i>Gestion des clients</a>
-                </li>
-
-                <li>
                     <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fas fa-shopping-basket orange-text"></i>Gestion des commandes<i class="fas fa-angle-down rotate-icon"></i>
+                        <i class="fas fa-shopping-basket gold-text"></i>Gestion des commandes<i class="fas fa-angle-down rotate-icon"></i>
                     </a>
                     <div class="collapsible-body">
                         <ul>
                             <li>
-                                <a href="html/css/grid.html" class="waves-effect">Les commandes du jour</a>
+                                <a href="{{ path('admin_cmd_to_day') }}" class="waves-effect"><i class="fas fa-calendar-day mr-2 gold-text"></i>Les commandes du jour</a>
                             </li>
                             <li>
-                                <a href="html/css/media.html" class="waves-effect">Toutes les commandes</a>
+                                <a href="{{ path('admin_cmd_all') }}" class="waves-effect"><i class="far fa-calendar-alt mr-2 gold-text"></i>Toutes les commandes</a>
                             </li>
                         </ul>
                     </div>
                 </li>
+
                 <li>
                     <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fas fa-gift orange-text"></i>Service après-vente<i class="fas fa-angle-down rotate-icon"></i>
+                        <i class="fas fa-gift gold-text"></i>Service après-vente<i class="fas fa-angle-down rotate-icon"></i>
                     </a>
                     <div class="collapsible-body">
                         <ul>
                             <li>
-                                <a href="html/css/grid.html" class="waves-effect">Reclamation du jour</a>
+                                <a href="#" class="waves-effect">Reclamation du jour</a>
                             </li>
                             <li>
-                                <a href="html/css/media.html" class="waves-effect">Nos reclamations</a>
+                                <a href="#" class="waves-effect">Nos reclamations</a>
                             </li>
                         </ul>
                     </div>

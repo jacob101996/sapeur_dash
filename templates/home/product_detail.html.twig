@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ACCUEIL - BIENVENUE{% endblock %}
+{% block title %}ACCUEIL - DETAIL PRODUIT{% endblock %}
 
 
 {% block content %}
@@ -14,7 +14,7 @@
                 <li><a href="{{ path('home_index') }}">Accueil</a></li>
                 <li><a href="#">Détail</a></li>
                 <li><a href="#">Produit</a></li>
-                <li>{{ product.productName }}</li>
+                <li>{{ product_item.productName }}</li>
 
             </ul>
 
@@ -35,6 +35,17 @@
                     {% endfor %}
                 </div>
 
+                <div class="col-md-12" id="MsgCart">
+                    <div style="font-size: 17px !important; color: white" class="alert  p-3 alert-dismissible fade show text-left" role="alert" id="alertMsgAddcart">
+                        <span class="icon-cart" style="margin-right: 10px"></span>Elément ajouté au panier !
+                    </div>
+                </div>
+                <div class="col-md-12" id="MsgFavori">
+                    <div style="font-size: 17px !important; color: white" class="alert  p-3 alert-dismissible fade show text-left" role="alert" id="alertMsgAddFavori">
+                        <span class="icon-heart" style="margin-right: 10px"></span>Elément ajouté au en favori !
+                    </div>
+                </div>
+
                 <main class="col-md-9 col-sm-8">
 
                     <!-- - - - - - - - - - - - - - Product images & description - - - - - - - - - - - - - - - - -->
@@ -51,8 +62,26 @@
 
                                 <div class="image_preview_container">
 
-                                    <img id="img_zoom" data-zoom-image="{{ asset('sapeuradmin/product')~product.productImage }}"
-                                         src="{{ asset('sapeuradmin/product/')~product.productImage }}" alt="">
+                                    <img id="img_zoom" data-zoom-image="{{ asset('sapeuradmin/product')~product_item.productImage }}"
+                                         src="{{ asset('sapeuradmin/product/')~product_item.productImage }}" alt="">
+
+                                    {% if product_item.productReduction is defined and product_item.productReduction
+                                        is not null and product_item.productReduction|length != 0 and product_item.qualityProduct == "medium_quality" %}
+                                        <div class="label_offer percentage">
+
+                                            <div>{{ product_item.productReduction }}%</div>OFF
+
+                                        </div>
+                                    {% endif %}
+
+                                    {% if product_item.qualityProduct == "best_quality" %}
+                                        <div class="label_offer percentage" style="background-color: goldenrod">
+                                            <span class="icon-star"></span>
+                                            <div style="font-size: 10px" class="">Offre</div>
+                                            <div>VIP</div>
+
+                                        </div>
+                                    {% endif %}
 
                                 </div>
 
@@ -64,30 +93,30 @@
 
                                     <div class="owl_carousel" id="thumbnails">
 
-                                        {% if product.productImage1 is defined and product.productImage|length > 0 %}
-                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product.productImage1 }}"
-                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product.productImage1 }}">
+                                        {% if product_item.productImage1 is defined and product_item.productImage|length > 0 %}
+                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product_item.productImage1 }}"
+                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product_item.productImage1 }}">
 
-                                                <img src="{{ asset('sapeuradmin/product/')~product.productImage1 }}" width="74px" height="74px"
-                                                     data-large-image="{{ asset('sapeuradmin/product/')~product.productImage1 }}" alt="">
+                                                <img src="{{ asset('sapeuradmin/product/')~product_item.productImage1 }}" width="74px" height="74px"
+                                                     data-large-image="{{ asset('sapeuradmin/product/')~product_item.productImage1 }}" alt="">
                                             </a>
                                         {% endif %}
 
-                                        {% if product.productImage2 is defined and product.productImage2|length > 0 %}
-                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product.productImage2 }}"
-                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product.productImage2 }}">
+                                        {% if product_item.productImage2 is defined and product_item.productImage2|length > 0 %}
+                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product_item.productImage2 }}"
+                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product_item.productImage2 }}">
 
-                                                <img src="{{ asset('sapeuradmin/product/')~product.productImage2 }}" width="74px" height="74px"
-                                                     data-large-image="{{ asset('sapeuradmin/product/')~product.productImage2 }}" alt="">
+                                                <img src="{{ asset('sapeuradmin/product/')~product_item.productImage2 }}" width="74px" height="74px"
+                                                     data-large-image="{{ asset('sapeuradmin/product/')~product_item.productImage2 }}" alt="">
                                             </a>
                                         {% endif %}
 
-                                        {% if product.productImage3 is defined and product.productImage3|length > 0 %}
-                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product.productImage3 }}"
-                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product.productImage3}}">
+                                        {% if product_item.productImage3 is defined and product_item.productImage3|length > 0 %}
+                                            <a href="#" data-image="{{ asset('sapeuradmin/product/')~product_item.productImage3 }}"
+                                               data-zoom-image="{{ asset('sapeuradmin/product/')~product_item.productImage3}}">
 
-                                                <img src="{{ asset('sapeuradmin/product/')~product.productImage3 }}" width="74px" height="74px"
-                                                     data-large-image="{{ asset('sapeuradmin/product/')~product.productImage3 }}" alt="">
+                                                <img src="{{ asset('sapeuradmin/product/')~product_item.productImage3 }}" width="74px" height="74px"
+                                                     data-large-image="{{ asset('sapeuradmin/product/')~product_item.productImage3 }}" alt="">
                                             </a>
                                         {% endif %}
 
@@ -106,7 +135,7 @@
 
                             <div class="single_product_description">
 
-                                <h3 class="offset_title"><a href="#">{{ product.productName }}</a></h3>
+                                <h3 class="offset_title"><a href="#">{{ product_item.productName }}</a></h3>
 
                                 <!-- - - - - - - - - - - - - - Page navigation - - - - - - - - - - - - - - - - -->
 
@@ -155,8 +184,8 @@
 
                                             <td>Marque: </td>
                                             <td>
-                                                {% if product.marque is defined and product.marque is not null %}
-                                                    <span>{{ product.marque.libelle }}</span>
+                                                {% if product_item.marque is defined and product_item.marque is not null %}
+                                                    <span>{{ product_item.marque.libelle }}</span>
                                                 {% else %}
                                                     <span>Non défini</span>
                                                 {% endif %}
@@ -168,10 +197,10 @@
 
                                             <td>Disponibilité: </td>
                                             <td>
-                                                {% if product.productStock >= 1 %}
-                                                    <span class="in_stock">En stock</span> {{ product.productStock }} element(s)
-                                                {% elseif product.productStock == 0 %}
-                                                    <span class="out_of_stock">Stock épuisé</span> {{ product.productStock }} element(s)
+                                                {% if product_item.productStock >= 1 %}
+                                                    <span class="in_stock">En stock</span> {{ product_item.productStock }} element(s)
+                                                {% elseif product_item.productStock == 0 %}
+                                                    <span class="out_of_stock">Stock épuisé</span> {{ product_item.productStock }} element(s)
                                                 {% endif %}
                                             </td>
 
@@ -181,7 +210,7 @@
 
                                             <td>Code du produit: </td>
                                             <td>
-                                                {{ product.partner.partnerCode }}
+                                                {{ product_item.partner.partnerCode }}
                                             </td>
                                         </tr>
 
@@ -191,13 +220,13 @@
 
                                 </div>
 
-                                {% if product.productDescription is defined and product.productDescription is not null %}
+                                {% if product_item.productDescription is defined and product_item.productDescription is not null %}
                                     <hr>
 
                                     <div class="description_section">
 
                                         <p>
-                                            {{ product.productDescription|raw }}
+                                            {{ product_item.productDescription|raw }}
                                         </p>
 
                                     </div>
@@ -206,12 +235,12 @@
                                 {% endif %}
 
                                 <p class="product_price">
-                                    {% if product.productReduction is defined and product.productReduction is not null %}
-                                        {% set prixReduction = (product.productReduction * product.productPrice)/100 %}
-                                        <s>{{ product.productPrice }} CFA</s>
-                                        <b class="theme_color">{{ product.productPrice - prixReduction }} CFA</b>
+                                    {% if product_item.productReduction is defined and product_item.productReduction|length > 0  %}
+                                        {% set prixReduction = (product_item.productReduction * product_item.productPrice)/100 %}
+                                        <s style="font-size: 15px; margin-right: 10px">{{ product_item.productPrice }} CFA</s>
+                                        <b class="theme_color">{{ (product_item.productPrice + prixReduction)|number_format(0, " ", " ") }} CFA</b>
                                     {% else %}
-                                        <b class="theme_color">{{ product.productPrice }} CFA</b>
+                                        <b class="theme_color">{{ product_item.productPrice|number_format(0, " ", " ") }} CFA</b>
                                     {% endif %}
                                 </p>
 
@@ -219,14 +248,16 @@
 
                                 <div class="buttons_row">
 
-                                    {% if product.productStock >= 1 %}
-                                        <button class="button_blue middle_btn">Ajout au panier</button>
-
-                                        <button class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container"><span class="tooltip top">Favori</span></button>
-                                    {% elseif product.productStock == 0 %}
-                                        <button class="button_blue middle_btn disabled">Ajout au panier</button>
-                                        <button class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container disabled"><span class="tooltip top">Favori</span></button>
-                                        <span class="out_of_stock">Stock épuisé</span> {{ product.productStock }} element(s)
+                                    {% if product_item.productStock >= 1 %}
+                                        <button onclick="AddCard({{ product_item.id }})" class="button_blue middle_btn" style="background-color: #cb9700">Ajout au panier</button>
+                                        <button onclick="AddFavori({{ product_item.id }})" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                            <span class="tooltip top">Favori</span>
+                                        </button>
+                                    {% elseif product_item.productStock == 0 %}
+                                        <button class="button_blue middle_btn disabled" disabled style="background-color: lightgrey;
+                                        cursor: not-allowed">Ajout au panier</button>
+                                        <button class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container disabled" disabled
+                                                style="cursor: not-allowed"><span class="tooltip top">Favori</span></button>
                                     {% endif %}
 
                                 </div>
@@ -269,7 +300,11 @@
                                 <div id="description" class="tab_container">
 
                                     <p>
-                                        {{ product.productDescription|raw }}
+                                        {% if product_item.productDescription|length > 0 %}
+                                            {{ product_item.productDescription|raw }}
+                                        {% else %}
+                                            <span class="italic">Aucun commentaire pour ce produit !</span>
+                                        {% endif %}
                                     </p>
 
                                 </div><!--/ #tab-1-->
@@ -442,14 +477,22 @@
 
                                             <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
-                                            {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-
+                                            {% if item.productReduction is defined and item.productReduction
+                                                is not null and item.productReduction|length != 0 and item.qualityProduct == "medium_quality" %}
                                                 <div class="label_offer percentage">
 
                                                     <div>{{ item.productReduction }}%</div>OFF
 
                                                 </div>
+                                            {% endif %}
 
+                                            {% if item.qualityProduct == "best_quality" %}
+                                                <div class="label_offer percentage" style="background-color: goldenrod">
+                                                    <span class="icon-star"></span>
+                                                    <div style="font-size: 10px" class="">Offre</div>
+                                                    <div>VIP</div>
+
+                                                </div>
                                             {% endif %}
 
                                             <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
@@ -462,7 +505,7 @@
 
                                         <div class="description">
 
-                                            <h1>{{ item.productName }}</h1>
+                                            <h3>{{ item.productName }}</h3>
 
                                             <p>
                                                 {{ (item.productDescription|raw) }}
@@ -471,10 +514,11 @@
                                             <div class="clearfix product_info">
 
                                                 {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                    <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
-                                                        <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                    <p class="product_price alignleft"><s style="font-size: 14px; margin-right: 10px">{{ item.productPrice }} CFA</s>
+                                                        <b style="font-size: 20px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
                                                 {% else %}
-                                                    <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                    <p class="product_price alignleft"><b style="font-size: 20px">{{ item.productPrice }} CFA</b></p>
+                                                    <br>
                                                 {% endif %}
 
                                             </div>
@@ -546,7 +590,8 @@
 
                         <footer class="bottom_box">
 
-                            <a href="#" class="button_grey middle_btn">Voir les produits de ce vendeur</a>
+                            <a href="{{ path('all_prod_of_seller', {'slug': partner.partnerCode }) }}"
+                               class="button_grey middle_btn">Voir les produits de ce vendeur</a>
 
                         </footer>
 
@@ -589,6 +634,11 @@
                                                  style="">
                                         </a>
 
+                                        {% if prod_al.productReduction is defined and prod_al.productReduction
+                                            is not null and prod_al.productReduction|length != 0 %}
+                                            <div style="color: #ff4557; font-weight: bold">{{ prod_al.productReduction }}% OFF</div>
+                                        {% endif %}
+
                                     </a>
 
                                     <div class="wrapper">
@@ -600,10 +650,10 @@
                                         <div class="clearfix product_info">
 
                                             {% if prod_al.productReduction is defined and prod_al.productReduction is not null and prod_al.productReduction|length != 0 %}
-                                                <small class="product_price alignleft"><s style="margin-right: 10px!important;">{{ prod_al.productPrice }} CFA</s>
-                                                    <b style="">{{ (((prod_al.productPrice * prod_al.productReduction)/100) +   prod_al.productPrice) }} CFA</b></small>
+                                                <p class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 14px">{{ prod_al.productPrice }} CFA</s>
+                                                    <b style="font-size: 20px">{{ (((prod_al.productPrice * prod_al.productReduction)/100) +   prod_al.productPrice) }} CFA</b></p>
                                             {% else %}
-                                                <small class="product_price alignleft"><b>{{ prod_al.productPrice }} CFA</b></small>
+                                                <p class="product_price alignleft"><b style="font-size: 20px">{{ prod_al.productPrice }} CFA</b></p>
                                             {% endif %}
 
                                             <ul class="rating alignright">

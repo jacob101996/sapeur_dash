@@ -41,15 +41,24 @@
 
                                         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
-                                        {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-
+                                        {% if item.productReduction is defined and item.productReduction
+                                            is not null and item.productReduction|length != 0 and item.qualityProduct == "medium_quality" %}
                                             <div class="label_offer percentage">
 
                                                 <div>{{ item.productReduction }}%</div>OFF
 
                                             </div>
-
                                         {% endif %}
+
+                                        {% if item.qualityProduct == "best_quality" %}
+                                            <div class="label_offer percentage" style="background-color: goldenrod">
+                                                <span class="icon-star"></span>
+                                                <div style="font-size: 10px" class="">Offre</div>
+                                                <div>VIP</div>
+
+                                            </div>
+                                        {% endif %}
+
 
                                         <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
 
@@ -61,17 +70,15 @@
 
                                     <div class="description">
 
-                                        <h1>{{ item.productName }}</h1>
-
-                                        <a href="#">Enzymatic Therapy CoQ10, 100mg, Softgels 120 ea</a>
+                                        <h3>{{ item.productName }}</h3>
 
                                         <div class="clearfix product_info">
 
                                             {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
-                                                    <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                <p class="product_price alignleft"><s style="font-size: 14px; margin-right: 15px">{{ item.productPrice }} CFA</s>
+                                                    <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
                                             {% else %}
-                                                <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p>
                                             {% endif %}
 
                                         </div>
@@ -121,15 +128,24 @@
 
                                                 <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
 
-                                                {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-
+                                                {% if item.productReduction is defined and item.productReduction
+                                                    is not null and item.productReduction|length != 0 and item.qualityProduct == "medium_quality" %}
                                                     <div class="label_offer percentage">
 
                                                         <div>{{ item.productReduction }}%</div>OFF
 
                                                     </div>
-
                                                 {% endif %}
+
+                                                {% if item.qualityProduct == "best_quality" %}
+                                                    <div class="label_offer percentage" style="background-color: goldenrod">
+                                                        <span class="icon-star"></span>
+                                                        <div style="font-size: 10px" class="">Offre</div>
+                                                        <div>VIP</div>
+
+                                                    </div>
+                                                {% endif %}
+
 
                                                 <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
 
@@ -141,15 +157,16 @@
 
                                             <div class="description">
 
-                                                <h1>{{ item.productName }}</h1>
+                                                <h3>{{ item.productName }}</h3>
 
                                                 <div class="clearfix product_info">
 
                                                     {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
-                                                            <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        <p class="product_price alignleft"><s style="font-size: 14px">{{ item.productPrice }} CFA</s>
+                                                            <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
                                                     {% else %}
-                                                        <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                        <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p>
+                                                        <br>
                                                     {% endif %}
 
                                                     <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
@@ -215,15 +232,24 @@
 
                                                 <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
 
-                                                {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-
+                                                {% if item.productReduction is defined and item.productReduction
+                                                    is not null and item.productReduction|length != 0 and item.qualityProduct == "medium_quality" %}
                                                     <div class="label_offer percentage">
 
                                                         <div>{{ item.productReduction }}%</div>OFF
 
                                                     </div>
-
                                                 {% endif %}
+
+                                                {% if item.qualityProduct == "best_quality" %}
+                                                    <div class="label_offer percentage" style="background-color: goldenrod">
+                                                        <span class="icon-star"></span>
+                                                        <div style="font-size: 10px" class="">Offre</div>
+                                                        <div>VIP</div>
+
+                                                    </div>
+                                                {% endif %}
+
 
                                                 <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
 
@@ -235,15 +261,15 @@
 
                                             <div class="description">
 
-                                                <h1>{{ item.productName }}</h1>
+                                                <h3>{{ item.productName }}</h3>
 
                                                 <div class="clearfix product_info">
 
                                                     {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
-                                                            <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        <p class="product_price alignleft"><s style="font-size: 14px">{{ item.productPrice }} CFA</s>
+                                                            <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
                                                     {% else %}
-                                                        <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                        <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p> <br>
                                                     {% endif %}
 
                                                     <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
@@ -308,15 +334,24 @@
 
                                                 <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
 
-                                                {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-
+                                                {% if item.productReduction is defined and item.productReduction
+                                                    is not null and item.productReduction|length != 0 and item.qualityProduct == "medium_quality" %}
                                                     <div class="label_offer percentage">
 
                                                         <div>{{ item.productReduction }}%</div>OFF
 
                                                     </div>
-
                                                 {% endif %}
+
+                                                {% if item.qualityProduct == "best_quality" %}
+                                                    <div class="label_offer percentage" style="background-color: goldenrod">
+                                                        <span class="icon-star"></span>
+                                                        <div style="font-size: 10px" class="">Offre</div>
+                                                        <div>VIP</div>
+
+                                                    </div>
+                                                {% endif %}
+
 
                                                 <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
 
@@ -328,15 +363,16 @@
 
                                             <div class="description">
 
-                                                <h1>{{ item.productName }}</h1>
+                                                <h3>{{ item.productName }}</h3>
 
                                                 <div class="clearfix product_info">
 
                                                     {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
-                                                            <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        <p class="product_price alignleft"><s style="font-size: 14px">{{ item.productPrice }} CFA</s>
+                                                            <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
                                                     {% else %}
-                                                        <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                        <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p>
+                                                        <br>
                                                     {% endif %}
 
                                                     <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
@@ -402,15 +438,24 @@
 
                                                 <!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
 
-                                                {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-
+                                                {% if item.productReduction is defined and item.productReduction
+                                                    is not null and item.productReduction|length != 0 and item.qualityProduct == "medium_quality" %}
                                                     <div class="label_offer percentage">
 
                                                         <div>{{ item.productReduction }}%</div>OFF
 
                                                     </div>
-
                                                 {% endif %}
+
+                                                {% if item.qualityProduct == "best_quality" %}
+                                                    <div class="label_offer percentage" style="background-color: goldenrod">
+                                                        <span class="icon-star"></span>
+                                                        <div style="font-size: 10px" class="">Offre</div>
+                                                        <div>VIP</div>
+
+                                                    </div>
+                                                {% endif %}
+
 
                                                 <!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
 
@@ -422,15 +467,16 @@
 
                                             <div class="description">
 
-                                                <h1>{{ item.productName }}</h1>
+                                                <h3>{{ item.productName }}</h3>
 
                                                 <div class="clearfix product_info">
 
                                                     {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                        <p class="product_price alignleft"><s>{{ item.productPrice }} CFA</s>
-                                                            <b>{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        <p class="product_price alignleft"><s style="font-size: 14px">{{ item.productPrice }} CFA</s>
+                                                            <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
                                                     {% else %}
-                                                        <p class="product_price alignleft"><b>{{ item.productPrice }} CFA</b></p>
+                                                        <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p>
+                                                        <br>
                                                     {% endif %}
 
                                                     <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
@@ -472,9 +518,11 @@
 
                     <div class="table_layout">
 
-                        <div class="table_row text-center">
+                        <div class="col" style="text-align: center;">
 
-                            <h2><b>Sapeur2baby</b>, la plateforme des sapeurs, numero 1 en Côte d'Ivoire, Trouver vos produits à moidre coût.</h2>
+                            <p style="font-size: 20px; line-height: 30px"><b>Sapeur2baby</b>, la plateforme des Sapeurs,
+                                numero 1 en Côte d'Ivoire, trouver vos produits à moindre coût. <br/>
+                            </p>
 
                         </div>
 

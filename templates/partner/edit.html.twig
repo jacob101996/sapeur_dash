@@ -20,7 +20,7 @@
                     {% endfor %}
                 {% endfor %}
 
-                <h3 class="dark-grey-text">Ajout du partenaire</h3>
+                <h3 class="dark-grey-text">Modification des informations</h3>
                 {{ form_start(form) }}
                 <!-- Grid row -->
                 <div class="row border p-2 pt-4">
@@ -32,7 +32,7 @@
                     <div class="col-md-3 input-group" style="margin-top: 31px">
                         <input
                                 type="text"
-                                class="form-control" name="code_partner"  id="partner_code" required readonly
+                                class="form-control" name="code_partner"  id="partner_code" required readonly value="{{ partner_code }}"
                         />
                         <a class="partnerCode mt-2 ml-1" id="inputGroup-sizing-lg" title="Générer code partenaire"><i class="fas fa-sync-alt text-info"></i></a>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="col-md-7 form-group">{{ form_row(form.partner_nroom) }}</div>
 
                     <div class="col-md-12 form-group">
-                        <button type="submit" class="btn btn-green btn-md"><i class="fas fa-check-circle mr-2"></i>Enregistrer</button>
+                        <button type="submit" class="btn btn-green btn-md"><i class="fas fa-check-circle mr-2"></i>Mettre à jour</button>
                     </div>
                 </div>
                 <!-- Grid row -->

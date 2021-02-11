@@ -1,0 +1,118 @@
+<script>
+    $('#MsgFavori').hide();
+    $('#MsgCart').hide();
+
+    function AddCard(idprod) {
+
+        let pathFeed = "/add-card";
+
+        $('#MsgFavori').hide();
+        $('#MsgCart').show();
+
+        $.ajax({
+            url: pathFeed,
+            type: "post",
+            dataType: "json",
+            data: {
+                idp: idprod,
+            },
+            async: true,
+            success: function (data)
+            {
+                $('#open_shopping_cart').attr("data-amount", data.nbprod);
+                $('#alertMsgAddcart').addClass("alert-success");
+
+                setTimeout(function () {
+                    $('#alertMsgAddcart').removeClass("alert-success");
+                }, 1000)
+            },
+            error: function(data){
+
+            }
+        });
+    }
+
+    function AddFavori(idprod) {
+
+        $('#MsgFavori').show();
+        $('#MsgCart').hide();
+
+        let pathFeed = "/add-favori";
+
+        $.ajax({
+            url: pathFeed,
+            type: "post",
+            dataType: "json",
+            data: {
+                idp: idprod,
+            },
+            async: true,
+            success: function (data)
+            {
+                $('#heart').attr("data-amount", data.nbfavori);
+                $('#alertMsgAddFavori').addClass("alert-success");
+
+                setTimeout(function () {
+                    $('#alertMsgAddFavori').removeClass("alert-success");
+                }, 1000)
+            },
+            error: function(data){
+
+            }
+        });
+    }
+
+    $('#form-autocomplete').on("click", function ()
+    {
+        let pathFeed = "/autocomplete";
+
+        $.ajax({
+            url: pathFeed,
+            type: "post",
+            dataType: "json",
+            async: true,
+            success: function (data)
+            {
+                let states = data.list;
+                $('#form-autocomplete').mdbAutocomplete({
+                    data: states,
+                    dataColor: 'green',
+                    inputFocus: '2px solid green',
+                    inputBlur: '1px solid #ced4da',
+                    inputFocusShadow: '0 1px 0 0 #4285f4',
+                    inputBlurShadow: ''
+                });
+            },
+            error: function(data){
+
+            }
+        });
+    });
+
+    function ModifyQteProduct(idprod) {
+        let idQte = 'qte'+idprod;
+        let qte = $('#'+idQte).val();
+
+        let pathFeed = "/modify-qte";
+
+        $.ajax({
+            url: pathFeed,
+            type: "post",
+            dataType: "json",
+            data: {
+                prod: idprod,
+                qte: qte
+            },
+            async: true,
+            success: function (data)
+            {
+                $('#mnt'+idprod).html(data.montant);
+                $('.total').html(data.total);
+                $('#open_shopping_cart').attr("data-amount", data.nbprod);
+            },
+            error: function(data){
+
+            }
+        });
+    }
+</script>

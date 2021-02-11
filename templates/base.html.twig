@@ -3,7 +3,7 @@
 <head>
     <!-- Basic page needs
     ============================================ -->
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="author" content="">
     <meta name="description" content="">
@@ -56,7 +56,7 @@
             font-weight: bold;
         }
         .alert-success {
-            color: #155724;
+            color: black!important;
             background-color: #d4edda;
             border-color: #c3e6cb;
         }
@@ -83,6 +83,56 @@
             font-family: "Roboto",sans-serif;
             font-weight: 300;
         }
+        @media only screen and (max-width: 799px){
+            .search {
+                display: block!important;
+                width: 100% !important;
+            }
+        }
+
+        @media only screen and (max-width: 992px){
+            .search input {
+                width: calc(100% - 50px);
+            }
+        }
+
+
+        @media only screen and (max-width: 799px){
+            .sticky_inner .nav_item {
+                width: 100%;
+                display: table-cell;
+            }
+            .toggle_menu{
+                display: none;
+            }
+            #open_shopping_cart{
+                margin-top: 23px!important;
+            }
+            b.title{
+                display: none!important;
+            }
+            .on_the_sides {
+                -webkit-flex-direction: column;
+                flex-direction: row;
+                /* -webkit-align-items: flex-start; */
+                /* align-items: flex-start; */
+            }
+            .left_side{
+                margin-top: 10px!important;
+            }
+            .row {
+                margin-left: 0!important;
+                margin-right: 0!important;
+            }
+        }
+        @media only screen and (max-width: 799px){
+            .nav_item .cats {
+                width: max-content!important;
+            }
+        }
+
+
+
     </style>
 </head>
 <body class="front_page">
@@ -105,7 +155,7 @@
     <!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
     {% block nav %}{% include 'nav_home.html.twig' %}{% endblock %}
 
-    {% if app.request.get('_route') != "view_product_detail" %}
+    {% if app.request.get('_route') == "home_index" %}
         <!-- - - - - - - - - - - - - - Layer slider - - - - - - - - - - - - - - - - -->
         {% block slider %}{% include '_slider_home.html.twig' %}{% endblock %}
 
@@ -156,6 +206,28 @@
 <script src="{{ asset('bootstrap/') }}js/theme.styleswitcher.js"></script>
 <script src="{{ asset('bootstrap/') }}js/theme.plugins.js"></script>
 <script src="{{ asset('bootstrap/') }}js/theme.core.js"></script>
+
+{% include 'ajax.html.twig' %}
+
+<script>
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+
+    // Get the navbar
+    let navbar = document.getElementsByClassName("main_navigation_wrap");
+
+    // Get the offset position of the navbar
+    let sticky = navbar.offsetTop;
+
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
 
 </body>
 </html>

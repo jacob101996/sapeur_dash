@@ -35,11 +35,6 @@ class Command
     private $delivery_location;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $date_delivery;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $trans_id;
@@ -73,6 +68,26 @@ class Command
      * @ORM\Column(type="datetime")
      */
     private $command_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name_clt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tel_clt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $buyed_by;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_delivery;
 
     public function __construct()
     {
@@ -111,18 +126,6 @@ class Command
     public function setDeliveryLocation(string $delivery_location): self
     {
         $this->delivery_location = $delivery_location;
-
-        return $this;
-    }
-
-    public function getDateDelivery(): ?string
-    {
-        return $this->date_delivery;
-    }
-
-    public function setDateDelivery(string $date_delivery): self
-    {
-        $this->date_delivery = $date_delivery;
 
         return $this;
     }
@@ -223,6 +226,54 @@ class Command
     public function setCommandAt(\DateTimeInterface $command_at): self
     {
         $this->command_at = $command_at;
+
+        return $this;
+    }
+
+    public function getNameClt(): ?string
+    {
+        return $this->name_clt;
+    }
+
+    public function setNameClt(string $name_clt): self
+    {
+        $this->name_clt = $name_clt;
+
+        return $this;
+    }
+
+    public function getTelClt(): ?string
+    {
+        return $this->tel_clt;
+    }
+
+    public function setTelClt(string $tel_clt): self
+    {
+        $this->tel_clt = $tel_clt;
+
+        return $this;
+    }
+
+    public function getBuyedBy(): ?string
+    {
+        return $this->buyed_by;
+    }
+
+    public function setBuyedBy(string $buyed_by): self
+    {
+        $this->buyed_by = $buyed_by;
+
+        return $this;
+    }
+
+    public function getDateDelivery(): ?\DateTimeInterface
+    {
+        return $this->date_delivery;
+    }
+
+    public function setDateDelivery(\DateTimeInterface $date_delivery): self
+    {
+        $this->date_delivery = $date_delivery;
 
         return $this;
     }

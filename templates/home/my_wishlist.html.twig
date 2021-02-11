@@ -1,0 +1,212 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ACCUEIL - BIENVENUE{% endblock %}
+{% block slider %}{% endblock %}
+
+{% block content %}
+<div class="wide_layout">
+
+    <div class="secondary_page_wrapper">
+
+        <div class="container">
+
+            <!-- - - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - - - - -->
+
+            <ul class="breadcrumbs">
+
+                <li><a href="{{ path('home_index') }}">Accueil</a></li>
+                <li>Mes produits favoris</li>
+
+            </ul>
+
+            <!-- - - - - - - - - - - - - - End of breadcrumbs - - - - - - - - - - - - - - - - -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+                        {% for message in messages %}
+                            <div style="font-size: 17px !important;" class="alert alert-{{ label }} p-3 alert-dismissible fade show text-left" role="alert" id="alertMsg">
+                                {{ message|raw }}
+                                <button type="button" class="close arcticmodal-close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row">
+
+                <aside class="col-md-3 col-sm-4">
+
+                    <ul class="products_list_widget">
+
+                        {% for prod_al in prod  %}
+
+                            <li>
+
+                                <a href="#" class="product_thumb">
+
+                                    <a href="{{ path('view_product_detail', {'id': prod_al.id }) }}">
+                                        <img src="{{ asset('sapeuradmin/product/')~prod_al.productImage }}" alt=""
+                                             style="">
+                                    </a>
+
+                                    {% if prod_al.productReduction is defined and prod_al.productReduction
+                                        is not null and prod_al.productReduction|length != 0 %}
+                                        <div style="color: #ff4557; font-weight: bold">{{ prod_al.productReduction }}% OFF</div>
+                                    {% endif %}
+
+                                </a>
+
+                                <div class="wrapper">
+
+                                    <a href="#" class="product_title">
+                                        {{ prod_al.productDescription|raw }}
+                                    </a>
+
+                                    <div class="clearfix product_info">
+
+                                        {% if prod_al.productReduction is defined and prod_al.productReduction is not null and prod_al.productReduction|length != 0 %}
+                                            <p class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 14px">{{ prod_al.productPrice }} CFA</s>
+                                                <b style="font-size: 20px">{{ (((prod_al.productPrice * prod_al.productReduction)/100) +   prod_al.productPrice) }} CFA</b></p>
+                                        {% else %}
+                                            <p class="product_price alignleft"><b style="font-size: 20px">{{ prod_al.productPrice }} CFA</b></p>
+                                        {% endif %}
+
+                                        <ul class="rating alignright">
+
+                                            <li class="active"></li>
+                                            <li class="active"></li>
+                                            <li class="active"></li>
+                                            <li class="active"></li>
+                                            <li></li>
+
+                                        </ul>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <br>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </aside><!--/ [col]-->
+
+                <main class="col-md-9 col-sm-8">
+
+                    <h1>Mes favoris</h1>
+
+
+                    <div class="table_wrap">
+
+                        <table class="table_type_1 wishlist_table">
+
+                            <thead>
+
+                            <tr>
+
+                                <th class="product_image_col">Image Produit</th>
+                                <th class="product_title_col">Nom produit et Categorie</th>
+                                <th class="product_price_col">Prix</th>
+                                <th>Action</th>
+
+                            </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                            {% if products is defined and products|length > 0 %}
+
+                                {% for item in products  %}
+
+                                    <tr>
+
+                                        <!-- - - - - - - - - - - - - - Product image - - - - - - - - - - - - - - - - -->
+
+                                        <td data-title="Product Image">
+
+                                            <img src="{{ asset('sapeuradmin/product/')~item.product.productImage }}" alt=""
+                                                 style="">
+
+                                        </td>
+
+                                        <!-- - - - - - - - - - - - - - End of product image - - - - - - - - - - - - - - - - -->
+
+                                        <!-- - - - - - - - - - - - - - Product name & category - - - - - - - - - - - - - - - - -->
+
+                                        <td data-title="Product Name and Category">
+
+                                            <h3 class="product_title">{{ item.product.productName }}</h3>
+
+                                            <h5 >{{ item.product.category.libelleFr }}</h5>
+
+                                            {% if item.product.productReduction is defined and item.product.productReduction
+                                                is not null and item.product.productReduction|length != 0 %}
+                                                <div style="color: #ff4557; font-weight: bold">{{ item.product.productReduction }}% OFF</div>
+                                            {% endif %}
+
+                                        </td>
+
+                                        <!-- - - - - - - - - - - - - - End of product name & category - - - - - - - - - - - - - - - - -->
+
+                                        <!-- - - - - - - - - - - - - - Product price - - - - - - - - - - - - - - - - -->
+
+                                        <td data-title="Price" class="total">
+                                            {% if item.product.productReduction is defined and item.product.productReduction is not null and item.product.productReduction|length != 0 %}
+                                                <p class="product_price alignleft">
+                                                    <b style="font-size: 20px">{{ (((item.product.productPrice * item.product.productReduction)/100) +   item.product.productPrice) }} CFA</b></p>
+                                            {% else %}
+                                                <p class="product_price alignleft"><b style="font-size: 20px">{{ item.product.productPrice }} CFA</b></p>
+                                                <br>
+                                            {% endif %}
+                                        </td>
+
+                                        <!-- - - - - - - - - - - - - - End of product price - - - - - - - - - - - - - - - - -->
+
+                                        <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                        <td data-title="Action">
+                                            <a onclick="AddCard({{ item.product.id }})" class="button_blue icon-cart" style="font-size: 20px"></a>
+
+                                            <a href="{{ path('remove_prod_in_whishlist', {'id': item.product.id }) }}" class="button_dark_grey" style="font-weight: bold">X</a>
+                                        </td>
+
+                                        <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+                                    </tr>
+
+                                {% endfor %}
+
+                            {% else %}
+
+                                <tr>
+                                    <td colspan="4">
+                                        <h4 class="italic">Aucun produit en favori !</h4>
+                                    </td>
+                                </tr>
+
+                            {% endif %}
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div><!--/ .table_wrap -->
+
+                    </main><!--/ [col]-->
+
+                </div><!--/ .row-->
+
+            </div><!--/ .container-->
+
+        </div><!--/ .page_wrapper-->
+
+        <!-- - - - - - - - - - - - - - End Page Wrapper - - - - - - - - - - - - - - - - -->
+    </div><!--/ [layout]-->
+{% endblock %}

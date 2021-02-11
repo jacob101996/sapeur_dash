@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ACCUEIL - BIENVENUE{% endblock %}
+{% block title %}ACCUEIL - PRODUIT DU VENDEUR{% endblock %}
 {% block slider %}{% endblock %}
 
 {% block content %}
@@ -13,9 +13,10 @@
 
             <ul class="breadcrumbs">
 
-                <li><a href="{{ path('home_index') }}">Accueil</a></li>
-                <li>{{ app.request.get('cat') }}</li>
-                <li>{{ app.request.get('sub') }}</li>
+                <li><a href="index.html">Accueil</a></li>
+                <li>Tout</li>
+                <li>Produits</li>
+                <li>{{ seller|capitalize }}</li>
 
             </ul>
 
@@ -36,7 +37,9 @@
                                 {% for cat in cats %}
 
                                     {% for subcat in cat.subCategory%}
+
                                         <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">{{ subcat.libelleFr }}</a></li>
+
                                     {% endfor %}
                                 {% endfor %}
                             {% endif %}
@@ -116,7 +119,8 @@
                         </a>
 
                     </div>
-                    <!-- - - - - - - - - - - - - - Compare products - - - - - - - - - - - - - - - - -->
+
+                    <!-- - - - - - - - - - - - - - End of banner - - - - - - - - - - - - - - - - -->
 
                     <section class="section_offset">
 
@@ -201,18 +205,16 @@
 
                     <div class="section_offset">
 
-                        {% if app.request.get('_route') == "view_product_by_cat_and_sub" %}
-                            <div class="widget-head">
-                                <h3 class="offset_title">{{ app.request.get('sub') }}</h3>
-                            </div>
-                        {% endif %}
+                        <div class="widget-head">
+                            <h3 class="offset_title">Tous les produits du vendeur</h3>
+                        </div>
 
                         <div class="table_layout" id="products_container">
 
                             <div class="row">
 
 
-                                {% if products is defined and products is not null and products|length > 0 %}
+                                {% if products is defined and products is not null %}
 
                                     {% for prod in products %}
 
@@ -295,14 +297,6 @@
                                         </div>
 
                                     {% endfor %}
-
-                                {% else %}
-
-                                <div class="col-md-6" style="margin-top: 20px">
-
-                                    <h3 class="italic">Ouff ! Aucun produit disponible </h3>
-
-                                </div>
 
                                 {% endif %}
 

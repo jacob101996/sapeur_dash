@@ -7,8 +7,10 @@ use App\Repository\ProductRepository;
 use App\Services\UploadFile;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
@@ -87,12 +89,68 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/my/account/product/product/edit/{{id}}", name="product_edit")
+     * @param $id
+     * @param ProductRepository $productRepository
+     * @param Request $request
+     * @param UploadFile $file
      * @return Response
      */
-    public function editProduct(){
+    public function editProduct($id, ProductRepository $productRepository, Request $request, UploadFile $file){
         //dd($repository->findAll());
+
+        $product    = $productRepository->find($id);
+        $oldImage1  = $product->getProductImage();
+        $oldImage2  = $product->getProductImage1();
+        $oldImage3  = $product->getProductImage2();
+        $oldImage4  = $product->getProductImage3();
+
+        $form       = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $data = $form->getData();
+
+            // Add medias
+            $path = $_ENV["DIR_IMG_PRODUCT"];
+
+            $image1 = $file->uploadFile($form['product_image']->getData(), $path);
+            $image2 = $file->uploadFile($form['product_image1']->getData(), $path);
+            $image3 = $file->uploadFile($form['product_image2']->getData(), $path);
+            $image4 = $file->uploadFile($form['product_image3']->getData(), $path);
+
+
+            if (!is_null($image1) && $image1 != "") {
+                $data->setProductImage($image1);
+            } else
+                $data->setProductImage($oldImage1);
+
+            if (!is_null($image2) && $image2 != "") {
+                $data->setProductImage1($image2);
+            } else
+                $data->setProductImage1($oldImage2);
+
+            if (!is_null($image3) && $image3 != "") {
+                $data->setProductImage2($image3);
+            } else
+                $data->setProductImage2($oldImage3);
+
+            if (!is_null($image4) && $image4 != "") {
+                $data->setProductImage3($image4);
+            }else
+                $data->setProductImage3($oldImage4);
+
+            $this->em->flush();
+
+            // Message & redirection
+            $this->addFlash("success", "Information(s) modifiée(s) avec succes !");
+            return $this->redirectToRoute("product_list");
+
+        }
+
         return $this->render('product/edit.html.twig', [
-            'items' => "",
+            'form'      => $form->createView(),
+            'product'   => $product
         ]);
     }
 
@@ -101,5 +159,141 @@ class ProductController extends AbstractController
      * @return Response
      */
     public function deleteProduct(){
+
+    }
+
+    /**
+     * @Route("/add-card")
+     * @param SessionInterface $session
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addCart(SessionInterface $session, Request $request)
+    {
+
+        $id         = $request->get('idp');
+
+        // Initialisation de la session
+        $panier     = $session->get('session_cart', []);
+
+        // Si le produit est déjà dans mon panier alors je rajoute
+        /*if (!empty($panier[$id])){
+            $panier[$id] ++;
+        }else
+            $panier[$id] = 1;*/
+
+        $panier[$id] = 1;
+
+        $session->set('session_cart', $panier);
+
+        $tabQte = [];
+        foreach ($session->get('session_cart', []) as $id => $quantity)
+        {
+            $tabQte []  = $quantity;
+        }
+
+        return new JsonResponse([
+            'nbprod'    => array_sum($tabQte)
+        ]);
+    }
+
+    /**
+     * @Route("/add-favori")
+     * @param SessionInterface $session
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addFavori(SessionInterface $session, Request $request)
+    {
+
+        $id         = $request->get('idp');
+        // Initialisation de la session
+        $favori     = $session->get('session_heart', []);
+
+        $favori[$id]    = 1;
+
+        $session->set('session_heart', $favori);
+
+        return new JsonResponse([
+            'nbfavori'    => count($session->get('session_heart', []))
+        ]);
+    }
+
+    /**
+     * @Route("/modify-qte")
+     * @param Request $request
+     * @param SessionInterface $session
+     * @param ProductRepository $repository
+     * @return JsonResponse
+     */
+    public function modifyQte(Request $request, SessionInterface $session, ProductRepository $repository)
+    {
+        try {
+            $idP        = $request->get('prod');
+            $qte        = $request->get('qte');
+
+            $panier     = $session->get('session_cart', []);
+
+            $panier[$idP]  = $qte;
+
+            $session->set('session_cart', $panier);
+
+
+
+            $total      = null;
+            $totalItems      = null;
+
+            $product    = $repository->find($idP);
+
+            if (is_null($product->getProductReduction())){
+                $prix   = $product->getProductPrice();
+            }else{
+                $reductionPrice = ($product->getProductPrice() * $product->getProductReduction())/100;
+                $prix   = (intval($product->getProductPrice()) + intval($reductionPrice));
+            }
+
+            $totalMontantProd = ($prix * $qte);
+
+
+            $panierWithData     = [];
+
+
+            foreach ($session->get('session_cart', []) as $id => $quantity)
+            {
+                $panierWithData []  = [
+                    'product_session'       => $repository->find($id),
+                    'qte'                   => $quantity
+                ];
+            }
+
+            $total      = 0;
+
+            foreach ($panierWithData as $item)
+            {
+                if (is_null($item['product_session']->getProductPrice())){
+                    $prix   = $item['product_session']->getProductPrice();
+                }else{
+                    $reductionPrice = ($item['product_session']->getProductPrice() * $item['product_session']->getProductReduction())/100;
+                    $prix           = (intval($item['product_session']->getProductPrice()) + intval($reductionPrice));
+                }
+
+                $totalItems = ($prix * $item['qte']);
+                $total      += $totalItems;
+            }
+
+            $tabQte = [];
+            foreach ($session->get('session_cart',[]) as $id => $quantity) {
+                $tabQte []  = $quantity;
+            }
+
+            return new JsonResponse([
+                'total'     => $total,
+                'montant'   => $totalMontantProd,
+                'nbprod'    => array_sum($tabQte)
+            ]);
+
+        }catch (\Exception $e) {
+            die($e->getMessage());
+        }
     }
 }

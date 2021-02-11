@@ -51,18 +51,44 @@
                                 <td>{{ user.email }}</td>
                                 <td>
                                     {% if user.roles.0 == "ROLE_ADMIN" %}
-                                        <span>Administrateur</span>
-                                    {% elseif  user.roles.0 == "ROLE_PARTNER" %}
-                                        <span>Partenaire</span>
+                                        <span>Admin</span>
+                                    {% elseif  user.roles.0 == "ROLE_COMMERCIAL" %}
+                                        <span>Commercial</span>
+                                    {% elseif  user.roles.0 == "ROLE_SUPER_ADMIN" %}
+                                        <span>Super Admin</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if app.user.roles.0 in ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] %}
                                         <a href="{{ path('user_edit', {'id': user.id}) }}"><i class="fas fa-pen-alt text-info mr-4 mt-2" title="Modifier" style="font-size: 20px"></i></a>
-                                        <a href="{{ path('user_delete', {'id': user.id}) }}"><i class="far fa-trash-alt text-danger mt-2" style="font-size: 20px"></i></a>
+                                        <a data-toggle="modal" data-target="#modalAlertUser"><i class="far fa-trash-alt text-danger mt-2" style="font-size: 20px"></i></a>
                                     {% endif %}
                                 </td>
                             </tr>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalAlertUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle text-warning mr-2"></i>Attention !</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Attention !! si vous continuez, ce compte sera définitivement supprimé.
+                                            <br>
+                                            Voulez-vous continuer ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{{ path('user_delete', {'id': user.id}) }}"  class="btn btn-danger btn-md" data-dismiss="modal">Continuer</a>
+                                            <button type="button" class="btn btn-grey btn-md" data-dismiss="modal">Annuler</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
 
                     </table>

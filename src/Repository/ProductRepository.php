@@ -22,19 +22,29 @@ class ProductRepository extends ServiceEntityRepository
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findProductByCat($value)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere('p.category = :val')
             ->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
+    public function findProductByCatAndSub($cat, $subCat)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.category = :val1')
+            ->andWhere('p.sub_category = :val2')
+            ->setParameter('val1', $cat)
+            ->setParameter('val2', $subCat)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Product
@@ -82,12 +92,21 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter("cat", 3)
             ->getResult();
     }
+
     public function findRandomProdSport(){
         $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
         $sql = "SELECT * FROM product WHERE category_id =:cat ORDER BY RAND() LIMIT 12";
         return $this->getEntityManager()->createNativeQuery($sql, $rsm)
             ->setParameter("cat", 4)
+            ->getResult();
+    }
+
+    public function findManiProductItems(){
+        $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
+        $sql = "SELECT * FROM product  ORDER BY RAND() LIMIT 20";
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
             ->getResult();
     }
 }

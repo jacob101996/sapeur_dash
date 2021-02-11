@@ -29,8 +29,9 @@ class AccountType extends AbstractType
                     'class'         =>'browser-default custom-select'
                 ],
                 "choices"           => [
-                    'Partenaire'    => 'ROLE_PARTNER',
-                    'Administrateur'=> 'ROLE_ADMIN'
+                    'Commercial'    => 'ROLE_COMMERCIAL',
+                    'Admin'         => 'ROLE_ADMIN',
+                    'Super Admin'   => 'ROLE_SUPER_ADMIN',
                 ],
                 "mapped"            => false
             ])
