@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Command;
+use App\Entity\StatusCommand;
+use App\Repository\CategoryProductRepository;
 use App\Repository\ProductRepository;
 use App\Repository\StatusCommandRepository;
+use App\Services\PaymentPro;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -32,25 +35,69 @@ class CommandController extends AbstractController
      * @param Request $request
      * @param ProductRepository $repository
      * @param StatusCommandRepository $statusCommandRepository
-     * @return RedirectResponse
-     * @throws \Exception
+     * @param CategoryProductRepository $categoryProductRepository
+     * @return Response
+     * @throws \SoapFault
      */
     public function startCommand(SessionInterface $session, Request $request,
-                                 ProductRepository $repository, StatusCommandRepository $statusCommandRepository){
+                                 ProductRepository $repository,
+                                 StatusCommandRepository $statusCommandRepository,
+                                 CategoryProductRepository $categoryProductRepository){
+
 
         $panier             = $session->get('session_cart', []);
+
         $panierWithData     = [];
 
-
-        foreach ($panier as $id => $quantity)
-        {
+        foreach ($panier as $id => $quantity) {
             $panierWithData []  = [
                 'product'       => $repository->find($id),
                 'qte'           => $quantity
             ];
         }
 
-        //dd($_SERVER['DOCUMENT_ROOT']."/logo.jpg");
+        // Recuperation de la reponse du server
+        $response = $request->get('responsecode');
+
+
+        if (!is_null($response) && intval($response) == 0)
+        {
+
+            $chanel = $request->get('channel');
+            $refNumber = $request->get('referenceNumber');
+            $transAt = $request->get('transactiondt');
+            $amount  = $request->get('amount');
+            $idTrans = $request->get('payId');
+
+            // Recuperation de la commande par la reference
+            $command = $this->em->getRepository(Command::class)->findByRefCmd($request->get('referenceNumber'));
+
+            if (count($command) > 0)
+            {
+                // Mise a jour du stock du produit dans la base de donnee
+                foreach ($panierWithData as $item) {
+                    $newQte =   ($item['product']->getProductStock() - $item['qte']);
+                    $item['product']->setProductStock($newQte);
+                    // Validation de la requette
+                    $this->em->flush();
+                }
+
+                $command[0]->setPayId($request->get('payId'));
+                $command[0]->setStatus($this->em->getRepository(StatusCommand::class)->find(2));
+
+                // Validation de la requette
+                $this->em->flush();
+
+                // Destruction de la session
+                $session->remove("session_cart");
+
+                return $this->redirectToRoute('congratulation', [
+                    'code' => intval($response), 'chanel' => $chanel, 'refNumber' => $refNumber,
+                    'transAt' => $transAt, 'amount' => $amount, 'idTrans' => $idTrans
+                ]);
+            }
+
+        }
 
         $total      = null;
         $prix       = null;
@@ -68,6 +115,14 @@ class CommandController extends AbstractController
             $total      += $totalItems;
         }
 
+        // Count nbr item in panier
+        $tabQte = [];
+        foreach ($panier as $id => $quantity)
+        {
+            $tabQte []  = $quantity;
+        }
+
+
         if ($request->isMethod('POST'))
         {
             $command        = new Command();
@@ -84,7 +139,7 @@ class CommandController extends AbstractController
 
             // Calcul du montant TTC
             $MntTva =  ($command->getTauxTva() * $total)/100;
-            $mntTtc = ($total + $MntTva);
+            $mntTtc = round($total + $MntTva);
 
             $command->setMntTtc($mntTtc);
             $command->setStatus($statusCommandRepository->find(1));
@@ -105,26 +160,54 @@ class CommandController extends AbstractController
             // Persistence des donnees
             $this->em->persist($command);
 
-            // Impression des la facture proforma
-            $this->generateProformaInvoice($code, $command->getNameClt(), $command->getTelClt(), $command->getDeliveryLocation(),
-                $date_cmd, $command->getBuyedBy(), $panierWithData, $total, $command->getTauxTva(), $mntTtc, "/var/www/html/sapeur2baby/public/logo.jpg");
+            /*===============================================================*/
+            //                        Payment Pro Api                        //
+            /*===============================================================*/
 
+            // Appel du service de payment
+            $paymentPro =   new PaymentPro();
+            $sessionId = $paymentPro->executePayment($mntTtc, 1, $command->getNameClt(),
+                $command->getNameClt(), $command->getTelClt(), $command->getBuyedBy(), $command->getRefCmd());
 
-            // Mise a jour du stock du produit dans la base de donnee
-            foreach ($panierWithData as $item)
+            //dd($sessionId);
+
+            if (!is_null($sessionId))
             {
-                $newQte =   ($item['product']->getProductStock() - $item['qte']);
-                $item['product']->setProductStock($newQte);
+                try {
+                    // Recuperation de la session
+                    $array = (array)$sessionId;
+
+                    // Impression des la facture proforma
+                    $this->generateProformaInvoice($code, $command->getNameClt(), $command->getTelClt(), $command->getDeliveryLocation(),
+                        $date_cmd, $command->getBuyedBy(), $panierWithData, $total, $command->getTauxTva(), $mntTtc, "/var/www/html/sapeur2baby/public/logo.jpg");
+
+                    $this->em->flush();
+
+                    // Redirect to API Payment PRO
+                    return $this->redirect('https://paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
+                        .$array['Sessionid'], 307);
+
+                }catch (\SoapFault $fault) {
+                    die($fault->getMessage());
+                }catch (\Exception $e){
+                    die($e->getMessage());
+                }
             }
 
-            // Validation de la requette
-            $this->em->flush();
+            /*===============================================================*/
+            //                        Fin Payment Pro Api                    //
+            /*===============================================================*/
 
-            // Destruction de la session
-            $session->remove("session_cart");
-
-            return $this->redirectToRoute('cmd_congratulation');
         }
+
+        return $this->render('home/my_cart.html.twig', [
+            'products'                => $repository->findManiProductItems(),
+            'nbprod'                  => array_sum($tabQte),
+            'cats'                    => $categoryProductRepository->findAll(),
+            'product_session'         => $panierWithData,
+            'total'                   => $total,
+            'nbfavori'                => count($session->get('session_heart', [])),
+        ]);
 
     }
 
@@ -217,5 +300,72 @@ class CommandController extends AbstractController
         $qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
         $qrCode->setValidateResult(false);
         return $qrCode->writeDataUri();
+    }
+
+    /**
+     * @Route("/congratulation/{code}", name="congratulation")
+     * @param $code
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
+     */
+    public function congratulation($code, Request $request)
+    {
+
+        if ( intval($code) == -1){
+            $this->addFlash("warning", "Ouff! Un problème est survenu lors de l'opération, veuillez reprendre ultérieurement");
+            return $this->redirectToRoute("my_cart");
+
+        } // Erreur initialisation
+        elseif (intval($code) == 10){
+            $this->addFlash("warning", "Ouff! Un problème est survenu lors de l'opération, veuillez reprendre ultérieurement");
+            return $this->redirectToRoute("my_cart");
+
+        } // Paramètres insuffisants
+        elseif (intval($code) == 11){
+            $this->addFlash("warning", "Ouff! Un problème inconu est survenu lors de l'opération, veuillez reprendre ultérieurement");
+            return $this->redirectToRoute("my_cart");
+
+        } // ID marchand inconnu
+
+        $command =  $this->em->getRepository(Command::class)->findByPayId($request->get('idTrans'));
+
+        if (count($command) == 0) {
+            $this->addFlash("warning", "Ouff ! Une erreur inconu est survenu en cas de 
+            problème merci de contacter notre service technique");
+
+            return $this->redirectToRoute("error", ['code' => $this->generateToken()]);
+        }
+
+        return $this->render('home/congratulation.html.twig', [
+            "nbfavori"       => 0,
+            "nbprod"         => 0,
+            "chanel"         => $request->get('chanel'),
+            "ref"            => $request->get('refNumber'),
+            "trans_at"       => $request->get('transAt'),
+            "amount"         => $request->get('amount'),
+            "idTrans"        => $request->get('idTrans'),
+        ]);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function generateToken()
+    {
+        return rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
+    }
+
+    /**
+     * @Route("/error/{code}", name="error")
+     * @return Response
+     */
+    public function error()
+    {
+        return $this->render('home/error.html.twig', [
+            "nbfavori"       => 0,
+            "nbprod"         => 0,
+        ]);
     }
 }

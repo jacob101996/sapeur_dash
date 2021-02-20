@@ -73,7 +73,7 @@
 	body{
 		font:400 14px/21px 'Roboto', sans-serif;
 		color:#6d6d6d;
-		background-color: #f4f4f4;
+		background-color: #6d6d6d!important;
 		background-attachment: fixed;
 	}
 
@@ -171,7 +171,7 @@
 	.boxed_layout,
 	.wide_layout{ 
 		overflow-x: hidden;
-		background: #fff; 
+		background: #fff;
 		margin: auto;
 	}
 
@@ -184,7 +184,7 @@
 	.section_offset:not(:last-child){ margin-bottom:40px; }
 
 	[class*="page_wrapper"]{
-		background:#f8f8f8;
+		background: #ececec;
 	}
 
 	.page_wrapper{
@@ -5271,7 +5271,7 @@
 	.widget-head h3{
 	    padding: 14px 20px;
 	    margin-bottom: 0;
-	    background-color: #4e4e4e;
+	    background-color: #ff4557;
 	    color: #fff;
 	    font-weight: 300;
 	}

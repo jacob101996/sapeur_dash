@@ -89,6 +89,11 @@ class Command
      */
     private $date_delivery;
 
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $pay_id;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -274,6 +279,18 @@ class Command
     public function setDateDelivery(\DateTimeInterface $date_delivery): self
     {
         $this->date_delivery = $date_delivery;
+
+        return $this;
+    }
+
+    public function getPayId(): ?int
+    {
+        return $this->pay_id;
+    }
+
+    public function setPayId(?int $pay_id): self
+    {
+        $this->pay_id = $pay_id;
 
         return $this;
     }

@@ -59,6 +59,10 @@
             color: black!important;
             background-color: #d4edda;
             border-color: #c3e6cb;
+        }.alert-warning {
+            color: black!important;
+            background-color: rgba(254, 163, 0, 0.44);
+            font-weight: bold;
         }
 
         .alert {
@@ -96,7 +100,6 @@
             }
         }
 
-
         @media only screen and (max-width: 799px){
             .sticky_inner .nav_item {
                 width: 100%;
@@ -131,11 +134,9 @@
             }
         }
 
-
-
     </style>
 </head>
-<body class="front_page">
+<body class="front_page" style="background-color: #fff!important;">
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -227,6 +228,25 @@
             navbar.classList.remove("sticky");
         }
     }
+
+    $('#at_home').hide();
+    $('#cash').hide();
+
+    //
+    $('#mode_buy').change(function () {
+        let val = $('#mode_buy').val();
+
+        if (val === "at_home"){
+            $('#cash').hide();
+            $('#at_home').show();
+        }
+        if (val === "cash"){
+            $('#at_home').hide();
+            $('#cash').show();
+        }
+
+
+    })
 </script>
 
 </body>

@@ -22,19 +22,29 @@ class CommandRepository extends ServiceEntityRepository
     // /**
     //  * @return Command[] Returns an array of Command objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByRefCmd($ref)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('c.ref_cmd = :val')
+            ->setParameter('val', $ref)
             ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
+    public function findByPayId($id_pay)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.pay_id = :val')
+            ->setParameter('val', $id_pay)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Command

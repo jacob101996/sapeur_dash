@@ -252,26 +252,25 @@
                                 <p class="form_caption">Entrer vos informations pour terminer la commande</p>
 
                                     <div class="col-lg-12 col-md-12">
-                                        <label for="name" class="required">Nom & Prénom(s)</label>
+                                        <label for="name" class="required bold">Nom & Prénom(s)</label>
                                         <input type="text" required name="name" id="name">
                                     </div><!--/ [col] -->
                                     <div class="col-lg-12 col-md-12">
-                                        <label for="contact" class="required">Numéro de téléphone</label>
+                                        <label for="contact" class="required bold">Numéro de téléphone</label>
                                         <input type="tel" required name="contact" pattern="^[0-9]{10}" maxlength="10" placeholder="0102010124" id="contact">
                                     </div><!--/ [col] -->
 
                                     <div class="col-lg-12 col-md-12">
-                                        <label for="lieu" class="required">Lieu de livraison</label>
+                                        <label for="lieu" class="required bold">Lieu de livraison</label>
                                         <input type="text" required name="lieu" id="lieu">
                                     </div><!--/ [col] -->
 
                                     <div class="col-lg-12 col-md-12">
-                                        <label for="buy" class="required">Moyen de paiement</label>
-                                        <select name="buy" id="buy" required>
-                                            <option value="">-- Payer par ? --</option>
-                                            <option value="OM">Orange Money - OM</option>
-                                            <option value="Flooz">Moov Money - Flooz</option>
-                                            <option value="OM">MTN Money - MOMO</option>
+                                        <label for="mode_buy" class="required bold">Moyen de paiement</label>
+                                        <select name="mode_buy" id="mode_buy" required>
+                                            <option value="">-- Selectionnez ? --</option>
+                                            <option value="at_home">Je paie à la livraison</option>
+                                            <option value="cash">Je paie cash en ligne</option>
                                         </select>
                                     </div><!--/ [col] -->
 
@@ -306,13 +305,27 @@
 
                             </div>
 
-                            <footer class="bottom_box">
+                            <div class="col-lg-12 col-md-12" style="margin-top: 15px !important; margin-bottom: 20px!important;">
+                                <label for="buy" class="required bold">Moyen de paiement</label>
+                                <select name="buy" id="buy" required>
+                                    <option value="">-- Payer par ? --</option>
+                                    <option value="OM">Orange Money - OM</option>
+                                    <option value="FlOOZ">Moov Money - Flooz</option>
+                                    <option value="MOMO">MTN Money - MOMO</option>
+                                    <option value="CARD">Visa CARD</option>
+                                </select>
+                            </div><!--/ [col] -->
+
+                            <footer class="bottom_box" id="at_home">
+                                {% if product_session is defined and product_session|length > 0 %}
+                                    <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit"><i class="icon-lock"></i>Je paie 10% avant la livraison</button>
+                                {% endif %}
+
+                            </footer>
+                            <footer class="bottom_box" id="cash">
 
                                 {% if product_session is defined and product_session|length > 0 %}
-                                    <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit"><i class="icon-lock"></i> Valider & passer au paiement</button>
-                                {% else %}
-                                    <button class="middle_btn disabled" style="background-color: lightgrey; font-weight: bold; cursor: not-allowed" title="Votre panier est vide !"
-                                            disabled type="submit"><i class="icon-lock"></i> Valider & passer au paiement</button>
+                                    <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit"><i class="icon-lock"></i> Je paie Cash en ligne</button>
                                 {% endif %}
 
                             </footer>
