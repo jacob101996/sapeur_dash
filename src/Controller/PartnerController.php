@@ -58,7 +58,6 @@ class PartnerController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/generate-unique-partner-code")
      * @param Request $request
@@ -112,13 +111,12 @@ class PartnerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
-
             // Message flash & redirection
             $this->addFlash("success", "Information(s) modifiée(s) avec succes !");
             return $this->redirectToRoute("partner_list");
         }
         return $this->render('partner/edit.html.twig', [
-            'form' => $form->createView(),
+            'form'          => $form->createView(),
             'partner_code'  => $partner->getPartnerCode()
         ]);
     }
@@ -134,8 +132,12 @@ class PartnerController extends AbstractController
         $partner    = $partnerRepository->find($id);
 
         // Suppression des element lié
-        foreach ($partner->getProducts() as $product)
-        {
+        foreach ($partner->getProducts() as $product) {
+
+            foreach ($product->getAvis() as $avi){
+                $product->removeAvi($avi);
+            }
+
             $this->em->remove($product);
             $this->em->flush();
         }
@@ -146,6 +148,5 @@ class PartnerController extends AbstractController
         // Message flash & redirection
         $this->addFlash("success", "Partner supprimer avec succes !");
         return $this->redirectToRoute("partner_list");
-
     }
 }
