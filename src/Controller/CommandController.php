@@ -134,7 +134,7 @@ class CommandController extends AbstractController
             $command->setRefCmd($code);
             $command->setMntTtc($total);
             $command->setMntHt($total);
-            $command->setTauxTva(18);
+            $command->setTauxTva(0);
             $command->setDateDelivery($date_cmd);
 
             // Calcul du montant TTC
