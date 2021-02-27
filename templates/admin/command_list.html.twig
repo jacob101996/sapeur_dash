@@ -66,7 +66,14 @@
                                     </a>
                                 </td>
                                 <td>{{ cmd.dateDelivery|date('Y/m/d H:i:s') }}</td>
-                                <td><span class="badge badge-info">{{ cmd.status.libelle }} ...</span></td>
+                                <td>
+
+                                {% if cmd.status.id == 1 %}
+                                    <span class="badge badge-danger">{{ cmd.status.libelle }} ...</span>
+                                {% else %}
+                                    <span class="badge badge-success">{{ cmd.status.libelle }}</span>
+                                {% endif %}
+                                </td>
                             </tr>
                         {% endfor %}
 
