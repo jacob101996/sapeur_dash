@@ -43,9 +43,9 @@
                             <th>Nom client</th>
                             <th>Contact</th>
                             <th>Lieu de livraion</th>
-                            <th>Ref commande</th>
+                            <th>Ref</th>
                             <th>Montant TTC</th>
-                            <th>Payé par ?</th>
+                            <th>ID Trans</th>
                             <th>Facture</th>
                             <th>Date</th>
                             <th>Statut</th>
@@ -59,7 +59,7 @@
                                 <td>{{ cmd.deliveryLocation }}</td>
                                 <td>{{ cmd.refCmd }}</td>
                                 <td class="font-weight-bold">{{ (cmd.mntTtc|round)|number_format(0," ", " ") }} CFA</td>
-                                <td>{{ cmd.buyedBy }}</td>
+                                <td>{{ cmd.payId }}</td>
                                 <td class="text-center">
                                     <a href="{{ asset('/invoice/')~cmd.factureName }}" target="_blank">
                                         <i class="far fa-file-pdf fa-2x" style="color: #ff5252!important"></i>
