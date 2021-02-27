@@ -189,7 +189,6 @@ class HomeController extends AbstractController
             ];
         }
 
-
         // Parcourir le tableau calcul price
         foreach ($panierWithData as $item) {
             if (is_null($item['product_session']->getProductReduction())){
