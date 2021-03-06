@@ -269,8 +269,8 @@
                                         <label for="mode_buy" class="required bold">Moyen de paiement</label>
                                         <select name="mode_buy" id="mode_buy" required>
                                             <option value="">-- Selectionnez ? --</option>
-                                            <option value="at_home">Je paie à la livraison</option>
-                                            <option value="cash">Je paie cash en ligne</option>
+                                            <option value="at_home">Je paye à la livraison</option>
+                                            <option value="cash">Je paye cash en ligne</option>
                                         </select>
                                     </div><!--/ [col] -->
 
@@ -318,14 +318,13 @@
 
                             <footer class="bottom_box" id="at_home">
                                 {% if product_session is defined and product_session|length > 0 %}
-                                    <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit"><i class="icon-lock"></i>Je paie 10% avant la livraison</button>
+                                    <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit"><i class="icon-lock"></i>Je paiye 10% avant la livraison</button>
                                 {% endif %}
 
                             </footer>
                             <footer class="bottom_box" id="cash">
-
                                 {% if product_session is defined and product_session|length > 0 %}
-                                    <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit"><i class="icon-lock"></i> Je paie Cash en ligne</button>
+                                    <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit"><i class="icon-lock"></i> Je paye cash en ligne</button>
                                 {% endif %}
 
                             </footer>

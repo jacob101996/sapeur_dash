@@ -126,11 +126,11 @@ class CommandController extends AbstractController
         if ($request->isMethod('POST'))
         {
             $command        = new Command();
-            $code           = date("dHis"); // JJHIS 01159652
+            $code           = "01".date("dm").substr(date('Y'), 2, 4); // Ref 01JJMMAA 01 Code debut SAPEUR2BABY
             $date_cmd       = new \DateTime("now");
 
             // Info sur la commande
-            $command->setTransId(substr(date('Y'), 2, 4).date("md").mt_rand(11,99));// Transaction id = AAMMJJ01
+            $command->setTransId(date("His").mt_rand(11,99));// Transaction id = HMSC
             $command->setRefCmd($code);
             $command->setMntTtc($total);
             $command->setMntHt($total);

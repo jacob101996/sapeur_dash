@@ -236,6 +236,8 @@
     $('#mode_buy').change(function () {
         let val = $('#mode_buy').val();
 
+        console.log(val);
+
         if (val === "at_home"){
             $('#cash').hide();
             $('#at_home').show();
@@ -244,7 +246,6 @@
             $('#at_home').hide();
             $('#cash').show();
         }
-
 
     })
 </script>
