@@ -179,6 +179,7 @@ class HomeController extends AbstractController
         $reductionPrice  = null;
         $panierWithData     = [];
         $totalItems         = null;
+        $dixPourcent        = null;
 
 
         foreach ($panier as $id => $quantity)
@@ -200,6 +201,8 @@ class HomeController extends AbstractController
 
             $totalItems = ($prix * $item['qte']);
             $total      += $totalItems;
+
+            $dixPourcent = ($total * 10)/100;
         }
 
         // Count nbr item in panier
@@ -216,6 +219,7 @@ class HomeController extends AbstractController
             'product_session'         => $panierWithData,
             'total'                   => $total,
             'nbfavori'                => count($session->get('session_heart', [])),
+            'dix_pourcent'            => $dixPourcent
         ]);
     }
 

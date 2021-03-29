@@ -241,6 +241,7 @@ class ProductController extends AbstractController
 
 
             $total      = null;
+            $dix_pourcent      = null;
             $totalItems      = null;
 
             $product    = $repository->find($idP);
@@ -279,6 +280,7 @@ class ProductController extends AbstractController
 
                 $totalItems = ($prix * $item['qte']);
                 $total      += $totalItems;
+                $dix_pourcent = ($total * 10)/100;
             }
 
             $tabQte = [];
@@ -289,7 +291,8 @@ class ProductController extends AbstractController
             return new JsonResponse([
                 'total'     => $total,
                 'montant'   => $totalMontantProd,
-                'nbprod'    => array_sum($tabQte)
+                'nbprod'    => array_sum($tabQte),
+                'dix_pourcent'=> $dix_pourcent
             ]);
 
         }catch (\Exception $e) {

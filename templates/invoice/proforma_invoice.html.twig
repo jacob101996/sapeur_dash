@@ -95,7 +95,7 @@
         <td style="text-align: left; border-top: none!important;font-weight: bold">{{ date_cmd|date('Y/m/d H:i:s') }}</td>
     </tr>
     <tr>
-        <td style="text-align: left; border-top: none!important;">Facture reglée par :</td>
+        <td style="text-align: left; border-top: none!important;">10 % reglé par :</td>
         <td style="text-align: left; border-top: none!important;font-weight: bold">{{ moyen_buy }}</td>
     </tr>
 
@@ -139,8 +139,12 @@
         <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ sub_total|number_format(0,' ', ' ') }}</td>
     </tr>
     <tr>
-        <td colspan="3" style="text-transform: uppercase">Taux TVA</td>
-        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ tva }} %</td>
+        <td colspan="3" style="text-transform: uppercase">Montant payé en ligne</td>
+        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ dix_pourcent|number_format(0,' ', ' ') }} %</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-transform: uppercase">Montant payé en espèce</td>
+        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ (mnt_ttc - dix_pourcent)|number_format(0,' ', ' ') }} %</td>
     </tr>
     <tr>
         <td colspan="3" style="text-transform: uppercase">Montant TTC:</td>

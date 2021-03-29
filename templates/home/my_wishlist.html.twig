@@ -171,8 +171,7 @@
                                         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
                                         <td data-title="Action">
-                                            <a onclick="AddCard({{ item.product.id }})" class="button_blue icon-cart" style="font-size: 20px"></a>
-
+                                            <a onclick="AddCard({{ item.product.id }})" class="button_blue icon-cart" style="font-size: 20px; cursor: pointer"></a>
                                             <a href="{{ path('remove_prod_in_whishlist', {'id': item.product.id }) }}" class="button_dark_grey" style="font-weight: bold">X</a>
                                         </td>
 

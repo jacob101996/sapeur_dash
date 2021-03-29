@@ -5363,11 +5363,9 @@
 				margin-bottom: 6px;
 			}
 
-/* ------------------------------------------------
-
+/*-------------------------------------------------
 		14. Footer
-
------------------------------------------------- */
+---------------------------------------------------*/
 
 	#footer{
 		background: #4e4e4e;
@@ -5391,7 +5389,7 @@
 	#footer .widget .list_of_links > li:first-child > a,
 	#footer .widget .list_of_entries > li:first-child,
 	#footer .widget .list_of_infoblocks > li:first-child,
-	#footer .widget .products_list_widget > li:first-child{ padding-top: 0px; }
+	#footer .widget .products_list_widget > li:first-child{ padding-top: 0; }
 
 	.footer_section{
 		padding-top:40px;
