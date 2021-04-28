@@ -105,11 +105,11 @@
 
                         <!-- - - - - - - - - - - - - - Search form - - - - - - - - - - - - - - - - -->
 
-                        <form class="clearfix search">
+                        <form class="clearfix search" method="post" action="{{ path('search_product') }}">
 
-                            <input type="text" name="" tabindex="1" placeholder="Recherche..." class="alignleft">
+                            <input type="text" name="search" id="search" tabindex="1" placeholder="Recherche..." class="alignleft">
 
-                            <button class="button_blue def_icon_btn alignleft"></button>
+                            <button class="button_blue def_icon_btn alignleft" type="submit"></button>
 
                         </form><!--/ #search-->
 

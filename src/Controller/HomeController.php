@@ -354,5 +354,48 @@ class HomeController extends AbstractController
         return $this->redirectToRoute("my_wishlist");
     }
 
+    /**
+     * @Route("/search/product", name="search_product")
+     * @param \App\Repository\ProductRepository $productRepository
+     * @param \App\Repository\CategoryProductRepository $categoryProductRepository
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchProduct(ProductRepository $productRepository,
+                                  CategoryProductRepository $categoryProductRepository,
+                                  SessionInterface $session, Request $request){
+
+        $panier             = $session->get('session_cart', []);
+
+        // Count nbr item in panier
+        $tabQte = [];
+        foreach ($panier as $id => $quantity)
+        {
+            $tabQte []  = $quantity;
+        }
+
+        $favori             = $session->get('session_heart', []);
+
+        $favoriWithData     = [];
+
+
+        foreach ($favori as $id => $quantity)
+        {
+            $favoriWithData []  = [
+                'product'       => $productRepository->find($id),
+                'qte'           => $quantity
+            ];
+        }
+
+        return $this->render('home/search_product.html.twig', [
+            'nbprod'                  => array_sum($tabQte),
+            'cats'                    => $categoryProductRepository->findAll(),
+            'nbfavori'                => count($session->get('session_heart', [])),
+            'prod'                    => $productRepository->findRandomProd(),
+            'products'                => $productRepository->findByProductSearch($request->get('search'))
+        ]);
+    }
+
 }
 
