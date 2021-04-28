@@ -43,7 +43,6 @@
                         {% for prod_al in prod  %}
 
                             <li>
-
                                 <a href="#" class="product_thumb">
 
                                     <a href="{{ path('view_product_detail', {'id': prod_al.id }) }}">
@@ -60,17 +59,13 @@
 
                                 <div class="wrapper">
 
-                                    <a href="#" class="product_title">
-                                        {{ prod_al.productDescription|raw }}
-                                    </a>
-
                                     <div class="clearfix product_info">
 
                                         {% if prod_al.productReduction is defined and prod_al.productReduction is not null and prod_al.productReduction|length != 0 %}
-                                            <p class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 14px">{{ prod_al.productPrice }} CFA</s>
-                                                <b style="font-size: 20px">{{ (((prod_al.productPrice * prod_al.productReduction)/100) +   prod_al.productPrice) }} CFA</b></p>
+                                            <p class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 12px">{{ prod_al.productPrice|number_format(0, " ", " ") }} CFA</s>
+                                                <b style="font-size: 17px">{{ (((prod_al.productPrice * prod_al.productReduction)/100) +   prod_al.productPrice)|number_format(0, " ", " ") }} CFA</b></p>
                                         {% else %}
-                                            <p class="product_price alignleft"><b style="font-size: 20px">{{ prod_al.productPrice }} CFA</b></p>
+                                            <p class="product_price alignleft"><b style="font-size: 17px">{{ prod_al.productPrice|number_format(0, " ", " ") }} CFA</b></p>
                                         {% endif %}
 
                                         <ul class="rating alignright">
@@ -98,7 +93,7 @@
 
                 <main class="col-md-9 col-sm-8">
 
-                    <h1>Mes favoris</h1>
+                    <h2>Mes favoris</h2>
 
 
                     <div class="table_wrap">

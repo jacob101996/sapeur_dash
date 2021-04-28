@@ -17,7 +17,7 @@
                 <section class="section_offset">
 
                     <div class="widget-head">
-                        <h3 class="offset_title">Produits aléatoires</h3>
+                        <h4 class="offset_title">Produits aléatoires</h4>
                     </div>
 
                     <div class="owl_carousel other_products">
@@ -70,15 +70,15 @@
 
                                     <div class="description">
 
-                                        <h3>{{ item.productName }}</h3>
+                                        <h4>{{ item.productName }}</h4>
 
                                         <div class="clearfix product_info">
 
                                             {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                <p class="product_price alignleft"><s style="font-size: 14px; margin-right: 15px">{{ item.productPrice }} CFA</s>
-                                                    <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                <p class="product_price alignleft"><s style="font-size: 12px; margin-right: 10px">{{ item.productPrice }} CFA</s>
+                                                    <b style="font-size: 17px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice)|number_format(0, " ", " ") }} CFA</b></p>
                                             {% else %}
-                                                <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p>
+                                                <p class="product_price alignleft"><b style="font-size: 17px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</b></p>
                                             {% endif %}
 
                                         </div>
@@ -106,7 +106,7 @@
                     <section class="section_offset animated transparent" data-animation="fadeInDown">
 
                         <div class="widget-head">
-                            <h3 class="offset_title">Collection Homme</h3>
+                            <h4 class="offset_title">Collection Homme</h4>
                         </div>
 
                         <div class="tabs type_3 products">
@@ -131,9 +131,7 @@
                                                 {% if item.productReduction is defined and item.productReduction
                                                     is not null and item.productReduction|length != 0 and item.qualityProduct == "medium_quality" %}
                                                     <div class="label_offer percentage">
-
                                                         <div>{{ item.productReduction }}%</div>OFF
-
                                                     </div>
                                                 {% endif %}
 
@@ -157,15 +155,15 @@
 
                                             <div class="description">
 
-                                                <h3>{{ item.productName }}</h3>
+                                                <h4>{{ item.productName }}</h4>
 
-                                                <div class="clearfix product_info">
+                                                <div class="clearfix product_info" style="margin-top: 10px">
 
                                                     {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                        <p class="product_price alignleft"><s style="font-size: 14px">{{ item.productPrice }} CFA</s>
-                                                            <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        <p class="product_price alignleft"><s style="font-size: 12px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</s>
+                                                            <b style="font-size: 17px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice)|number_format(0, " ", " ") }} CFA</b></p>
                                                     {% else %}
-                                                        <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p>
+                                                        <p class="product_price alignleft"><b style="font-size: 17px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</b></p>
                                                         <br>
                                                     {% endif %}
 
@@ -210,7 +208,7 @@
                     <section class="section_offset animated transparent" data-animation="fadeInDown">
 
                         <div class="widget-head">
-                            <h3 class="offset_title">Collection Femme</h3>
+                            <h4 class="offset_title">Collection Femme</h4>
                         </div>
 
                         <div class="tabs type_3 products">
@@ -261,15 +259,15 @@
 
                                             <div class="description">
 
-                                                <h3>{{ item.productName }}</h3>
+                                                <h4>{{ item.productName }}</h4>
 
-                                                <div class="clearfix product_info">
+                                                <div class="clearfix product_info" style="margin-top: 10px">
 
                                                     {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                        <p class="product_price alignleft"><s style="font-size: 14px">{{ item.productPrice }} CFA</s>
-                                                            <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        <p class="product_price alignleft"><s style="font-size: 14px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</s>
+                                                            <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice)|number_format(0, " ", " ") }} CFA</b></p>
                                                     {% else %}
-                                                        <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p> <br>
+                                                        <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</b></p> <br>
                                                     {% endif %}
 
                                                     <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
@@ -312,7 +310,7 @@
                     <section class="section_offset animated transparent" data-animation="fadeInDown">
 
                         <div class="widget-head">
-                            <h3 class="offset_title">Collection Enfant</h3>
+                            <h4 class="offset_title">Collection Enfant</h4>
                         </div>
 
                         <div class="tabs type_3 products">
@@ -363,15 +361,15 @@
 
                                             <div class="description">
 
-                                                <h3>{{ item.productName }}</h3>
+                                                <h4>{{ item.productName }}</h4>
 
-                                                <div class="clearfix product_info">
+                                                <div class="clearfix product_info" style="margin-top: 10px">
 
                                                     {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                        <p class="product_price alignleft"><s style="font-size: 14px">{{ item.productPrice }} CFA</s>
-                                                            <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></p>
+                                                        <p class="product_price alignleft"><s style="font-size: 12px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</s>
+                                                            <b style="font-size: 17px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice)|number_format(0, " ", " ") }} CFA</b></p>
                                                     {% else %}
-                                                        <p class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></p>
+                                                        <p class="product_price alignleft"><b style="font-size: 17px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</b></p>
                                                         <br>
                                                     {% endif %}
 

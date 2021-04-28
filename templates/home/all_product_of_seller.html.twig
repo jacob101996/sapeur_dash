@@ -124,7 +124,7 @@
 
                     <section class="section_offset">
 
-                        <h3>Produits aléatoires</h3>
+                        <h4>Produits aléatoires</h4>
 
                         <ul class="products_list_widget">
 
@@ -149,18 +149,13 @@
                                     </a>
 
                                     <div class="wrapper">
-
-                                        <a href="#" class="product_title">
-                                            {{ item.productDescription|raw }}
-                                        </a>
-
-                                        <div class="clearfix product_info">
+                                        <div class="clearfix product_info" style="margin-top: 10px">
 
                                             {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                <small class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 14px">{{ item.productPrice }} CFA</s>
-                                                    <b style="font-size: 25px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice) }} CFA</b></small>
+                                                <small class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 12px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</s>
+                                                    <b style="font-size: 17px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice)|number_format(0, " ", " ") }} CFA</b></small>
                                             {% else %}
-                                                <small class="product_price alignleft"><b style="font-size: 25px">{{ item.productPrice }} CFA</b></small>
+                                                <small class="product_price alignleft"><b style="font-size: 17px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</b></small>
                                             {% endif %}
 
                                             <ul class="rating alignright">
@@ -206,10 +201,10 @@
                     <div class="section_offset">
 
                         <div class="widget-head">
-                            <h3 class="offset_title">Tous les produits du vendeur</h3>
+                            <h4 class="offset_title">Tous les produits du vendeur</h4>
                         </div>
 
-                        <div class="table_layout" id="products_container">
+                        <div class="table_layout" style="margin-top: 10px" id="products_container">
 
                             <div class="row">
 
@@ -218,7 +213,7 @@
 
                                     {% for prod in products %}
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-3" style="margin-bottom: 20px">
 
                                             <div class="product_item">
 
@@ -235,9 +230,7 @@
                                                     {% if prod.productReduction is defined and prod.productReduction
                                                         is not null and prod.productReduction|length != 0 and prod.qualityProduct == "medium_quality" %}
                                                         <div class="label_offer percentage">
-
                                                             <div>{{ prod.productReduction }}%</div>OFF
-
                                                         </div>
                                                     {% endif %}
 
@@ -260,20 +253,19 @@
 
                                                 <div class="description">
 
-                                                    <h3>{{ prod.productName }}</h3>
+                                                    <h4>{{ prod.productName }}</h4>
 
                                                     <div class="clearfix product_info">
 
                                                         {% if prod.productReduction is defined and prod.productReduction is not null and prod.productReduction|length != 0 %}
-                                                            <p class="product_price alignleft"><s style="font-size: 14px">{{ prod.productPrice }} CFA</s>
-                                                                <b style="font-size: 20px">{{ (((prod.productPrice * prod.productReduction)/100) +   prod.productPrice) }} CFA</b></p>
+                                                            <p class="product_price alignleft"><s style="font-size: 12px">{{ prod.productPrice|number_format(0, " ", " ") }} CFA</s>
+                                                                <b style="font-size: 17px">{{ (((prod.productPrice * prod.productReduction)/100) +   prod.productPrice)|number_format(0, " ", " ") }} CFA</b></p>
                                                         {% else %}
-                                                            <p class="product_price alignleft"><b style="font-size: 20px">{{ prod.productPrice }} CFA</b></p>
+                                                            <p class="product_price alignleft"><b style="font-size: 17px">{{ prod.productPrice|number_format(0, " ", " ") }} CFA</b></p>
                                                             <br>
                                                         {% endif %}
 
                                                         <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
-
                                                         <ul class="rating alignright">
 
                                                             <li class="active"></li>

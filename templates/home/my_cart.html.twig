@@ -39,7 +39,7 @@
 
             <section class="section_offset">
 
-                <h1>Mon panier</h1>
+                <h2>Mon panier</h2>
 
                 <!-- - - - - - - - - - - - - - Shopping cart table - - - - - - - - - - - - - - - - -->
 
@@ -141,7 +141,7 @@
                                     <!-- - - - - - - - - - - - - - Total - - - - - - - - - - - - - - - - -->
 
                                     <td data-title="Total">
-                                        <span style="color: #febd2b" id="mnt{{ product.product_session.id }}">
+                                        <span style="color: #cb9700" id="mnt{{ product.product_session.id }}">
                                             {% if product.product_session.productReduction is defined and product.product_session.productReduction|length > 0  %}
                                                 {% set prixReduction = (product.product_session.productReduction * product.product_session.productPrice)/100 %}
                                                     {{ ((product.product_session.productPrice + prixReduction) * product.qte)|number_format(0, " ", " ")  }}
@@ -207,7 +207,7 @@
 
                     <section class="col-sm-4">
 
-                        <h3>Codes de réduction</h3>
+                        <h4>Codes de réduction</h4>
 
                         <div class="theme_box">
 
@@ -245,7 +245,7 @@
 
                         <section class="col-sm-4">
 
-                            <h3>Vos information pour valider la commande</h3>
+                            <h4>Vos information pour valider la commande</h4>
 
                             <div class="theme_box">
 
@@ -265,23 +265,13 @@
                                         <input type="text" required name="lieu" id="lieu">
                                     </div><!--/ [col] -->
 
-                                    <div class="col-lg-12 col-md-12">
-                                        <label for="mode_buy" class="required bold">Moyen de paiement</label>
-                                        <select name="mode_buy" id="mode_buy" required>
-                                            <option value="">-- Selectionnez ? --</option>
-                                            <option value="at_home">Je paye à la livraison</option>
-                                            {#<option value="cash">Je paye cash en ligne</option>#}
-                                        </select>
-                                    </div><!--/ [col] -->
-
-
                             </div><!--/ .theme_box -->
 
                         </section><!--/ [col] -->
 
                         <section class="col-sm-4">
 
-                            <h3>Total</h3>
+                            <h4>Total</h4>
 
                             <div class="table_wrap">
 
@@ -291,12 +281,12 @@
 
                                     <tr>
                                         <td>Sous total</td>
-                                        <td><span class="total">{{ total|number_format(0, " ", " ") }}</span> <span style="color: #febd2b">CFA</span></td>
+                                        <td><span class="total">{{ total|number_format(0, " ", " ") }}</span> <span style="color: #cb9700">CFA</span></td>
                                     </tr>
 
                                     <tr >
                                         <td>Total</td>
-                                        <td ><span class="total">{{ total|number_format(0, " ", " ") }}</span> <span style="color: #febd2b">CFA</span></td>
+                                        <td ><span class="total">{{ total|number_format(0, " ", " ") }}</span> <span style="color: #cb9700">CFA</span></td>
                                     </tr>
 
                                     </tfoot>
@@ -316,7 +306,7 @@
                                 </select>
                             </div><!--/ [col] -->
 
-                            <footer class="bottom_box" id="at_home">
+                            <footer class="bottom_box">
                                 {% if product_session is defined and product_session|length > 0 %}
                                     <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit">
                                         <i class="icon-lock"></i>Je paye <b id="dix_pourcent">{{ dix_pourcent|number_format(0," ", " ") }} F</b> avant la livraison</button>
@@ -341,7 +331,7 @@
 
             <section class="section_offset">
 
-                <h3 class="offset_title">Vous pouvez aimer aussi</h3>
+                <h4 class="offset_title">Vous pouvez aimer aussi</h4>
 
                 <!-- - - - - - - - - - - - - - Carousel of you might also like - - - - - - - - - - - - - - - - -->
 
@@ -398,10 +388,10 @@
 
                                     <p class="product_price">
                                         {% if product.productReduction is defined and product.productReduction is not null and product.productReduction|length != 0 %}
-                                        <p class="product_price alignleft"><s style="font-size: 14px; margin-right: 5px">{{ product.productPrice }} CFA</s>
-                                            <b style="font-size: 20px">{{ (((product.productPrice * product.productReduction)/100) +   product.productPrice) }} F</b></p>
+                                        <p class="product_price alignleft"><s style="font-size: 12px; margin-right: 5px">{{ product.productPrice|number_format(0, " ", " ") }} CFA</s>
+                                            <b style="font-size: 17px">{{ (((product.productPrice * product.productReduction)/100) +   product.productPrice)|number_format(0, " ", " ") }} F</b></p>
                                         {% else %}
-                                            <p class="product_price alignleft"><b style="font-size: 20px">{{ product.productPrice }} F</b></p>
+                                            <p class="product_price alignleft"><b style="font-size: 17px">{{ product.productPrice|number_format(0, " ", " ") }} F</b></p>
                                         {% endif %}
 
                                     <!-- - - - - - - - - - - - - - End product rating - - - - - - - - - - - - - - - - -->
