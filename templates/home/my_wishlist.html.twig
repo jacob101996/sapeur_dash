@@ -135,8 +135,7 @@
                                         <!-- - - - - - - - - - - - - - Product name & category - - - - - - - - - - - - - - - - -->
 
                                         <td data-title="Product Name and Category">
-
-                                            <h3 class="product_title">{{ item.product.productName }}</h3>
+                                            <h4>{{ (item.product.productName|length >= 14) ? item.product.productName|slice(0,13)~"..." : item.product.productName }}</h4>
 
                                             <h5 >{{ item.product.category.libelleFr }}</h5>
 

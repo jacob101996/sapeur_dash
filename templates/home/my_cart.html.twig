@@ -84,7 +84,8 @@
                                     <td data-title="Product Name">
 
                                         <a class="product_title">
-                                            {{ product.product_session.productName }}
+                                            {{ (product.product_session.productName|length >= 14) ? product.product_session.productName|slice(0,13)~
+                                            "..." : product.product_session.productName }}
                                         </a>
 
                                         {% if product.product_session.productReduction is defined and product.product_session.productReduction
@@ -331,7 +332,7 @@
 
             <section class="section_offset">
 
-                <h4 class="offset_title">Vous pouvez aimer aussi</h4>
+                <h4 class="offset_title">Vous pouvez voir aussi</h4>
 
                 <!-- - - - - - - - - - - - - - Carousel of you might also like - - - - - - - - - - - - - - - - -->
 
@@ -382,7 +383,7 @@
 
                             <div class="description">
 
-                                <h5><a href="#">{{ product.productName }}</a></h5>
+                                <h4>{{ (product.productName|length >= 10) ? product.productName|slice(0,10)~"..." : product.productName }}</h4>
 
                                 <div class="clearfix product_info">
 

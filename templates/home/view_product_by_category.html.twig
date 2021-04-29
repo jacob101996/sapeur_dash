@@ -254,7 +254,7 @@
 
                                                 <div class="description">
 
-                                                    <h4>{{ prod.productName }}</h4>
+                                                    <h4>{{ (prod.productName|length >= 14) ? prod.productName|slice(0,13)~"..." : prod.productName }}</h4>
 
                                                     <div class="clearfix product_info">
 

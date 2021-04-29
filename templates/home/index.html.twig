@@ -70,7 +70,7 @@
 
                                     <div class="description">
 
-                                        <h4>{{ item.productName }}</h4>
+                                        <h4>{{ (item.productName|length >= 14) ? item.productName|slice(0,13)~"..." : item.productName }}</h4>
 
                                         <div class="clearfix product_info">
 
@@ -155,7 +155,7 @@
 
                                             <div class="description">
 
-                                                <h4>{{ item.productName }}</h4>
+                                                <h4>{{ (item.productName|length >= 14) ? item.productName|slice(0,13)~"..." : item.productName }}</h4>
 
                                                 <div class="clearfix product_info" style="margin-top: 10px">
 
@@ -258,8 +258,7 @@
                                             <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
 
                                             <div class="description">
-
-                                                <h4>{{ item.productName }}</h4>
+                                                <h4>{{ (item.productName|length >= 14) ? item.productName|slice(0,13)~"..." : item.productName }}</h4>
 
                                                 <div class="clearfix product_info" style="margin-top: 10px">
 
@@ -361,7 +360,7 @@
 
                                             <div class="description">
 
-                                                <h4>{{ item.productName }}</h4>
+                                                <h4>{{ (item.itemuctName|length >= 14) ? item.productName|slice(0,13)~"..." : item.productName }}</h4>
 
                                                 <div class="clearfix product_info" style="margin-top: 10px">
 
@@ -465,7 +464,7 @@
 
                                             <div class="description">
 
-                                                <h3>{{ item.productName }}</h3>
+                                                <h4>{{ (item.productName|length >= 14) ? item.productName|slice(0,13)~"..." : item.productName }}</h4>
 
                                                 <div class="clearfix product_info">
 
