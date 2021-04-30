@@ -63,7 +63,7 @@
 
                                         {% if prod_al.productReduction is defined and prod_al.productReduction is not null and prod_al.productReduction|length != 0 %}
                                             <p class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 12px">{{ prod_al.productPrice|number_format(0, " ", " ") }} CFA</s>
-                                                <b style="font-size: 17px">{{ (((prod_al.productPrice * prod_al.productReduction)/100) +   prod_al.productPrice)|number_format(0, " ", " ") }} CFA</b></p>
+                                                <b style="font-size: 17px">{{ (((prod_al.productPrice * prod_al.productReduction)/100) +   prod_al.productPrice)|number_format(0, " ", " ") }}</b></p>
                                         {% else %}
                                             <p class="product_price alignleft"><b style="font-size: 17px">{{ prod_al.productPrice|number_format(0, " ", " ") }} CFA</b></p>
                                         {% endif %}
@@ -98,16 +98,17 @@
 
                     <div class="table_wrap">
 
-                        <table class="table_type_1 wishlist_table">
+                        <table class="table_type_1 wishlist_table table">
 
                             <thead>
 
                             <tr>
 
-                                <th class="product_image_col">Image Produit</th>
-                                <th class="product_title_col">Nom produit et Categorie</th>
-                                <th class="product_price_col">Prix</th>
-                                <th>Action</th>
+                                <th class="product_image_col">Image</th>
+                                <th class="product_title_col">Nom produit</th>
+                                <th class="product_price_col" width="30%">Prix (CFA)</th>
+                                <th class="product_price_col" width="30%">Stock</th>
+                                <th>#</th>
 
                             </tr>
 
@@ -123,7 +124,7 @@
 
                                         <!-- - - - - - - - - - - - - - Product image - - - - - - - - - - - - - - - - -->
 
-                                        <td data-title="Product Image">
+                                        <td>
 
                                             <img src="{{ asset('sapeuradmin/product/')~item.product.productImage }}" alt=""
                                                  style="">
@@ -134,11 +135,8 @@
 
                                         <!-- - - - - - - - - - - - - - Product name & category - - - - - - - - - - - - - - - - -->
 
-                                        <td data-title="Product Name and Category">
+                                        <td>
                                             <h4>{{ (item.product.productName|length >= 14) ? item.product.productName|slice(0,13)~"..." : item.product.productName }}</h4>
-
-                                            <h5 >{{ item.product.category.libelleFr }}</h5>
-
                                             {% if item.product.productReduction is defined and item.product.productReduction
                                                 is not null and item.product.productReduction|length != 0 %}
                                                 <div style="color: #ff4557; font-weight: bold">{{ item.product.productReduction }}% OFF</div>
@@ -150,22 +148,26 @@
 
                                         <!-- - - - - - - - - - - - - - Product price - - - - - - - - - - - - - - - - -->
 
-                                        <td data-title="Price" class="total">
+                                        <td>
                                             {% if item.product.productReduction is defined and item.product.productReduction is not null and item.product.productReduction|length != 0 %}
-                                                <p class="product_price alignleft">
-                                                    <b style="font-size: 20px">{{ (((item.product.productPrice * item.product.productReduction)/100) +   item.product.productPrice) }} CFA</b></p>
+                                                <b style="">{{ (((item.product.productPrice * item.product.productReduction)/100) +   item.product.productPrice)|number_format(0, " ", " ") }} CFA</b>
                                             {% else %}
-                                                <p class="product_price alignleft"><b style="font-size: 20px">{{ item.product.productPrice }} CFA</b></p>
-                                                <br>
+                                                <b style="">{{ item.product.productPrice|number_format(0, " ", " ") }}</b>
                                             {% endif %}
                                         </td>
+
+                                        <td>{{ (item.product.productStock > 0) ? item.product.productStock~" disponible" : "Stock épuisé" }} </td>
 
                                         <!-- - - - - - - - - - - - - - End of product price - - - - - - - - - - - - - - - - -->
 
                                         <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
-                                        <td data-title="Action">
-                                            <a onclick="AddCard({{ item.product.id }})" class="button_blue icon-cart" style="font-size: 20px; cursor: pointer"></a>
+                                        <td>
+                                            {% if item.product.productStock == 0 %}
+                                                <a onclick="" class="button_blue icon-cart disabled" disabled="true"></a>
+                                            {% else %}
+                                                <a onclick="AddCard({{ item.product.id }})" class="button_blue icon-cart" style="cursor: pointer"></a>
+                                            {% endif %}
                                             <a href="{{ path('remove_prod_in_whishlist', {'id': item.product.id }) }}" class="button_dark_grey" style="font-weight: bold">X</a>
                                         </td>
 
@@ -178,8 +180,8 @@
                             {% else %}
 
                                 <tr>
-                                    <td colspan="4">
-                                        <h4 class="italic">Aucun produit en favori !</h4>
+                                    <td colspan="5">
+                                        <h4 class="italic"><span class="icon-exclamation" style=""></span> Aucun produit en favori !</h4>
                                     </td>
                                 </tr>
 
