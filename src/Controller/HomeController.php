@@ -72,12 +72,15 @@ class HomeController extends AbstractController
             $tabQte []  = $quantity;
         }
 
+        //dd($categoryProductRepository->findByCat($slug));
+
         return $this->render('home/view_product_by_category.html.twig', [
-            'cats'      => $categoryProductRepository->findAll(),
+            'cat'       => $categoryProductRepository->findByCat($slug),
             'products'  => $productRepository->findProductByCat($categoryProductRepository->findByCat($slug)),
             'prod'      => $productRepository->findRandomProd(),
             'nbprod'    => array_sum($tabQte),
-            'nbfavori'                => count($session->get('session_heart', [])),
+            'nbfavori'  => count($session->get('session_heart', [])),
+            'cats'      => $categoryProductRepository->findAll()
         ]);
     }
 
@@ -152,13 +155,17 @@ class HomeController extends AbstractController
             $tabQte []  = $quantity;
         }
 
+        $subCat = $subCategoryProductRepository->findOneBySubCat($categoryProductRepository->findByCat($cat),$sub);
+
+        //dd($productRepository->findProductByCatAndSub($categoryProductRepository->findByCat($cat), $subCat));
+
         return $this->render('home/view_product_by_category.html.twig', [
-            'cats'      => $categoryProductRepository->findAll(),
-            'products'  => $productRepository->findProductByCatAndSub($categoryProductRepository->findByCat($cat),
-                        $subCategoryProductRepository->findOneBySubCat($sub)),
+            'cat'      => $categoryProductRepository->findByCat($cat),
+            'products'  => $productRepository->findProductByCatAndSub($categoryProductRepository->findByCat($cat), $subCat),
             'prod'      => $productRepository->findRandomProd(),
             'nbprod'    => array_sum($tabQte),
             'nbfavori'                => count($session->get('session_heart', [])),
+            'cats'      => $categoryProductRepository->findAll()
         ]);
     }
 
