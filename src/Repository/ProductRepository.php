@@ -34,6 +34,20 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findProductByCatAndSubAndQuality($cat, $subCat, $quality)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.category = :val1')
+            ->andWhere('p.sub_category = :val2')
+            ->andWhere('p.quality_product = :val3')
+            ->setParameter('val1', $cat)
+            ->setParameter('val2', $subCat)
+            ->setParameter('val3', $quality)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findProductByCatAndSub($cat, $subCat)
     {
         return $this->createQueryBuilder('p')
@@ -45,6 +59,16 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    public function findProductByQuality($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.quality_product = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findByProductSearch($value)
     {
         return $this->createQueryBuilder('p')

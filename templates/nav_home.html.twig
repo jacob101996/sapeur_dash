@@ -43,7 +43,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'medium_quality'}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -64,7 +64,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'best_quality'}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -111,7 +111,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">{{ subcat.libelleFr }}</a></li>
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'medium_quality'}) }}">{{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
 
@@ -131,7 +131,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'best_quality'}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -178,7 +178,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'medium_quality'}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -199,7 +199,7 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'best_quality'}) }}">
                                                                     {{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
@@ -248,7 +248,7 @@
 
                                                             {% for subcat in cat.subCategory%}
 
-                                                                <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">{{ subcat.libelleFr }}</a></li>
+                                                                <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'medium_quality'}) }}">{{ subcat.libelleFr }}</a></li>
 
                                                             {% endfor %}
 
@@ -268,7 +268,7 @@
 
                                                             {% for subcat in cat.subCategory%}
 
-                                                                <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">
+                                                                <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'best_quality'}) }}">
                                                                         {{ subcat.libelleFr }}</a></li>
 
                                                             {% endfor %}
@@ -319,8 +319,9 @@
                             <ul>
 
                                 <li><a href="{{ path('home_index') }}">Accueil</a></li>
-                                <!--<li><a href="#">Demande de partenariat</a></li>
-                                <li><a href="shop_my_account.html">Confection de vêtement</a></li>
+                                <li><a href="{{ path('search_product_by_quality', {'quality': 'medium_quality'}) }}">Friperie</a></li>
+                                <li><a href="{{ path('search_product_by_quality', {'quality': 'best_quality'}) }}">Haut de gamme</a></li>
+                                <!--
                                 <li><a href="shop_shopping_cart.html">A propos</a></li>-->
 
                             </ul>

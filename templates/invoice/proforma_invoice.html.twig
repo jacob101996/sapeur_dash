@@ -140,11 +140,11 @@
     </tr>
     <tr>
         <td colspan="3" style="text-transform: uppercase">Montant payé en ligne</td>
-        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ dix_pourcent|number_format(0,' ', ' ') }} %</td>
+        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ amount_buyed|number_format(0,' ', ' ') }} %</td>
     </tr>
     <tr>
         <td colspan="3" style="text-transform: uppercase">Montant payé en espèce</td>
-        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ (mnt_ttc - dix_pourcent)|number_format(0,' ', ' ') }} %</td>
+        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ (mnt_ttc - amount_buyed)|number_format(0,' ', ' ') }} %</td>
     </tr>
     <tr>
         <td colspan="3" style="text-transform: uppercase">Montant TTC:</td>

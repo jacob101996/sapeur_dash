@@ -99,8 +99,9 @@ class CommandController extends AbstractController
 
         }
 
-        $total      = null;
-        $prix       = null;
+        $total              = null;
+        $prix               = null;
+        $amountBuyed        = null;
 
         foreach ($panierWithData as $item) {
 
@@ -142,7 +143,7 @@ class CommandController extends AbstractController
             $mntTtc = round($total + $MntTva);
 
             // Calcul des dix pourcent
-            $dix_pourcent   = ($mntTtc * 10)/100;
+            $amountBuyed   = ($mntTtc * 10)/100;
 
             $command->setMntTtc($mntTtc);
             $command->setStatus($statusCommandRepository->find(1));
@@ -169,7 +170,7 @@ class CommandController extends AbstractController
 
             // Appel du service de payment
             $paymentPro =   new PaymentPro();
-            $sessionId = $paymentPro->executePayment($dix_pourcent, 1, $command->getNameClt(),
+            $sessionId = $paymentPro->executePayment($amountBuyed, 1, $command->getNameClt(),
                 $command->getNameClt(), $command->getTelClt(), $command->getBuyedBy(), $command->getRefCmd());
 
             //dd($sessionId);
@@ -182,7 +183,7 @@ class CommandController extends AbstractController
 
                     // Impression des la facture proforma
                     $this->generateProformaInvoice($code, $command->getNameClt(), $command->getTelClt(), $command->getDeliveryLocation(),
-                        $date_cmd, $command->getBuyedBy(), $panierWithData, $total, $command->getTauxTva(), $mntTtc,$dix_pourcent ,"/var/www/html/sapeur2baby/public/logo.jpg");
+                        $date_cmd, $command->getBuyedBy(), $panierWithData, $total, $command->getTauxTva(), $mntTtc,$amountBuyed ,"/var/www/html/sapeur2baby/public/logo.jpg");
 
                     $this->em->flush();
 
@@ -228,7 +229,7 @@ class CommandController extends AbstractController
      * @param $logo
      */
     public function generateProformaInvoice($code, $name, $tel, $lieu, $date_cmd, $moyen_buy, $panierWithData, $sub_total, $tva,
-                                            $mnt_ttc,$dix_pourcent, $logo)
+                                            $mnt_ttc,$amountBuyed, $logo)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -253,7 +254,7 @@ class CommandController extends AbstractController
             'logo'              => $logo,
             'mnt_ttc'           => $mnt_ttc,
             'moyen_buy'         => $moyen_buy,
-            'dix_pourcent'      => $dix_pourcent,
+            'amount_buyed'      => $amountBuyed,
         ]);
 
         // Load HTML to Dompdf

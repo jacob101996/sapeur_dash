@@ -134,14 +134,50 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/view/{cat}/{sub}", name="view_product_by_cat_and_sub")
+     * @Route("/view/{cat}/{sub}/{quality}", name="view_product_by_cat_and_sub_quality")
      * @param $cat
      * @param $sub
+     * @param $quality
      * @param CategoryProductRepository $categoryProductRepository
      * @param ProductRepository $productRepository
      * @param SessionInterface $session
      * @param SubCategoryProductRepository $subCategoryProductRepository
      * @return RedirectResponse|Response
+     */
+    public function viewDetailProductBySubCatQuality($cat,$sub,CategoryProductRepository  $categoryProductRepository,
+                                              ProductRepository $productRepository, SessionInterface $session,
+                                              SubCategoryProductRepository $subCategoryProductRepository, $quality)
+    {
+
+        $tabQte = [];
+
+        foreach ($session->get('session_cart', []) as $id => $quantity)
+        {
+            $tabQte []  = $quantity;
+        }
+
+        $subCat = $subCategoryProductRepository->findOneBySubCat($categoryProductRepository->findByCat($cat),$sub);
+
+        return $this->render('home/view_product_by_category.html.twig', [
+            'cat'      => $categoryProductRepository->findByCat($cat),
+            'products'  => $productRepository->findProductByCatAndSubAndQuality($categoryProductRepository->findByCat($cat),
+                $subCat, $quality),
+            'prod'      => $productRepository->findRandomProd(),
+            'nbprod'    => array_sum($tabQte),
+            'nbfavori'                => count($session->get('session_heart', [])),
+            'cats'      => $categoryProductRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/view/{cat}/{sub}", name="view_product_by_cat_and_sub")
+     * @param $cat
+     * @param $sub
+     * @param \App\Repository\CategoryProductRepository $categoryProductRepository
+     * @param \App\Repository\ProductRepository $productRepository
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \App\Repository\SubCategoryProductRepository $subCategoryProductRepository
+     * @return mixed
      */
     public function viewDetailProductBySubCat($cat,$sub,CategoryProductRepository  $categoryProductRepository,
                                               ProductRepository $productRepository, SessionInterface $session,
@@ -157,11 +193,10 @@ class HomeController extends AbstractController
 
         $subCat = $subCategoryProductRepository->findOneBySubCat($categoryProductRepository->findByCat($cat),$sub);
 
-        //dd($productRepository->findProductByCatAndSub($categoryProductRepository->findByCat($cat), $subCat));
-
         return $this->render('home/view_product_by_category.html.twig', [
             'cat'      => $categoryProductRepository->findByCat($cat),
-            'products'  => $productRepository->findProductByCatAndSub($categoryProductRepository->findByCat($cat), $subCat),
+            'products'  => $productRepository->findProductByCatAndSub($categoryProductRepository->findByCat($cat),
+                $subCat),
             'prod'      => $productRepository->findRandomProd(),
             'nbprod'    => array_sum($tabQte),
             'nbfavori'                => count($session->get('session_heart', [])),
@@ -401,6 +436,49 @@ class HomeController extends AbstractController
             'nbfavori'                => count($session->get('session_heart', [])),
             'prod'                    => $productRepository->findRandomProd(),
             'products'                => $productRepository->findByProductSearch($request->get('search'))
+        ]);
+    }
+
+    /**
+     * @Route("/search/product/by/{quality}", name="search_product_by_quality")
+     * @param ProductRepository $productRepository
+     * @param CategoryProductRepository $categoryProductRepository
+     * @param SessionInterface $session
+     * @param $quality
+     * @return mixed
+     */
+    public function searchProductByQuality(ProductRepository $productRepository,
+                                  CategoryProductRepository $categoryProductRepository,
+                                  SessionInterface $session, $quality){
+
+        $panier             = $session->get('session_cart', []);
+
+        // Count nbr item in panier
+        $tabQte = [];
+        foreach ($panier as $id => $quantity)
+        {
+            $tabQte []  = $quantity;
+        }
+
+        $favori             = $session->get('session_heart', []);
+
+        $favoriWithData     = [];
+
+
+        foreach ($favori as $id => $quantity)
+        {
+            $favoriWithData []  = [
+                'product'       => $productRepository->find($id),
+                'qte'           => $quantity
+            ];
+        }
+
+        return $this->render('home/search_product.html.twig', [
+            'nbprod'                  => array_sum($tabQte),
+            'cats'                    => $categoryProductRepository->findAll(),
+            'nbfavori'                => count($session->get('session_heart', [])),
+            'prod'                    => $productRepository->findRandomProd(),
+            'products'                => $productRepository->findProductByQuality($quality)
         ]);
     }
 

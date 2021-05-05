@@ -229,25 +229,26 @@
         }
     }
 
-    $('#at_home').hide();
-    $('#cash').hide();
+    $('.btn_livraison').hide();
+    $('.btn_cash').hide();
 
     //
-    $('#mode_buy').change(function () {
-        let val = $('#mode_buy').val();
+    $('#mode').change(function () {
+        let val = $('#mode').val();
 
         console.log(val);
 
-        if (val === "at_home"){
-            $('#cash').hide();
-            $('#at_home').show();
+        if (val === "livraison"){
+            $('.btn_livraison').show();
+            $('.btn_cash').hide();
         }
         if (val === "cash"){
-            $('#at_home').hide();
-            $('#cash').show();
+            $('.btn_livraison').hide();
+            $('.btn_cash').show();
         }
 
     })
+
 </script>
 
 </body>

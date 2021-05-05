@@ -25,8 +25,8 @@ class PaymentPro
     {
 
         $marchanID  = 'PP-F109';
-        $notifUrl   = 'http://sapeurdebaby.piecesivoire.com/start-command';
-        $returnUrl  = 'http://sapeurdebaby.piecesivoire.com//congratulation';
+        $notifUrl   = 'http://127.0.0.1:8000/start-command'; // http://sapeurdebaby.piecesivoire.com/start-command
+        $returnUrl  = 'http://127.0.0.1:8000/congratulation'; // http://sapeurdebaby.piecesivoire.com//congratulation
         $urlApi     = "https://www.paiementpro.net/webservice/OnlineServicePayment_v2.php?wsdl";
 
 

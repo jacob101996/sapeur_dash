@@ -34,7 +34,7 @@
                             {% if cat is defined and cat is not null %}
 
                                 {% for subcat in cat.subCategory%}
-                                    <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">{{ subcat.libelleFr }}</a></li>
+                                    <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr }) }}">{{ subcat.libelleFr }}</a></li>
                                 {% endfor %}
                             {% endif %}
 
