@@ -59,14 +59,13 @@ class CommandController extends AbstractController
         // Recuperation de la reponse du server
         $response = $request->get('responsecode');
 
-
         if (!is_null($response) && intval($response) == 0)
         {
 
             $chanel = $request->get('channel');
             $refNumber = $request->get('referenceNumber');
             $transAt = $request->get('transactiondt');
-            $amount  = $request->get('amount');
+            $amount  = $request->get('buy');
             $idTrans = $request->get('payId');
 
             // Recuperation de la commande par la reference
@@ -98,6 +97,7 @@ class CommandController extends AbstractController
             }
 
         }
+
 
         $total              = null;
         $prix               = null;
@@ -203,6 +203,7 @@ class CommandController extends AbstractController
             /*===============================================================*/
 
         }
+
 
         return $this->render('home/my_cart.html.twig', [
             'products'                => $repository->findManiProductItems(),
