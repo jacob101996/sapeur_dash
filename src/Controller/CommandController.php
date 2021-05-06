@@ -98,7 +98,6 @@ class CommandController extends AbstractController
 
         }
 
-
         $total              = null;
         $prix               = null;
         $amountBuyed        = null;
@@ -127,7 +126,7 @@ class CommandController extends AbstractController
         if ($request->isMethod('POST'))
         {
             $command        = new Command();
-            $code           = "01".date("dm").substr(date('Y'), 2, 4); // Ref 01JJMMAA 01 Code debut SAPEUR2BABY
+            $code           = "01".date("His"); // Ref 01HMS 01 Code debut SAPEUR2BABY
             $date_cmd       = new \DateTime("now");
 
             // Info sur la commande
