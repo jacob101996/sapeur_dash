@@ -90,7 +90,7 @@ class Command
     private $date_delivery;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $pay_id;
 
@@ -282,13 +282,11 @@ class Command
 
         return $this;
     }
-
-    public function getPayId(): ?int
+    public function getPayId(): ?string
     {
         return $this->pay_id;
     }
-
-    public function setPayId(?int $pay_id): self
+    public function setPayId(?string $pay_id): self
     {
         $this->pay_id = $pay_id;
 
