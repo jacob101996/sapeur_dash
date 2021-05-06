@@ -96,7 +96,7 @@
     </tr>
     <tr>
         <td style="text-align: left; border-top: none!important;">10 % reglé par :</td>
-        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ moyen_buy }}</td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ (moyen_buy == "OMCIV2")? "Orange Money" : moyen_buy }}</td>
     </tr>
 
 </table>
@@ -136,19 +136,15 @@
     {% endfor %}
     <tr>
         <td colspan="3" style="text-transform: uppercase">Montant HT</td>
-        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ sub_total|number_format(0,' ', ' ') }}</td>
+        <td style="font-weight: bold; text-align: left; color: black"> {{ sub_total|number_format(0,' ', ' ') }}</td>
     </tr>
     <tr>
         <td colspan="3" style="text-transform: uppercase">Montant payé en ligne</td>
-        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ amount_buyed|number_format(0,' ', ' ') }} %</td>
+        <td style="font-weight: bold; text-align: left; color: black"> {{ amount_buyed|number_format(0,' ', ' ') }} </td>
     </tr>
     <tr>
-        <td colspan="3" style="text-transform: uppercase">Montant payé en espèce</td>
-        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ (mnt_ttc - amount_buyed)|number_format(0,' ', ' ') }} %</td>
-    </tr>
-    <tr>
-        <td colspan="3" style="text-transform: uppercase">Montant TTC:</td>
-        <td style="font-weight: bold; font-size: 16px; text-align: left; color: black"> {{ mnt_ttc|number_format(0,' ', ' ') }}</td>
+        <td colspan="3" style="text-transform: uppercase">Reste à payer en espèce</td>
+        <td style="font-weight: bold; text-align: left; color: orangered"> {{ (mnt_ttc - amount_buyed)|number_format(0,' ', ' ') }}</td>
     </tr>
     </tbody>
 </table>
