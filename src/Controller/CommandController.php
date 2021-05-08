@@ -56,6 +56,31 @@ class CommandController extends AbstractController
             ];
         }
 
+
+        $total              = null;
+        $prix               = null;
+        $amountBuyed        = null;
+
+        foreach ($panierWithData as $item) {
+
+            if (is_null($item['product']->getProductReduction())){
+                $prix   = $item['product']->getProductPrice();
+            }else{
+                $reductionPrice = ($item['product']->getProductPrice() * $item['product']->getProductReduction())/100;
+                $prix   = (intval($item['product']->getProductPrice()) + intval($reductionPrice));
+            }
+
+            $totalItems = ($prix * $item['qte']);
+            $total      += $totalItems;
+        }
+
+        // Count nbr item in panier
+        $tabQte = [];
+        foreach ($panier as $id => $quantity)
+        {
+            $tabQte []  = $quantity;
+        }
+
         // Recuperation de la reponse du server
         $response = $request->get('responsecode');
 
@@ -98,31 +123,6 @@ class CommandController extends AbstractController
 
         }
 
-        $total              = null;
-        $prix               = null;
-        $amountBuyed        = null;
-
-        foreach ($panierWithData as $item) {
-
-            if (is_null($item['product']->getProductReduction())){
-                $prix   = $item['product']->getProductPrice();
-            }else{
-                $reductionPrice = ($item['product']->getProductPrice() * $item['product']->getProductReduction())/100;
-                $prix   = (intval($item['product']->getProductPrice()) + intval($reductionPrice));
-            }
-
-            $totalItems = ($prix * $item['qte']);
-            $total      += $totalItems;
-        }
-
-        // Count nbr item in panier
-        $tabQte = [];
-        foreach ($panier as $id => $quantity)
-        {
-            $tabQte []  = $quantity;
-        }
-
-
         if ($request->isMethod('POST'))
         {
             $command        = new Command();
@@ -141,8 +141,11 @@ class CommandController extends AbstractController
             $MntTva =  ($command->getTauxTva() * $total)/100;
             $mntTtc = round($total + $MntTva);
 
-            // Calcul des dix pourcent
-            $amountBuyed   = ($mntTtc * 10)/100;
+            if ($mntTtc > 5000) {
+                // Calcul des dix pourcent
+                $amountBuyed   = ($mntTtc * 10)/100;
+            }else
+                $amountBuyed   = $mntTtc;
 
             $command->setMntTtc($mntTtc);
             $command->setStatus($statusCommandRepository->find(1));
