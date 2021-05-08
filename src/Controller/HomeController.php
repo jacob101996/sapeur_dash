@@ -243,9 +243,12 @@ class HomeController extends AbstractController
 
             $totalItems = ($prix * $item['qte']);
             $total      += $totalItems;
-
-            $dixPourcent = ($total * 10)/100;
         }
+
+        if ($total > 4999){
+            $dixPourcent = ($total * 10)/100;
+        }else
+            $dixPourcent = $total;
 
         // Count nbr item in panier
         $tabQte = [];
