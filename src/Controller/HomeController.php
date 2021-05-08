@@ -245,10 +245,10 @@ class HomeController extends AbstractController
             $total      += $totalItems;
         }
 
-        if ($total > 4999){
-            $dixPourcent = ($total * 10)/100;
-        }else
+        if ($total <= 4999){
             $dixPourcent = $total;
+        }else
+            $dixPourcent = ($total * 10)/100;
 
         // Count nbr item in panier
         $tabQte = [];

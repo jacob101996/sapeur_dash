@@ -318,13 +318,17 @@
 
                             <footer class="bottom_box">
                                 {% if product_session is defined and product_session|length > 0 %}
-                                    <button class="middle_btn btn_livraison" style="background-color: #cb9700; color: white" type="submit">
-                                            {% if dix_pourcent > 4999 %}
-                                                <i class="icon-lock"></i>Je paye <b id="dix_pourcent">Cash en ligne</b>
-                                            {% else %}
-                                                <i class="icon-lock"></i>Je paye <b id="dix_pourcent">{{ dix_pourcent|number_format(0," ", " ") }} F</b> avant ma livraison
-                                            {% endif %}
-                                    </button>
+
+                                    {% if total <= 4999 %}
+                                        <button class="middle_btn btn_livraison" style="background-color: #cb9700; color: white" type="submit">
+                                            <i class="icon-lock"></i><span class="Msg">Je paye cash en ligne </span>
+                                        </button>
+                                    {% else %}
+                                        <button class="middle_btn btn_livraison" style="background-color: #cb9700; color: white" type="submit">
+                                            <i class="icon-lock"></i>Je paye <b id="dix_pourcent">
+                                                {{ dix_pourcent|number_format(0," ", " ") }} F</b> avant ma livraison
+                                        </button>
+                                    {% endif %}
 
                                 {% endif %}
                             </footer>

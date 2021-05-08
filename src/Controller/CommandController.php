@@ -141,11 +141,11 @@ class CommandController extends AbstractController
             $MntTva =  ($command->getTauxTva() * $total)/100;
             $mntTtc = round($total + $MntTva);
 
-            if ($mntTtc > 4999) {
+            if ($mntTtc <= 4999) {
                 // Calcul des dix pourcent
-                $amountBuyed   = ($mntTtc * 10)/100;
-            }else
                 $amountBuyed   = $mntTtc;
+            }else
+                $amountBuyed   = ($mntTtc * 10)/100;
 
             $command->setMntTtc($mntTtc);
             $command->setStatus($statusCommandRepository->find(1));
