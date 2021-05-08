@@ -300,7 +300,11 @@
                                 <label for="mode" class="required bold">Mode de paiement ?</label>
                                 <select name="mode" id="mode" required>
                                     <option value="">-- Choisir un mode de paiement --</option>
-                                    <option value="livraison">Payer à la livraison</option>
+                                    {% if total <= 4999 %}
+                                        <option value="livraison">Payer cash en ligne</option>
+                                    {% else %}
+                                        <option value="livraison">Payer à la livraison</option>
+                                    {% endif %}
                                     <!--<option value="cash">Payer cash en ligne</option>-->
                                 </select>
                             </div><!--/ [col] -->
@@ -326,7 +330,7 @@
                                     {% else %}
                                         <button class="middle_btn btn_livraison" style="background-color: #cb9700; color: white" type="submit">
                                             <i class="icon-lock"></i>Je paye <b id="dix_pourcent">
-                                                {{ dix_pourcent|number_format(0," ", " ") }} F</b> avant ma livraison
+                                                {{ dix_pourcent|number_format(0," ", " ") }} F</b> en ligne avant ma livraison
                                         </button>
                                     {% endif %}
 
