@@ -320,10 +320,11 @@
                                 {% if product_session is defined and product_session|length > 0 %}
                                     <button class="middle_btn btn_livraison" style="background-color: #cb9700; color: white" type="submit">
                                         <i class="icon-lock"></i>Je paye <b id="dix_pourcent">
+                                            {% if dix_pourcent > 4999 %}
                                             {{ dix_pourcent|number_format(0," ", " ") }} F</b> avant ma livraison
-                                    </button>
-                                    <button class="middle_btn btn_cash" style="background-color: #cb9700; color: white" type="submit">
-                                        <i class="icon-lock"></i><span class="Msg">Je paye cash en ligne </span>
+                                            {% else %}
+                                                Cash en ligne
+                                            {% endif %}
                                     </button>
 
                                 {% endif %}
