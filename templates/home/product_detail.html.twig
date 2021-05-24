@@ -4,7 +4,7 @@
 
 
 {% block content %}
-    <div class="secondary_page_wrapper">
+    <div class="page_wrapper">
 
         <div class="container">
 
@@ -251,13 +251,15 @@
                                     {% if product_item.productStock >= 1 %}
                                         <button onclick="AddCard({{ product_item.id }})" class="button_blue middle_btn" style="background-color: #cb9700">Ajout au panier</button>
                                         <button onclick="AddFavori({{ product_item.id }})" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
-                                            <span class="Ajout en favori">Favori</span>
+                                            <span class="Ajout en favori"></span>
                                         </button>
+                                        <a href="{{ path('my_cart') }}" onclick="AddCard({{ product_item.id }})"
+                                           class="middle_btn button_dark_grey" style="background-color: #cd322c; color: white"><span class="icon-basket"></span>Commander</a>
                                     {% elseif product_item.productStock == 0 %}
                                         <button class="button_blue middle_btn disabled" disabled style="background-color: lightgrey;
                                         cursor: not-allowed">Ajout au panier</button>
                                         <button onclick="AddFavori({{ product_item.id }})" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container"
-                                                style="cursor: pointer"><span class="Ajout en favori">Favori</span></button>
+                                                style="cursor: pointer"><span class="Ajout en favori"></span></button>
                                     {% endif %}
 
                                 </div>

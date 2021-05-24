@@ -73,8 +73,7 @@
 
                                     <td class="product_image_col" data-title="Product Image">
                                         <img src="{{ asset('sapeuradmin/product/')~product.product_session.productImage }}" alt=""
-                                             style="">
-
+                                             style="width: 50px!important; height: 50px!important;">
                                     </td>
 
                                     <!-- - - - - - - - - - - - - - End of product Image - - - - - - - - - - - - - - - - -->
@@ -84,7 +83,7 @@
                                     <td data-title="Product Name">
 
                                         <a class="product_title">
-                                            {{ (product.product_session.productName|length >= 14) ? product.product_session.productName|slice(0,13)~
+                                            {{ (product.product_session.productName|length >= 25) ? product.product_session.productName|slice(0,24)~
                                             "..." : product.product_session.productName }}
                                         </a>
 
@@ -149,8 +148,8 @@
                                             {% else %}
                                                 {{ (product.product_session.productPrice * product.qte)|number_format(0, " ", " ") }}
                                             {% endif %}
+                                            CFA
                                         </span>
-                                        <span style="color: #febd2b"> CFA</span>
                                     </td>
 
                                     <!-- - - - - - - - - - - - - - End of total - - - - - - - - - - - - - - - - -->
@@ -190,9 +189,10 @@
 
                     </div>
 
-                    <div class="right_side">
+                    <div class="right_side d-flex">
 
-                        <a data-modal-url="{{ asset('bootstrap/modals/alert.html.twig') }}" class="button_grey middle_btn">Vider mon panier</a>
+                        <a href="{{ path('my_information') }}" class="button_grey middle_btn"
+                           style="background-color: #cd322c; color: white"><span class="icon-check"></span>Valider ma commande</a>
 
                     </div>
 
@@ -201,157 +201,6 @@
                 <!-- - - - - - - - - - - - - - End of shopping cart table - - - - - - - - - - - - - - - - -->
 
             </section><!--/ .section_offset -->
-
-            <div class="section_offset">
-
-                <div class="row">
-
-                    <section class="col-sm-4">
-
-                        <h4>Codes de réduction</h4>
-
-                        <div class="theme_box">
-
-                            <p class="form_caption">Entrez votre code de coupon si vous en avez un.</p>
-
-                            <form id="discount_code">
-
-                                <ul>
-
-                                    <li class="row">
-
-                                        <div class="col-xs-12">
-
-                                            <input type="text" name="">
-
-                                        </div>
-
-                                    </li>
-
-                                </ul>
-
-                            </form>
-
-                        </div><!--/ .theme_box -->
-
-                        <footer class="bottom_box">
-
-                            <button type="submit" form="discount_code" class="button_grey middle_btn">Appliquer Coupon</button>
-
-                        </footer>
-
-                    </section><!--/ [col] -->
-
-                    <form id="estimate_shipping" method="post" action="{{ path('start_command') }}" class="type_2">
-
-                        <section class="col-sm-4">
-
-                            <h4>Vos information pour valider la commande</h4>
-
-                            <div class="theme_box">
-
-                                <p class="form_caption">Entrer vos informations pour terminer la commande</p>
-
-                                    <div class="col-lg-12 col-md-12">
-                                        <label for="name" class="required bold">Nom & Prénom(s)</label>
-                                        <input type="text" required name="name" id="name">
-                                    </div><!--/ [col] -->
-                                    <div class="col-lg-12 col-md-12">
-                                        <label for="contact" class="required bold">Numéro de téléphone</label>
-                                        <input type="tel" required name="contact" pattern="^[0-9]{10}" maxlength="10" placeholder="0102010124" id="contact">
-                                    </div><!--/ [col] -->
-
-                                    <div class="col-lg-12 col-md-12">
-                                        <label for="lieu" class="required bold">Lieu de livraison</label>
-                                        <input type="text" required name="lieu" id="lieu">
-                                    </div><!--/ [col] -->
-
-                            </div><!--/ .theme_box -->
-
-                        </section><!--/ [col] -->
-
-                        <section class="col-sm-4">
-
-                            <h4>Total</h4>
-
-                            <div class="table_wrap">
-
-                                <table class="zebra">
-
-                                    <tfoot>
-
-                                    <tr>
-                                        <td>Sous total</td>
-                                        <td><span class="total">{{ total|number_format(0, " ", " ") }}</span> <span style="color: #cb9700">CFA</span></td>
-                                    </tr>
-
-                                    <tr >
-                                        <td>Total</td>
-                                        <td ><span class="total">{{ total|number_format(0, " ", " ") }}</span> <span style="color: #cb9700">CFA</span></td>
-                                    </tr>
-
-                                    </tfoot>
-
-                                </table>
-
-                            </div>
-
-                            <div class="col-lg-12 col-md-12" style="margin-top: 15px !important;">
-                                <label for="mode" class="required bold">Mode de paiement ?</label>
-                                <select name="mode" id="mode" required>
-                                    <option value="">-- Choisir un mode de paiement --</option>
-                                    {% if total <= 4999 %}
-                                        <option value="livraison">Payer cash en ligne</option>
-                                    {% else %}
-                                        <option value="livraison">Payer à la livraison</option>
-                                    {% endif %}
-                                    <!--<option value="cash">Payer cash en ligne</option>-->
-                                </select>
-                            </div><!--/ [col] -->
-
-                            <div class="col-lg-12 col-md-12" style="margin-top: 15px !important; margin-bottom: 20px!important;">
-                                <label for="buy" class="required bold">Moyen de paiement</label>
-                                <select name="buy" id="buy" required>
-                                    <option value="">-- Payer par ? --</option>
-                                    <option value="OMCIV2">Orange Money - OM</option>
-                                    <option value="FlOOZ">Moov Money - Moov Money</option>
-                                    <option value="MOMO">MTN Money - MOMO</option>
-                                    <option value="CARD">Visa CARD</option>
-                                </select>
-                            </div><!--/ [col] -->
-
-                            <footer class="bottom_box">
-                                {% if product_session is defined and product_session|length > 0 %}
-
-                                    {% if total <= 4999 %}
-                                        <button class="middle_btn btn_livraison" style="background-color: #cb9700; color: white" type="submit">
-                                            <i class="icon-lock"></i><span class="Msg">Je paye cash en ligne </span>
-                                        </button>
-                                    {% else %}
-                                        <button class="middle_btn btn_livraison" style="background-color: #cb9700; color: white" type="submit">
-                                            <i class="icon-lock"></i>Je paye <b id="dix_pourcent">
-                                                {{ dix_pourcent|number_format(0," ", " ") }} F</b> en ligne avant ma livraison
-                                        </button>
-                                    {% endif %}
-
-                                {% endif %}
-                            </footer>
-
-                            {#
-                            <footer class="bottom_box" id="cash">
-                                {% if product_session is defined and product_session|length > 0 %}
-                                    <button class="middle_btn" style="background-color: #cb9700; color: white" type="submit">
-                                        <i class="icon-lock"></i> Je paye cash en ligne</button>
-                                {% endif %}
-                            </footer>#}
-
-                        </section><!-- / [col] -->
-
-                    </form>
-
-                </div><!--/ .row -->
-
-            </div><!--/ .section_offset -->
 
             <section class="section_offset">
 

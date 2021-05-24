@@ -262,6 +262,67 @@ class HomeController extends AbstractController
             'nbprod'                  => array_sum($tabQte),
             'cats'                    => $categoryProductRepository->findAll(),
             'product_session'         => $panierWithData,
+            'nbfavori'                => count($session->get('session_heart', [])),
+        ]);
+    }
+
+    /**
+     * @Route("/mon-panier/imformation-pour-valider-commande", name="my_information")
+     * @param ProductRepository $productRepository
+     * @param SessionInterface $session
+     * @param CategoryProductRepository $categoryProductRepository
+     * @return Response
+     */
+    public function commandInformation(ProductRepository $productRepository, SessionInterface $session,
+                                       CategoryProductRepository $categoryProductRepository)
+    {
+        $panier             = $session->get('session_cart', []);
+        $total      = null;
+        $prix       = null;
+        $reductionPrice  = null;
+        $panierWithData     = [];
+        $totalItems         = null;
+        $dixPourcent        = null;
+
+
+        foreach ($panier as $id => $quantity)
+        {
+            $panierWithData []  = [
+                'product_session'       => $productRepository->find($id),
+                'qte'                   => $quantity
+            ];
+        }
+
+        // Parcourir le tableau calcul price
+        foreach ($panierWithData as $item) {
+            if (is_null($item['product_session']->getProductReduction())){
+                $prix   = $item['product_session']->getProductPrice();
+            }else{
+                $reductionPrice = ($item['product_session']->getProductPrice() * $item['product_session']->getProductReduction())/100;
+                $prix   = (intval($item['product_session']->getProductPrice()) + intval($reductionPrice));
+            }
+
+            $totalItems = ($prix * $item['qte']);
+            $total      += $totalItems;
+        }
+
+        if ($total <= 4999){
+            $dixPourcent = $total;
+        }else
+            $dixPourcent = ($total * 10)/100;
+
+        // Count nbr item in panier
+        $tabQte = [];
+        foreach ($panier as $id => $quantity)
+        {
+            $tabQte []  = $quantity;
+        }
+
+        return $this->render('home/information_cmd.html.twig', [
+            'products'                => $productRepository->findManiProductItems(),
+            'nbprod'                  => array_sum($tabQte),
+            'cats'                    => $categoryProductRepository->findAll(),
+            'product_session'         => $panierWithData,
             'total'                   => $total,
             'nbfavori'                => count($session->get('session_heart', [])),
             'dix_pourcent'            => $dixPourcent

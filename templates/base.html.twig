@@ -137,15 +137,6 @@
     </style>
 </head>
 <body class="front_page" style="background-color: #fff!important;">
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=194364450619191";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
 
 <div class="wide_layout">
 
@@ -236,8 +227,6 @@
     $('#mode').change(function () {
         let val = $('#mode').val();
 
-        console.log(val);
-
         if (val === "livraison"){
             $('.btn_livraison').show();
             $('.btn_cash').hide();
@@ -245,6 +234,20 @@
         if (val === "cash"){
             $('.btn_livraison').hide();
             $('.btn_cash').show();
+        }
+
+    })
+
+    $('#point_livraison').change(function () {
+
+        let poitnLivraison = $('#point_livraison').val();
+
+        if (poitnLivraison === "abidjan"){
+
+        }
+
+        if (poitnLivraison === "grand-abidjan"){
+            console.log(poitnLivraison)
         }
 
     })
