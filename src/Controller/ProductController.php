@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ProductType;
+use App\Repository\PartnerRepository;
 use App\Repository\ProductRepository;
 use App\Services\UploadFile;
 use Doctrine\ORM\EntityManagerInterface;
@@ -84,6 +85,20 @@ class ProductController extends AbstractController
         //dd($repository->findAll());
         return $this->render('product/list.html.twig', [
             'items' => $repository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/my/account/partner/products/{code}", name="partner_product_list")
+     * @param PartnerRepository $partnerRepository
+     * @return Response
+     */
+    public function listPartnerProduct(PartnerRepository $partnerRepository, $code)
+    {
+        $partner    = $partnerRepository->findOneByPartnerCode($code);
+        return $this->render('product/list.html.twig', [
+            'items'     => $partner->getProducts(),
+            'partner'   => $partner
         ]);
     }
 

@@ -34,11 +34,57 @@ class AdminController extends AbstractController
     public function index(ProductRepository $productRepository, PartnerRepository $partnerRepository,
                           CommandRepository $commandRepository, SavRepository $savRepository)
     {
+        // Commande du jour
+        $toDay  = date("d-m-Y");
+
+        $tabCmdToDay    = [];
+
+        foreach ($commandRepository->findAllCommand() as $item){
+
+            if ($item->getCommandAt()->format('d-m-Y') == $toDay)
+            {
+                $tabCmdToDay    []  = $item;
+            }
+        }
+
         return $this->render('admin/index.html.twig', [
             'products'  => $productRepository->findAll(),
             'partners'  => $partnerRepository->findAll(),
             'commands'  => $commandRepository->findAll(),
             'sav'       => $savRepository->findAll(),
+            'commandToDay'=> $tabCmdToDay,
+            'moov_money' => count($commandRepository->findByBuyedBy('FlOOZ')),
+            'orange_money' => count($commandRepository->findByBuyedBy('OMCIV2')),
+            'mtn_money' => count($commandRepository->findByBuyedBy('MOMO')),
+            'visa_card' => count($commandRepository->findByBuyedBy('CARD')),
+        ]);
+    }
+
+    /**
+     * @Route("/my/account/command/detail/{code_facture}", name="admin_detail_command")
+     * @param $code_facture
+     * @param CommandRepository $commandRepository
+     * @return Response
+     */
+    public function detailCommand($code_facture,
+                                  CommandRepository $commandRepository){
+
+        // Commande du jour
+        $toDay  = date("d-m-Y");
+
+        $tabCmdToDay    = [];
+
+        foreach ($commandRepository->findAllCommand() as $item){
+
+            if ($item->getCommandAt()->format('d-m-Y') == $toDay)
+            {
+                $tabCmdToDay    []  = $item;
+            }
+        }
+
+        return $this->render('admin/detail_command.html.twig', [
+            'commandToDay'  => $tabCmdToDay,
+            'command'       => $commandRepository->findOneByNumberFacture($code_facture)
         ]);
     }
 
@@ -99,9 +145,9 @@ class AdminController extends AbstractController
 
         $tabCmdToDay    = [];
 
-        foreach ( $commandRepository->findAll() as $item){
+        foreach ( $commandRepository->findAllCommand() as $item){
 
-            if ($item->getDateDelivery()->format('d-m-Y') == $toDay)
+            if ($item->getCommandAt()->format('d-m-Y') == $toDay)
             {
                 $tabCmdToDay    []  = $item;
             }
@@ -119,7 +165,7 @@ class AdminController extends AbstractController
     public function returnCmdAll(CommandRepository $commandRepository)
     {
         return $this->render('admin/command_list.html.twig', [
-            'commands'  => $commandRepository->findAll(),
+            'commands'  => $commandRepository->findAllCommand(),
         ]);
     }
 }

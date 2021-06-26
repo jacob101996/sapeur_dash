@@ -94,6 +94,31 @@ class Command
      */
     private $pay_id;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $montant_livraison;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $montant_buy;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $number_facture;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $etat;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_buyed;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -289,6 +314,66 @@ class Command
     public function setPayId(?string $pay_id): self
     {
         $this->pay_id = $pay_id;
+
+        return $this;
+    }
+
+    public function getMontantLivraison(): ?string
+    {
+        return $this->montant_livraison;
+    }
+
+    public function setMontantLivraison(string $montant_livraison): self
+    {
+        $this->montant_livraison = $montant_livraison;
+
+        return $this;
+    }
+
+    public function getMontantBuy(): ?string
+    {
+        return $this->montant_buy;
+    }
+
+    public function setMontantBuy(string $montant_buy): self
+    {
+        $this->montant_buy = $montant_buy;
+
+        return $this;
+    }
+
+    public function getNumberFacture(): ?string
+    {
+        return $this->number_facture;
+    }
+
+    public function setNumberFacture(string $number_facture): self
+    {
+        $this->number_facture = $number_facture;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getIsBuyed(): ?bool
+    {
+        return $this->is_buyed;
+    }
+
+    public function setIsBuyed(bool $is_buyed): self
+    {
+        $this->is_buyed = $is_buyed;
 
         return $this;
     }

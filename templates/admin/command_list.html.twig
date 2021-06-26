@@ -24,32 +24,32 @@
                 <div class="card-body">
                     <div class="row text-dark">
                         {% if app.request.get('_route') == "admin_cmd_to_day" %}
-                            <div class="col-md-8"><h4 class="dark-grey-text">Commandes du jour</h4></div>
+                            <div class="col-md-8"><h5 class="dark-grey-text">Liste des commandes du jour</h5></div>
                             <div class="col-md-4 mt-2 text-right">
                                 <a href="{{ path('admin_cmd_all') }}" title="Toutes les commandes"><i class="far fa-calendar-alt mr-2 gold-text" style="font-size: 25px"></i></a>
                             </div>
                         {% elseif app.request.get('_route') == "admin_cmd_all" %}
-                            <div class="col-md-8"><h4 class="dark-grey-text">Toute les commandes</h4></div>
+                            <div class="col-md-8"><h5 class="dark-grey-text">Toute les commandes</h5></div>
                             <div class="col-md-4 mt-2 text-right">
-                                <a href="{{ path('admin_cmd_to_day') }}" title="Toutes les commandes"><i class="fas fa-calendar-day mr-2 gold-text" style="font-size: 25px"></i></a>
+                                <a href="{{ path('admin_cmd_to_day') }}" title="Commande du jour"><i class="fas fa-calendar-day mr-2 gold-text" style="font-size: 25px"></i></a>
                             </div>
                         {% endif %}
 
                     </div>
-                    <hr/>
-                    <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+                    <hr class="mt-0"/>
+                    <table id="dtMaterialDesignExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>Nom client</th>
+                            <th>Nom client & Contact</th>
                             <th>Contact</th>
                             <th>Lieu de livraion</th>
-                            <th>Ref</th>
-                            <th>Montant TTC</th>
+                            <th>Montant <span style="text-transform: uppercase">PAYé</span></th>
                             <th>Opérateur</th>
                             <th>ID Trans</th>
+                            <th>Date commande</th>
+                            <th>Etat</th>
                             <th>Facture</th>
-                            <th>Date</th>
-                            <th>Statut</th>
+                            <th>#</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,27 +58,29 @@
                                 <td>{{ cmd.nameClt }}</td>
                                 <td>{{ cmd.telClt }}</td>
                                 <td>{{ cmd.deliveryLocation }}</td>
-                                <td>{{ cmd.refCmd }}</td>
-                                <td class="font-weight-bold">{{ (cmd.mntTtc|round)|number_format(0," ", " ") }} CFA</td>
+                                <td class="font-weight-bold">{{ (cmd.montantBuy)|number_format(0," ", " ") }} CFA</td>
                                 <td class="font-weight-bold">{{ cmd.buyedBy }}</td>
                                 <td>{{ cmd.payId }}</td>
+                                <td>{{ cmd.commandAt|date('Y/m/d H:i:s') }}</td>
+                                <td>
+                                    {% if cmd.etat == "success" and cmd.isBuyed == 1 %}
+                                        <span class="text-success" title="Paiement effectué"><i class="fas fa-check"></i> Succès</span>
+                                    {% else %}
+                                        <span class="text-danger" title="Paiement effectué"><i class="fas fa-times"></i> Echec</span>
+                                    {% endif %}
+                                </td>
                                 <td class="text-center">
                                     <a href="{{ asset('/invoice/')~cmd.factureName }}" target="_blank">
                                         <i class="far fa-file-pdf fa-2x" style="color: #ff5252!important"></i>
                                     </a>
                                 </td>
-                                <td>{{ cmd.dateDelivery|date('Y/m/d H:i:s') }}</td>
                                 <td>
-
-                                {% if cmd.status.id == 1 %}
-                                    <span class="badge badge-danger">{{ cmd.status.libelle }} ...</span>
-                                {% else %}
-                                    <span class="badge badge-success">{{ cmd.status.libelle }}</span>
-                                {% endif %}
+                                    <a href="{{ path('admin_detail_command', {'code_facture': cmd.numberFacture}) }}">
+                                        <i class="fas fa-eye"></i> Détails
+                                    </a>
                                 </td>
                             </tr>
                         {% endfor %}
-
                     </table>
                 </div>
             </div>

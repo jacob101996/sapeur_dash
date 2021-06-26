@@ -5,9 +5,10 @@
     ============================================ -->
     <title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8">
-    <meta name="author" content="">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="author" content="SAPEUR DE BABY - contact@sapeurdebaby.com">
+    <meta name="description" content="Une plateforme e-commerce de vente de vêtements et accessoires vestimentaire en ligne">
+    <meta name="keywords" content="Vente de vêtements, e-commerce, sapeur2baby, sapeurdebay, vente d'accessoires, shop, boutique en ligne">
+    <meta name="robots" content="index, follow, archive" />
 
     <!-- Mobile specific metas
     ============================================ -->
@@ -236,18 +237,41 @@
             $('.btn_cash').show();
         }
 
-    })
+    });
+
+    // Default value
+    $('#commune_abidjan').prop('required', true);
+    $('#commune_g_abidjan').prop('required', false);
+    $('#montant_livraison').html("<span>1 000 </span>");
+
 
     $('#point_livraison').change(function () {
 
-        let poitnLivraison = $('#point_livraison').val();
+        let pointLivraison = $('#point_livraison').val();
 
-        if (poitnLivraison === "abidjan"){
+        if (pointLivraison === "Abidjan"){
 
+            $('.commune_g_abidjan').removeClass('show');
+            $('.commune_g_abidjan').addClass('hide');
+            $('.commune_abidjan').removeClass('hide');
+            $('.commune_abidjan').addClass('show');
+            $('#commune_g_abidjan').prop('required', false);
+            $('#commune_abidjan').prop('required', true);
+
+            // Affichage du montant
+            $('#montant_livraison').html("<span>1 000 </span>")
         }
 
-        if (poitnLivraison === "grand-abidjan"){
-            console.log(poitnLivraison)
+        if (pointLivraison === "Grand-abidjan"){
+            $('.commune_abidjan').removeClass('show');
+            $('.commune_abidjan').addClass('hide');
+            $('.commune_g_abidjan').removeClass('hide');
+            $('.commune_g_abidjan').addClass('show');
+            $('#commune_abidjan').prop('required', false);
+            $('#commune_g_abidjan').prop('required', true);
+
+            // Affichage du montant
+            $('#montant_livraison').html("<span>1 500 </span>")
         }
 
     })

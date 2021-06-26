@@ -7,13 +7,13 @@
         <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 
             <!-- Card -->
-            <div class="card card-cascade cascading-admin-card">
+            <div class="card card-cascade cascading-admin-card border-primary">
 
                 <!-- Card Data -->
                 <div class="admin-up">
                     <i class="fab fa-product-hunt primary-color mr-3 z-depth-2"></i>
                     <div class="data">
-                        <p class="text-uppercase">Produits</p>
+                        <p class="text-uppercase"><u>Produits</u></p>
                         <h4 class="font-weight-bold dark-grey-text">{{ products|length }}</h4>
                     </div>
                 </div>
@@ -28,13 +28,13 @@
         <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 
             <!-- Card -->
-            <div class="card card-cascade cascading-admin-card">
+            <div class="card card-cascade cascading-admin-card border-success">
 
                 <!-- Card Data -->
                 <div class="admin-up">
-                    <i class="fas fa-users mr-3 z-depth-2" style="background-color: #cb9700"></i>
+                    <i class="fas fa-users mr-3 z-depth-2 bg-success"></i>
                     <div class="data">
-                        <p class="text-uppercase">Parténaires</p>
+                        <p class="text-uppercase"><u>Parténaires</u></p>
                         <h4 class="font-weight-bold dark-grey-text">{{ partners|length }}</h4>
                     </div>
                 </div>
@@ -49,13 +49,15 @@
         <div class="col-xl-3 col-md-6 mb-md-0 mb-4">
 
             <!-- Card -->
-            <div class="card card-cascade cascading-admin-card">
+            <div class="card card-cascade cascading-admin-card border-info">
 
                 <!-- Card Data -->
                 <div class="admin-up">
-                    <i class="fas fa-shopping-basket light-blue lighten-1 mr-3 z-depth-2"></i>
+                    <a href="{{ path('admin_cmd_all') }}">
+                        <i class="fas fa-shopping-basket light-blue lighten-1 mr-3 z-depth-2"></i>
+                    </a>
                     <div class="data">
-                        <p class="text-uppercase">Commandes</p>
+                        <p class="text-uppercase"><u>Commandes</u></p>
                         <h4 class="font-weight-bold dark-grey-text">{{ commands|length }}</h4>
                     </div>
                 </div>
@@ -70,13 +72,13 @@
         <div class="col-xl-3 col-md-6 mb-0">
 
             <!-- Card -->
-            <div class="card card-cascade cascading-admin-card">
+            <div class="card card-cascade cascading-admin-card border-danger">
 
                 <!-- Card Data -->
                 <div class="admin-up">
-                    <i class="fas fa-exchange-alt red accent-2 mr-3 z-depth-2"></i>
+                    <i class="fas fa-exchange-alt bg-danger accent-2 mr-3 z-depth-2"></i>
                     <div class="data">
-                        <p class="text-uppercase">SAV</p>
+                        <p class="text-uppercase"><u>S.A.V</u></p>
                         <h4 class="font-weight-bold dark-grey-text">{{ sav|length }}</h4>
                     </div>
                 </div>

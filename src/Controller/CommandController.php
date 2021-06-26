@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Command;
 use App\Entity\StatusCommand;
 use App\Repository\CategoryProductRepository;
+use App\Repository\CommandRepository;
 use App\Repository\ProductRepository;
 use App\Repository\StatusCommandRepository;
 use App\Services\PaymentPro;
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class CommandController extends AbstractController
 {
@@ -42,7 +44,8 @@ class CommandController extends AbstractController
     public function startCommand(SessionInterface $session, Request $request,
                                  ProductRepository $repository,
                                  StatusCommandRepository $statusCommandRepository,
-                                 CategoryProductRepository $categoryProductRepository){
+                                 CategoryProductRepository $categoryProductRepository,
+                                 CommandRepository $commandRepository){
 
 
         $panier             = $session->get('session_cart', []);
@@ -108,6 +111,8 @@ class CommandController extends AbstractController
 
                 $command[0]->setPayId($request->get('payId'));
                 $command[0]->setStatus($this->em->getRepository(StatusCommand::class)->find(2));
+                $command[0]->setEtat("success");
+                $command[0]->setIsBuyed(true);
 
                 // Validation de la requette
                 $this->em->flush();
@@ -121,6 +126,11 @@ class CommandController extends AbstractController
                 ]);
             }
 
+        }elseif (!is_null($response) && intval($response) != 0){
+            $command = $this->em->getRepository(Command::class)->findByRefCmd($request->get('referenceNumber'));
+            $command[0]->setEtat("echec");
+            $command[0]->setIsBuyed(false);
+            $this->em->flush();
         }
 
         if ($request->isMethod('POST'))
@@ -129,23 +139,50 @@ class CommandController extends AbstractController
             $code           = "01".date("His"); // Ref 01HMS 01 Code debut SAPEUR2BABY
             $date_cmd       = new \DateTime("now");
 
+            $dateLivraison  = $date_cmd->add(\DateInterval::createFromDateString('+ '.$request->get('mode_livraison')." days"));
+
+            // Nom de la facture
+            $lastCmd    = $commandRepository->findByLastCmd();
+
+            if (count($lastCmd) > 0){
+                $lastNumero     = $lastCmd[0]->getNumberFacture();
+                $numeroFactureIncrement = "000".(intval($lastNumero) + 1);
+            }else
+                $numeroFactureIncrement = "0001";
+
+            $command->setNumberFacture($numeroFactureIncrement);
+
             // Info sur la commande
             $command->setTransId(date("His").mt_rand(11,99));// Transaction id = HMSC
             $command->setRefCmd($code);
             $command->setMntTtc($total);
             $command->setMntHt($total);
             $command->setTauxTva(0);
-            $command->setDateDelivery($date_cmd);
+            $command->setDateDelivery($dateLivraison);
+            $command->setIsBuyed(false);
+            //Defini la date de fin
 
             // Calcul du montant TTC
             $MntTva =  ($command->getTauxTva() * $total)/100;
             $mntTtc = round($total + $MntTva);
+            $amountLivraison = 0;
 
-            if ($mntTtc <= 4999) {
+            if ($mntTtc >= 50000) {
                 // Calcul des dix pourcent
                 $amountBuyed   = $mntTtc;
-            }else
-                $amountBuyed   = ($mntTtc * 10)/100;
+                $amountLivraison = 0;
+            }else{
+                if ($request->get('point_livraison') == "Abidjan"){
+                    $amountBuyed   = 5;
+                    $amountLivraison = 5;
+                }else{
+                    $amountBuyed   = 10;
+                    $amountLivraison = 10;
+                }
+            }
+
+            $command->setMontantBuy($amountBuyed);
+            $command->setMontantLivraison($amountLivraison);
 
             $command->setMntTtc($mntTtc);
             $command->setStatus($statusCommandRepository->find(1));
@@ -155,13 +192,19 @@ class CommandController extends AbstractController
                 $command->addProduct($item['product']);
             }
 
+            $lieuLivraison  = $request->get('point_livraison').",".$request->get('commune')
+                .",".$request->get('lieu');
+
+            $commandAt  = new \DateTime("now");
+
             // infos client
             $command->setNameClt($request->get('name'));
             $command->setTelClt($request->get('contact'));
-            $command->setDeliveryLocation($request->get('lieu'));
+            $command->setDeliveryLocation($lieuLivraison);
             $command->setBuyedBy($request->get('buy'));
-            $command->setCommandAt($date_cmd);
-            $command->setFactureName($code.'.pdf');
+            $command->setCommandAt($commandAt);
+            $command->setFactureName("FAC-".$numeroFactureIncrement.'.pdf');
+            $command->setEtat("echec");
 
             // Persistence des donnees
             $this->em->persist($command);
@@ -184,8 +227,9 @@ class CommandController extends AbstractController
                     $array = (array)$sessionId;
 
                     // Impression des la facture proforma
-                    $this->generateProformaInvoice($code, $command->getNameClt(), $command->getTelClt(), $command->getDeliveryLocation(),
-                        $date_cmd, $command->getBuyedBy(), $panierWithData, $total, $command->getTauxTva(), $mntTtc,$amountBuyed ,"/var/www/html/sapeur2baby/public/logo.jpg");
+                    $this->generateProformaInvoice($numeroFactureIncrement, $command->getNameClt(), $command->getTelClt(),
+                        $command->getDeliveryLocation(), $commandAt->format('d/m/Y H:i:s'), $command->getBuyedBy(), $panierWithData, $total,
+                        $mntTtc, $amountBuyed, $dateLivraison->format('d/m/Y'), $amountLivraison, $code);
 
                     $this->em->flush();
 
@@ -227,21 +271,25 @@ class CommandController extends AbstractController
      * @param $moyen_buy
      * @param $panierWithData
      * @param $sub_total
-     * @param $tva
      * @param $mnt_ttc
-     * @param $logo
+     * @param $amountBuyed
+     * @param $dateLivraison
+     * @param $amountLivraison
+     * @param $ref
      */
-    public function generateProformaInvoice($code, $name, $tel, $lieu, $date_cmd, $moyen_buy, $panierWithData, $sub_total, $tva,
-                                            $mnt_ttc,$amountBuyed, $logo)
+    public function generateProformaInvoice($code, $name, $tel, $lieu, $date_cmd, $moyen_buy, $panierWithData, $sub_total,
+                                            $mnt_ttc,$amountBuyed, $dateLivraison, $amountLivraison, $ref)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Courier');
+        $pdfOptions->setIsRemoteEnabled(true);
 
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
+        $dompdf->setOptions($pdfOptions);
 
-        $txt    = $name."\r\n".$tel."\r\n".$mnt_ttc."\r\n".date('Y/m/m H:i:s');
+        $qr    = $name."\r\n".$tel."\r\n".$dateLivraison;
 
 
         // Retrieve the HTML generated in our twig file
@@ -253,18 +301,24 @@ class CommandController extends AbstractController
             'name'              => $name,
             'tel'               => $tel,
             'lieu'              => $lieu,
-            'qr_code'           => $this->generateQRCode($txt),
-            'logo'              => $logo,
+            'qr_code'           => $this->generateQRCode($qr),
+            'logo'              => "http://sapeurdebaby.piecesivoire.com/bootstrap/images/logo.png",
             'mnt_ttc'           => $mnt_ttc,
             'moyen_buy'         => $moyen_buy,
             'amount_buyed'      => $amountBuyed,
+            'date_livraison'    => $dateLivraison,
+            'amount_livraison'  => $amountLivraison,
+            'montant_total_fac' => ($amountLivraison + $mnt_ttc),
+            'ref'               => $ref,
+
+
         ]);
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
 
         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('B5', 'portrait');
 
         // Render the HTML as PDF
         $dompdf->render();
@@ -281,10 +335,23 @@ class CommandController extends AbstractController
         }
 
         // e.g /var/www/project/public/mypdf.pdf
-        $pdfFilepath =  $publicDirectory .$code.'.pdf';
+        $pdfFilepath =  $publicDirectory ."FAC-".$code.'.pdf';
 
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
+    }
+
+    /**
+     * @Route("/facture/test")
+     */
+    public function textFacture(){
+
+        $this->generateProformaInvoice("0001", "Zouma Onesime", "0153686832",
+            "Abidjan,Cocody, Angré", date("Y/m/d H:i:s"), "Moov Money", "",
+            11000, 20000, 1500, date("Y/m/d"), 1500, "43423243");
+
+        echo "Succès";
+
     }
 
     /**

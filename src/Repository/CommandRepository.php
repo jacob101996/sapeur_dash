@@ -34,6 +34,17 @@ class CommandRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByBuyedBy($mode)
+        {
+            return $this->createQueryBuilder('c')
+                ->andWhere('c.buyed_by = :val')
+                ->setParameter('val', $mode)
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
+
     public function findByPayId($id_pay)
     {
         return $this->createQueryBuilder('c')
@@ -45,18 +56,33 @@ class CommandRepository extends ServiceEntityRepository
         ;
     }
 
-
-    /*
-    public function findOneBySomeField($value): ?Command
+    public function findAllCommand()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    public function findByLastCmd(){
+        $rsm = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Command::class, 'c');
+        $sql = "SELECT * FROM command ORDER BY id DESC LIMIT 1";
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)
+            ->getResult();
+    }
+
+    public function findOneByNumberFacture($value): ?Command
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.number_facture = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 
     public function dataCommand(){
         $query = $this->getEntityManager()->createQuery(

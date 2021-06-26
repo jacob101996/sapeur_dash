@@ -11,6 +11,10 @@
     <div class="page_wrapper" style="background-color: white">
 
         <div class="container">
+            <div class="alert alert_box_info" style="background-color: #018bc8; color: white!important;">
+                <span class="icon-truck"></span><span style="font-weight: bold">Information livraison: </span>
+                <span>Livraison partout à Abidjan et dans le grand Abidjan (Anyama, Bingerville, Grand-Bassam, Yopougon Songuon)</span>
+            </div>
             <div class="section_offset">
                 <form id="estimate_shipping" method="post" action="{{ path('start_command') }}" class="type_2">
 
@@ -35,14 +39,14 @@
                             <div class="col-lg-6 col-md-6">
                                 <label for="point_livraison" class="required bold">Point livraison</label>
                                 <select name="point_livraison" id="point_livraison" required>
-                                    <option value="abidjan">Abidjan</option>
-                                    <option value="grand-abidjan">Grand-Abidjan</option>
+                                    <option value="Abidjan">Abidjan</option>
+                                    <option value="Grand-abidjan">Grand-Abidjan</option>
                                 </select>
                             </div><!--/ [col] -->
 
                             <div class="col-lg-6 col-md-6 commune_abidjan">
                                 <label for="commune_abidjan" class="required bold">Commune</label>
-                                <select name="commune_abidjan" id="commune_abidjan">
+                                <select name="commune" id="commune_abidjan">
                                     <option value="Abobo">Abobo</option>
                                     <option value="Adjamé">Adjamé</option>
                                     <option value="Cocody">Cocody</option>
@@ -55,13 +59,13 @@
                                     <option value="Yopougon">Yopougon</option>
                                 </select>
                             </div><!--/ [col] -->
-                            <div class="col-lg-12 col-md-12 commune_g_abidjan hide">
+                            <div class="col-lg-6 col-md-6 commune_g_abidjan hide">
                                 <label for="commune_g_abidjan" class="required bold">Commune</label>
-                                <select name="commune_g_abidjan" id="commune_g_abidjan" required>
+                                <select name="commune" id="commune_g_abidjan">
                                     <option value="Anyama">Anyama</option>
                                     <option value="Bingerville">Bingerville</option>
-                                    <option value="Bassame">Bassame</option>
-                                    <option value="Songon">Songon</option>
+                                    <option value="Bassame">Grand-Bassam</option>
+                                    <option value="Songon">Yopougon-Songuon</option>
                                 </select>
                             </div><!--/ [col] -->
 
@@ -70,21 +74,21 @@
                                 <input type="text" required name="lieu" id="lieu" placeholder="Quartier">
                             </div><!--/ [col] -->
 
-                            <div class="col-lg-12 col-md-12">
+                            <div class="col-lg-12 col-md-12" style="margin-top: 10px; margin-bottom: 5px">
                                 <label for="" style="font-weight: bold" class="required">Mode de livraison</label>
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                <input class="form-check-input" type="radio" name="mode_livraison" id="mode_livraison_1" checked>
-                                <label class="form-check-label" for="mode_livraison_1">48H</label>
+                                <input class="form-check-input" type="radio" name="mode_livraison" id="mode_livraison_1" value="2" checked>
+                                <label class="form-check-label" for="mode_livraison_1" style="font-weight: bolder;">48 Heures</label>
                             </div>
                             <div class="col-lg-4 col-md-4">
-                                <input class="form-check-input" type="radio" name="mode_livraison" id="mode_livraison_2">
-                                <label class="form-check-label" for="mode_livraison_2">72H</label>
+                                <input class="form-check-input" type="radio" name="mode_livraison" id="mode_livraison_2" value="3">
+                                <label class="form-check-label" for="mode_livraison_2" style="font-weight: bolder;">72 Heures</label>
                             </div>
                             <div class="col-lg-4 col-md-4">
-                                <input class="form-check-input" type="radio" name="mode_livraison" id="mode_livraison_3">
-                                <label class="form-check-label" for="mode_livraison_3">5J</label>
+                                <input class="form-check-input" type="radio" name="mode_livraison" id="mode_livraison_3" value="5">
+                                <label class="form-check-label" for="mode_livraison_3" style="font-weight: bolder;">5 Jours</label>
                             </div>
 
                         </div><!--/ .theme_box -->
@@ -102,18 +106,17 @@
                                 <tfoot>
 
                                 <tr>
-                                    <td>Total fature</td>
+                                    <td>Total fature :</td>
                                     <td><span class="total">{{ total|number_format(0, " ", " ") }}</span> <span style="color: #cb9700">F CFA</span></td>
                                 </tr>
 
                                 <tr>
-                                    <td>Montant livraison :</td>
+                                    <td><span class="icon-truck"></span>Coût livraison :</td>
                                     <td>
                                         {% if total >= 50000 %}
-                                            <span style="color: green"><span class="icon-check-1">Livraison gratuit</span></span>
+                                            <span style="color: green"><span class="icon-check-1">Livraison gratuite !!</span></span>
                                         {% else %}
-                                            <span class="total">
-                                            {{ total|number_format(0, " ", " ") }}</span> <span style="color: #cb9700">F CFA</span>
+                                            <span class="total" id="montant_livraison"></span> <span style="color: #cb9700">F CFA</span>
                                         {% endif %}
                                     </td>
                                 </tr>

@@ -7,7 +7,7 @@
     {% include '_intro_admin.html.twig' %}
     <!-- Section: Intro -->
 
-    <section class="mb-5">
+    <section class="mb-5 border p-4">
 
         <!-- Card -->
         <div class="card card-cascade narrower">
@@ -19,12 +19,12 @@
                 <div class="row">
 
                     <!-- Grid column -->
-                    <div class="col-xl-6 col-lg-12 mr-0 pb-2 mb-5">
+                    <div class="col-xl-6 col-lg-12 mr-0">
 
                         <!-- Chart -->
                         <div class="view view-cascade gradient-card-header white">
 
-                            <h4 class="text-dark text-uppercase">Histogramme des ventes par mois</h4>
+                            <h5 class="text-dark text-uppercase">Histogramme des ventes par mois</h5>
 
                             <canvas id="barChart" height="155px"></canvas>
 
@@ -36,11 +36,111 @@
                     <!-- Grid column -->
                     <div class="col-xl-6 col-lg-12 mb-4 pb-2">
 
-                        <!-- Chart -->
-                        <div class="view view-cascade gradient-card-header" style="background-color: #cb9700">
 
-                            <canvas id="lineChart" height="175"></canvas>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Produits les plus commandés</h6>
+                                <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Photo</th>
+                                        <th>Catégorie</th>
+                                        <th>Nom du produit</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
 
+                                </table>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <h6>Boutique qui vendent plus</h6>
+                                <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Bouique</th>
+                                        <th>Nbre produit vendu</th>
+                                        <th>Mois</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Nos potentiels partenaires</h6>
+                                <div class="card-body card-body-cascade text-center">
+                                    <canvas id="doughnutChart" height="200px"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Visiteurs</h6>
+                                <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <tbody>
+                                    <tr>
+                                        <td>Visiteur par jour</td>
+                                        <td>0<i class="fas fa-sort-amount-up ml-1 text-danger"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Visiteur total</td>
+                                        <td>0<i class="fas fa-sort-amount-up ml-1 text-danger"></i></td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <h6>Moyen de paiement les plus utilisés</h6>
+                                <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <tbody>
+                                    <tr>
+                                        <td>Moov Money</td>
+                                        <td>
+                                            {{ moov_money }}
+                                            {{ ( (moov_money > mtn_money and moov_money > orange_money and moov_money > visa_card )
+                                            ? " <i class='far fa-check-circle text-success ml-2'></i>": ""    ) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>MTN Money</td>
+                                        <td>
+                                            {{ mtn_money }}
+                                            {{ ( (moov_money < mtn_money and mtn_money > orange_money and mtn_money > visa_card )
+                                            ? " <i class='far fa-check-circle text-success'></i>": ""    ) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Orange Money</td>
+                                        <td>
+                                            {{ orange_money  }}
+                                            {{ ( (moov_money < orange_money and mtn_money < orange_money and orange_money > visa_card )
+                                            ? " <i class='far fa-check-circle text-success ml-2'></i>": ""    ) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Visa CARD</td>
+                                        <td>
+                                            {{ visa_card }}
+                                            {{ ( (moov_money < visa_card and mtn_money < visa_card and orange_money < visa_card )
+                                            ? " <i class='far fa-check-circle text-success'></i>": ""    ) }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
                         </div>
 
                     </div>

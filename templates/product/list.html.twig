@@ -23,14 +23,21 @@
 
                 <div class="card-body">
                     <div class="row text-dark">
-                        <div class="col-md-8"><h4 class="dark-grey-text">Liste des produits</h4></div>
+                        <div class="col-md-8">
+                            {% if app.request.get('_route') == "partner_product_list" %}
+                                <h5 class="dark-grey-text">Liste des produits <b>{{ partner.partnerShopName }}</b></h5>
+                            {% else %}
+                                <h5 class="dark-grey-text">Liste des produits disponible en ligne</h5>
+                            {% endif %}
+
+                        </div>
                         <div class="col-md-4 mt-2 text-right">
-                            <a href="{{ path('product_add') }}" title="Ajout de produit"><i class="fas fa-plus-circle text-info mr-3" style="font-size: 25px"></i></a>
-                            <a href="{{ path('product_list') }}" title="Liste des produits"><i class="fas fa-list-alt text-danger" style="font-size: 25px"></i></a>
+                            <a href="{{ path('product_add') }}" title="Ajout de produit"><i class="fas fa-plus-circle text-info mr-2"></i></a>
+                            <a href="{{ path('product_list') }}" title="Liste des produits"><i class="fas fa-list-alt text-danger"></i></a>
                         </div>
                     </div>
                     <hr/>
-                    <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+                    <table id="dtMaterialDesignExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>Photo</th>
@@ -38,6 +45,7 @@
                             <th width="15%">Nom du produit</th>
                             <th>Prix</th>
                             <th>Stock</th>
+                            <th>Partenaire</th>
                             <th width="15%">#Action</th>
                         </tr>
                         </thead>
@@ -45,14 +53,15 @@
                         {% for produit in items %}
                             <tr>
                                 <td><img src="{{ asset('sapeuradmin/product/')~produit.productImage }}"
-                                         alt="" style="width: 60px"></td>
+                                         alt="" style="width: 40px"></td>
                                 <td>{{ produit.category.libelleFr }}</td>
                                 <td> {{ produit.productName }} </td>
                                 <td> {{ produit.productPrice|number_format() }} </td>
                                 <td> {{ produit.productStock }} </td>
+                                <td> {{ produit.partner.partnerShopName }} </td>
                                 <td>
-                                    <a href="{{ path('product_edit', {'id': produit.id}) }}"><i class="fas fa-pen-alt text-info mr-4 mt-2" title="Modifier" style="font-size: 20px"></i></a>
-                                    <a data-toggle="modal" data-target="#modalAlertProduct" ><i class="far fa-trash-alt text-danger mt-2" style="font-size: 20px"></i></a>
+                                    <a href="{{ path('product_edit', {'id': produit.id}) }}"><i class="fas fa-pen-alt text-info mr-2 mt-2" title="Modifier"></i></a>
+                                    <a data-toggle="modal" data-target="#modalAlertProduct" ><i class="far fa-trash-alt text-danger mt-2"></i></a>
                                 </td>
                             </tr>
 

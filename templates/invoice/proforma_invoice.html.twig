@@ -10,6 +10,9 @@
     <!-- Font Awesome -->
 
     <style>
+        body{
+            font-size: 10px!important;
+        }
         .table{
             width: 100%;
             margin-bottom: .5rem;
@@ -22,8 +25,8 @@
             border-top: none;
         }
         table.table td, table.table th {
-            padding-top: .5rem;
-            padding-bottom: .7rem;
+            padding-top: .4rem;
+            padding-bottom: .5rem;
         }
         .table thead th {
             vertical-align: bottom;
@@ -56,7 +59,6 @@
         }
         .font-weight-bold{
             font-weight: bold;
-            font-size: 17px;
         }
     </style>
 </head>
@@ -65,38 +67,56 @@
 
 <table class="table">
     <tr>
-        <td style="text-align: center;border-top: none!important;" colspan="2">
-            <h3 style="font-weight: bold; text-transform: uppercase; font-size: 35px">
-                <u>Facture Proforma</u>
-            </h3>
+        <td>
+            <img src="{{ logo }}" alt="" style="width: 120px"><br/>
+            <h1>Plateforme de vente de vêtements et <br/>accéssoires vestimentaire en ligne</h1>
         </td>
     </tr>
 </table>
 
 <table class="table" style="margin-top: 10px">
     <tr>
-        <td style="text-align: left; border-top: none!important;">N° FACTURE</td>
-        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ numero }}</td>
+        <td style="text-align: left; border-top: none!important; width: 20%">N° FACTURE</td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">: {{ numero }}</td>
     </tr>
     <tr>
-        <td style="text-align: left;border-top: none!important;">Nom & Prénom(s)</td>
-        <td style="text-align: left;border-top: none!important; font-weight: bold">{{ name|upper }}</td>
+        <td style="text-align: left;border-top: none!important;width: 20%">Ref commande</td>
+        <td style="text-align: left;border-top: none!important; font-weight: bold">: {{ ref|upper }}</td>
     </tr>
     <tr>
-        <td style="text-align: left; border-top: none!important;">Contact </td>
-        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ tel }}</td>
+        <td style="text-align: left; border-top: none!important; width: 20%">Date facturation </td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">: {{ date_cmd }}</td>
     </tr>
     <tr>
-        <td style="text-align: left; border-top: none!important;">Lieu de livraison </td>
-        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ lieu|upper }}</td>
+        <td style="text-align: left; border-top: none!important;width: 20%">Mode depaiement </td>
+        <td style="text-align: left; border-top: none!important;font-weight: bold">: {{ (moyen_buy == "OMCIV2")? "Orange Money" : moyen_buy }}</td>
     </tr>
+
+</table>
+
+<table class="table" style="margin-top: 10px">
     <tr>
-        <td style="text-align: left; border-top: none!important;">Date de commande</td>
-        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ date_cmd|date('Y/m/d H:i:s') }}</td>
-    </tr>
-    <tr>
-        <td style="text-align: left; border-top: none!important;">10 % reglé par :</td>
-        <td style="text-align: left; border-top: none!important;font-weight: bold">{{ (moyen_buy == "OMCIV2")? "Orange Money" : moyen_buy }}</td>
+        <td style="text-align: left; border-top: none!important; width: 50%!important;"></td>
+        <td style="text-align: left; border-top: none!important;">
+            <table class="table" style="margin-top: 10px">
+                <tr>
+                    <td style="text-align: left; border-top: none!important;">Nom client</td>
+                    <td style="text-align: left; border-top: none!important; font-weight: bold">: {{ name }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; border-top: none!important;">Contact client</td>
+                    <td style="text-align: left; border-top: none!important; font-weight: bold">: {{ tel }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; border-top: none!important;">Lieu de livraison</td>
+                    <td style="text-align: left; border-top: none!important; font-weight: bold">: {{ lieu }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; border-top: none!important;">Date de livraison</td>
+                    <td style="text-align: left; border-top: none!important; font-weight: bold">: {{ date_livraison }}</td>
+                </tr>
+            </table>
+        </td>
     </tr>
 
 </table>
@@ -104,7 +124,7 @@
 <table class="table">
     <tr>
         <td colspan="2" style="border-top: none!important;">
-            <hr style="margin-top: 0!important;">
+            <h3 style="font-size: 11px!important;"><u>FACTURE PROFORMA N° {{ numero }}</u></h3>
         </td>
     </tr>
 </table>
@@ -114,37 +134,46 @@
     <tr>
         <th>Nom produit</th>
         <th>Ref produit</th>
-        <th>Quantité</th>
-        <th>Montant (CFA)</th>
+        <th style="text-align: center">Quantité</th>
+        <th style="text-align: right">Montant</th>
     </tr>
     </thead>
     <tbody>
     {% for item in items %}
         <tr>
-            <td>{{ item.product.productName }}</td>
-            <td>{{ item.product.partner.partnerCode }}</td>
-            <td>{{ item.qte }}</td>
-            <td>
+            <td style="font-style: italic">{{ item.product.productName }}</td>
+            <td style="font-style: italic">{{ item.product.partner.partnerCode }}</td>
+            <td style="text-align: center;font-style: italic">{{ item.qte }}</td>
+            <td style="text-align: right; font-style: italic">
                 {% if item.product.productReduction|length != 0 %}
                      {% set priceReduction = (item.product.productPrice * item.product.productReduction)/100 %}
-                    {{ ((item.product.productPrice + priceReduction) * item.qte)|number_format(0,' ', ' ') }}
+                    {{ ((item.product.productPrice + priceReduction) * item.qte)|number_format(0,' ', ' ') }} F CFA
                 {% else %}
-                    {{ (item.product.productPrice * item.qte)|number_format(0,' ', ' ') }}
+                    {{ (item.product.productPrice * item.qte)|number_format(0,' ', ' ') }} F CFA
                 {% endif %}
             </td>
         </tr>
     {% endfor %}
     <tr>
-        <td colspan="3" style="text-transform: uppercase">Montant HT</td>
-        <td style="font-weight: bold; text-align: left; color: black"> {{ sub_total|number_format(0,' ', ' ') }}</td>
+        <td colspan="3" style="text-transform: uppercase">Montant Total</td>
+        <td style="font-weight: bold; text-align: right; color: black"> {{ sub_total|number_format(0,' ', ' ') }} F CFA</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-transform: uppercase">Montant de la livraison</td>
+        <td style="font-weight: bold; text-align: right; color: black"> {{ amount_livraison|number_format(0,' ', ' ') }} F CFA</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-transform: uppercase">Montant total facture</td>
+        <td style="font-weight: bold; text-align: right; color: black"> {{ (montant_total_fac)|number_format(0,' ', ' ') }} F CFA</td>
     </tr>
     <tr>
         <td colspan="3" style="text-transform: uppercase">Montant payé en ligne</td>
-        <td style="font-weight: bold; text-align: left; color: black"> {{ amount_buyed|number_format(0,' ', ' ') }} </td>
+        <td style="font-weight: bold; text-align: right; color: black"> {{ (amount_buyed)|number_format(0,' ', ' ') }} F CFA</td>
     </tr>
+
     <tr>
         <td colspan="3" style="text-transform: uppercase">Reste à payer en espèce</td>
-        <td style="font-weight: bold; text-align: left; color: orangered"> {{ (mnt_ttc - amount_buyed)|number_format(0,' ', ' ') }}</td>
+        <td style="font-weight: bold; text-align: right; color: #cd322c"> {{ (montant_total_fac - amount_buyed)|number_format(0,' ', ' ') }} F CFA</td>
     </tr>
     </tbody>
 </table>
@@ -160,7 +189,15 @@
     </tr>
     <tr>
         <td colspan="2" style="text-align: right; font-weight: bold">
-            <img src="{{ qr_code }}" alt="" style="width: 150px!important;">
+            <img src="{{ qr_code }}" alt="" style="width: 100px!important;">
+        </td>
+    </tr>
+</table>
+<table style="margin-top: 10px">
+    <tr>
+        <td colspan="2" style="color: darkgray; text-align: center">
+            <small>SAPEURDEBABY | CÔTE D'IVOIRE, ABIDJAN, COCODY SAINT JEAN | e.<span style="color: rgba(194,164,66,0.56)!important; font-weight: bold">CONTACT@SAPEURDEBABY.COM</span>
+                <br/>| m.<span style="color: rgba(194,164,66,0.56)!important; font-weight: bold">(+225) 01 53 22 26 28</span> | N°RCCM : CI-ABJ-2019-B-11629 </small>
         </td>
     </tr>
 </table>
