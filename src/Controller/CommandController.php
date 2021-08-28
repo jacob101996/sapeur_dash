@@ -217,6 +217,8 @@ class CommandController extends AbstractController
             $sessionId = $paymentPro->executePayment($amountBuyed, 1, $command->getNameClt(),
                 $command->getNameClt(), $command->getTelClt(), $command->getBuyedBy(), $command->getRefCmd());
 
+            //dump($command->getBuyedBy());
+
             //dd($sessionId->Sessionid);
 
             if (!is_null($sessionId))
@@ -232,9 +234,17 @@ class CommandController extends AbstractController
 
                     $this->em->flush();
 
-                    // Redirect to API Payment PRO
-                    return $this->redirect('https://paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
-                        .$sessionId->Sessionid, 307);
+                    if ($command->getBuyedBy() == "OMCIV2"){
+                        // Redirect to API Payment PRO
+                        return $this->redirect('http://www.paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
+                            .$sessionId->Sessionid, 307);
+                    }else{
+                        // Redirect to API Payment PRO
+                        return $this->redirect('https://www.paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
+                            .$sessionId->Sessionid, 307);
+                    }
+
+
                     //header("Location:https://www.paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid=".$sessionId->Sessionid);
 
                 }catch (\SoapFault $fault) {
