@@ -89,7 +89,6 @@ class CommandController extends AbstractController
 
         if (!is_null($response) && intval($response) == 0)
         {
-
             $chanel = $request->get('channel');
             $refNumber = $request->get('referenceNumber');
             $transAt = $request->get('transactiondt');
@@ -218,13 +217,13 @@ class CommandController extends AbstractController
             $sessionId = $paymentPro->executePayment($amountBuyed, 1, $command->getNameClt(),
                 $command->getNameClt(), $command->getTelClt(), $command->getBuyedBy(), $command->getRefCmd());
 
-            //dd($sessionId);
+            //dd($sessionId->Sessionid);
 
             if (!is_null($sessionId))
             {
                 try {
                     // Recuperation de la session
-                    $array = (array)$sessionId;
+                    //$array = (array)$sessionId;
 
                     // Impression des la facture proforma
                     $this->generateProformaInvoice($numeroFactureIncrement, $command->getNameClt(), $command->getTelClt(),
@@ -234,8 +233,9 @@ class CommandController extends AbstractController
                     $this->em->flush();
 
                     // Redirect to API Payment PRO
-                    return $this->redirect('https://paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
-                        .$array['Sessionid'], 307);
+                    return $this->redirect('http://paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
+                        .$sessionId->Sessionid, 307);
+                    //header("Location:https://www.paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid=".$sessionId->Sessionid);
 
                 }catch (\SoapFault $fault) {
                     die($fault->getMessage());
