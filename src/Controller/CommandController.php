@@ -172,10 +172,10 @@ class CommandController extends AbstractController
                 $amountLivraison = 0;
             }else{
                 if ($request->get('point_livraison') == "Abidjan"){
-                    $amountBuyed   = $mntTtc;
+                    $amountBuyed   = 1000;
                     $amountLivraison = 1000;
                 }else{
-                    $amountBuyed   = $mntTtc;
+                    $amountBuyed   = 1500;
                     $amountLivraison = 1500;
                 }
             }
@@ -214,7 +214,7 @@ class CommandController extends AbstractController
 
             // Appel du service de payment
             $paymentPro =   new PaymentPro();
-            $sessionId = $paymentPro->executePayment($amountLivraison, 1, $command->getNameClt(),
+            $sessionId = $paymentPro->executePayment($amountBuyed, 1, $command->getNameClt(),
                 $command->getNameClt(), $command->getTelClt(), $command->getBuyedBy(), $command->getRefCmd());
 
             //dump($command->getBuyedBy());
