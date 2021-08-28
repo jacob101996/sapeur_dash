@@ -233,7 +233,7 @@ class CommandController extends AbstractController
                     $this->em->flush();
 
                     // Redirect to API Payment PRO
-                    return $this->redirect('http://paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
+                    return $this->redirect('https://paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
                         .$sessionId->Sessionid, 307);
                     //header("Location:https://www.paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid=".$sessionId->Sessionid);
 
