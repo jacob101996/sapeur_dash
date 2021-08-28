@@ -236,8 +236,8 @@ class CommandController extends AbstractController
 
                     if ($command->getBuyedBy() == "OMCIV2"){
                         // Redirect to API Payment PRO
-                        return $this->redirect('http://www.paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
-                            .$sessionId->Sessionid, 307);
+                        return $this->redirect('https://www.paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
+                            .$sessionId->Sessionid);
                     }else{
                         // Redirect to API Payment PRO
                         return $this->redirect('https://www.paiementpro.net/webservice/onlinepayment/processing_v2.php?sessionid='
