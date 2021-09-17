@@ -1,55 +1,41 @@
 
 {% if app.request.get('_route')  in ["view_product_by_category", "all_prod_of_seller", "view_product_by_cat_and_sub"] %}
 
-    <div class="layerslider" style="width:100%; height: 522px;">
+    <div class="layerslider" style="height: 522px;!important;">
 
         <!-- - - - - - - - - - - - - - Slide 1 - - - - - - - - - - - - - - - - -->
 
         <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
 
-            <img class="ls-bg" src="{{ asset('bootstrap/images/s1.png') }}" alt="">
+            <img class="ls-bg" src="{{ asset('bootstrap/images/s1.jpg') }}" alt="">
 
         </div>
 
-        <!-- - - - - - - - - - - - - - End of slide 1 - - - - - - - - - - - - - - - - -->
-
-        <!-- - - - - - - - - - - - - - Slide 2 - - - - - - - - - - - - - - - - -->
 
         <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
 
-            <img class="ls-bg" src="{{ asset('bootstrap/images/s2.png') }}" alt="">
-
-        </div>
-
-        <!-- - - - - - - - - - - - - - End of slide 2 - - - - - - - - - - - - - - - - -->
-
-        <!-- - - - - - - - - - - - - - Slide 3 - - - - - - - - - - - - - - - - -->
-
-        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
-
-            <img class="ls-bg" src="{{ asset('bootstrap/images/s3.png') }}" alt="">
-
-        </div>
-        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
-
-            <img class="ls-bg" src="{{ asset('bootstrap/images/s4.png') }}" alt="">
+            <img class="ls-bg" src="{{ asset('bootstrap/images/s2.jpg') }}" alt="">
 
         </div>
 
         <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
 
-            <img class="ls-bg" src="{{ asset('bootstrap/images/s1.png') }}" alt="">
+            <img class="ls-bg" src="{{ asset('bootstrap/images/s3.jpg') }}" alt="">
 
         </div>
 
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
 
-        <!-- - - - - - - - - - - - - - End of slide 3 - - - - - - - - - - - - - - - - -->
+            <img class="ls-bg" src="{{ asset('bootstrap/images/s4.jpg') }}" alt="">
+
+        </div>
+
 
     </div><!--/ #layerslider-->
 
 {% else %}
 
-    <div class="layerslider" style="width:100%; height: 522px;">
+    <div class="layerslider" style="height: 520px;!important;">
 
         <!-- - - - - - - - - - - - - - Slide 1 - - - - - - - - - - - - - - - - -->
 
@@ -80,7 +66,18 @@
         </div>
 
 
-        <!-- - - - - - - - - - - - - - End of slide 3 - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - End of slide 4 - - - - - - - - - - - - - - - - -->
+
+        <!-- - - - - - - - - - - - - - Slide 3 - - - - - - - - - - - - - - - - -->
+
+        <div class="ls-slide" data-ls="transition2d: 10, 27, 63, 67, 69;">
+
+            <img class="ls-bg" src="{{ asset('bootstrap/images/4.jpg') }}" alt="">
+
+        </div>
+
+
+        <!-- - - - - - - - - - - - - - End of slide 4 - - - - - - - - - - - - - - - - -->
 
     </div><!--/ #layerslider-->
 
