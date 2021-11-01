@@ -70,6 +70,9 @@
             background-color: rgba(254, 163, 0, 0.44);
             font-weight: bold;
         }
+        .ls-inner{
+            width: 100%px!important;
+        }
 
         .alert {
             position: relative;
@@ -156,7 +159,6 @@
     {% if app.request.get('_route') == "home_index" %}
         <!-- - - - - - - - - - - - - - Layer slider - - - - - - - - - - - - - - - - -->
         {% block slider %}{% include '_slider_home.html.twig' %}{% endblock %}
-
         <!-- - - - - - - - - - - - - - End of layer slider - - - - - - - - - - - - - - - - -->
     {% endif %}
 

@@ -173,10 +173,10 @@ class HomeController extends AbstractController
      * @Route("/view/{cat}/{sub}", name="view_product_by_cat_and_sub")
      * @param $cat
      * @param $sub
-     * @param \App\Repository\CategoryProductRepository $categoryProductRepository
-     * @param \App\Repository\ProductRepository $productRepository
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \App\Repository\SubCategoryProductRepository $subCategoryProductRepository
+     * @param CategoryProductRepository $categoryProductRepository
+     * @param ProductRepository $productRepository
+     * @param SessionInterface $session
+     * @param SubCategoryProductRepository $subCategoryProductRepository
      * @return mixed
      */
     public function viewDetailProductBySubCat($cat,$sub,CategoryProductRepository  $categoryProductRepository,
@@ -462,9 +462,9 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/search/product", name="search_product")
-     * @param \App\Repository\ProductRepository $productRepository
-     * @param \App\Repository\CategoryProductRepository $categoryProductRepository
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param ProductRepository $productRepository
+     * @param CategoryProductRepository $categoryProductRepository
+     * @param SessionInterface $session
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */

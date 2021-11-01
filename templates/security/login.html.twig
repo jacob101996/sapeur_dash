@@ -15,7 +15,6 @@
             <hr/>
 
             <div class="row" style="margin-top: 30px">
-
                 <div class="col-md-12">
                     {% if error is defined and error is not null %}
                         <div class="col" style="font-size: 13px; padding: 8px; border: 1px solid rgba(255,123,26,0.33); font-weight: bold; color: #ff7b1a ;background-color: rgba(255,123,26,0.33)"><i class="fas fa-exclamation-triangle warning" style="margin-top: 4px"></i> {{ error.messageKey | trans(error.messagedata, 'security') }}</div>

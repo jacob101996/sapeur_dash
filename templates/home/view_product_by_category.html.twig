@@ -27,17 +27,43 @@
 
                     <section class="section_offset">
 
-                        <h4>Categories</h4>
+                        <h4 style="font-weight: bold">Catégories de vêtements</h4>
 
                         <ul class="theme_menu cats">
-
                             {% if cat is defined and cat is not null %}
 
-                                {% for subcat in cat.subCategory%}
-                                    <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr }) }}">{{ subcat.libelleFr }}</a></li>
+                                {% for subcat in cat.subCategory %}
+                                    {% if subcat.typeProduct.id == 1 %}
+                                        <li>
+                                            <a href="{{ path('view_product_by_cat_and_sub',
+                                                {'cat': cat.libelleFr, 'sub': subcat.libelleFr }) }}">
+                                                <img src="{{ asset('bootstrap/icone/category.jpg') }}" alt="" width="17px"> {{ subcat.libelleFr }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
                                 {% endfor %}
                             {% endif %}
+                        </ul>
 
+                        <h4 style="font-weight: bold; margin-top: 10px">Catégories d'accessoires</h4>
+
+                        <ul class="theme_menu cats">
+                            {% if cat is defined and cat is not null %}
+
+                                {% for subcat in cat.subCategory %}
+                                    {% if subcat.typeProduct.id == 2 %}
+                                        <li>
+                                            <a href="{{ path('view_product_by_cat_and_sub',
+                                                {'cat': cat.libelleFr, 'sub': subcat.libelleFr }) }}">
+                                                <img src="{{ asset('bootstrap/icone/category.jpg') }}" alt="" width="17px"> {{ subcat.libelleFr }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            {% endif %}
                         </ul>
 
                     </section><!--/ .animated.transparent-->

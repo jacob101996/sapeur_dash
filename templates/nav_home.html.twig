@@ -43,8 +43,8 @@
 
                                                         {% for subcat in cat.subCategory%}
 
-                                                            <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr, 'sub': subcat.libelleFr, 'quality': 'medium_quality'}) }}">
-                                                                    {{ subcat.libelleFr }}</a></li>
+                                                            <li><a href="{{ path('view_product_by_cat_and_sub_quality', {'cat': cat.libelleFr,
+                                                                    'sub': subcat.libelleFr, 'quality': 'medium_quality'}) }}">{{ subcat.libelleFr }}</a></li>
 
                                                         {% endfor %}
 
@@ -168,8 +168,8 @@
                                             <div class="mega_menu type_2 clearfix">
 
                                                 <!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
-
                                                 <div class="mega_menu_item">
+                                                {# <div cla $tabQte []  = $quantity;ss="mega_menu_item"> #}
 
                                                     <h6><b>Friperie</b></h6>
 
@@ -317,8 +317,23 @@
                             <ul>
 
                                 <li><a href="{{ path('home_index') }}">Accueil</a></li>
-                                <li><a href="{{ path('search_product_by_quality', {'quality': 'medium_quality'}) }}">Friperie</a></li>
-                                <li><a href="{{ path('search_product_by_quality', {'quality': 'best_quality'}) }}">Haut de gamme</a></li>
+                                <li>
+                                    <a href="{{ path('view_product_by_category', {'slug': 'homme'}) }}">
+                                        <img src="{{ asset('bootstrap/icone/man.png') }}" alt="" width="25px" style="margin-top: -4px"> <span>Univers Homme</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('view_product_by_category', {'slug': 'femme'}) }}">
+                                        <img src="{{ asset('bootstrap/icone/woman.png') }}" alt="" width="25px" style="margin-top: -4px">
+                                        <span>Univers Femme</span></a>
+
+                                </li>
+                                <li><a href="{{ path('view_product_by_category', {'slug': 'enfant'}) }}">
+                                        <img src="{{ asset('bootstrap/icone/child.png') }}" alt="" width="25px" style="margin-top: -4px">
+                                        <span>Univers Enfant</span></a></li>
+                                <li><a href="{{ path('view_product_by_category', {'slug': 'sport'}) }}">
+                                        <img src="{{ asset('bootstrap/icone/sport.png') }}" alt="" width="25px" style="margin-top: -4px">
+                                        <span>Univers Sport</span>
+                                    </a></li>
                                 <!--
                                 <li><a href="shop_shopping_cart.html">A propos</a></li>-->
 
