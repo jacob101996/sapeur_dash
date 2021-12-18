@@ -31,7 +31,7 @@
                     </div>
                 </li>
 
-                {% if app.user.roles is not null %}
+                {% if app.user != "anon." %}
                     {% if app.user.roles.0 in ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] %}
 
                         <li>
