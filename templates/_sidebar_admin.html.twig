@@ -30,7 +30,7 @@
                         </ul>
                     </div>
                 </li>
-                {% if app.user.roles.0 in ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] %}
+                {% if app.user is defined and app.user.roles.0 in ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] %}
 
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
