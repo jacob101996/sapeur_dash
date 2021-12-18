@@ -156,12 +156,6 @@
     <!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
     {% block nav %}{% include 'nav_home.html.twig' %}{% endblock %}
 
-    {% if app.request.get('_route') == "home_index" %}
-        <!-- - - - - - - - - - - - - - Layer slider - - - - - - - - - - - - - - - - -->
-        {% block slider %}{% include '_slider_home.html.twig' %}{% endblock %}
-        <!-- - - - - - - - - - - - - - End of layer slider - - - - - - - - - - - - - - - - -->
-    {% endif %}
-
     <!-- - - - - - - - - - - - - - Page Wrapper - - - - - - - - - - - - - - - - -->
 
     {% block content %}{% endblock %}
@@ -207,7 +201,6 @@
 <script src="{{ asset('bootstrap/') }}js/theme.plugins.js"></script>
 <script src="{{ asset('bootstrap/') }}js/theme.core.js"></script>
 
-{% include 'ajax.html.twig' %}
 
 <script>
     // When the user scrolls the page, execute myFunction

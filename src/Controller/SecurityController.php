@@ -50,7 +50,7 @@ class SecurityController extends AbstractController
             {
                 $token->setToken(null);
             }
-            return $this->redirectToRoute('home_index');
+            return $this->redirectToRoute('security_login');
         }catch (\Exception $e)
         {
             die($e->getMessage());

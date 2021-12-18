@@ -25,7 +25,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/my/account/", name="admin_index")
+     * @Route("/", name="admin_index")
      * @param ProductRepository $productRepository
      * @param PartnerRepository $partnerRepository
      * @param CommandRepository $commandRepository
