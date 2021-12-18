@@ -119,6 +119,11 @@ class Command
      */
     private $is_buyed;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $send_sms;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -374,6 +379,18 @@ class Command
     public function setIsBuyed(bool $is_buyed): self
     {
         $this->is_buyed = $is_buyed;
+
+        return $this;
+    }
+
+    public function getSendSms(): ?bool
+    {
+        return $this->send_sms;
+    }
+
+    public function setSendSms(bool $send_sms): self
+    {
+        $this->send_sms = $send_sms;
 
         return $this;
     }

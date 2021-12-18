@@ -8,6 +8,7 @@ use App\Repository\PartnerRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubCategoryProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

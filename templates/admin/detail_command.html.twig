@@ -32,8 +32,8 @@
                     <hr class="mt-0"/>
                     <div class="row">
                         <div class="col-md-12 text-right">
-                            <a href="" class="btn btn-green btn-sm">Valider la commande</a>
-                            <button  class="btn btn-danger btn-sm">Annuler la commande</button>
+                            <a href="{{ path('send_sms_clt', {'ref' : command.refCmd}) }}" class="btn btn-green btn-sm">Valider la commande</a>
+                            <a href="{{ path('send_sms_clt_echec', {'ref' : command.refCmd}) }}"  class="btn btn-danger btn-sm">Annuler la commande</a>
                         </div>
                     </div>
                 </div>
@@ -91,6 +91,10 @@
                 <tr>
                     <td>Lieu livraison</td>
                     <td class="text-left font-weight-bold">{{ command.deliveryLocation }}</td>
+                </tr>
+                <tr>
+                    <td>Etat SMS</td>
+                    <td class="text-left font-weight-bold {{ command.sendSms == 1 ? 'text-success': 'text-danger'}} ">{{ command.sendSms == 1 ? 'SMS envoyé au client': 'SMS non envoyé' }}</td>
                 </tr>
                 <tr>
                     <td colspan="2" class="text-center">
