@@ -31,37 +31,41 @@
                     </div>
                 </li>
 
-                <li>
-                    <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fas fa-users gold-text"></i>Gestion des comptes<i class="fas fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li>
-                                <a href="{{ path('user_add') }}" class="waves-effect"><i class="fas fa-user-plus gold-text"></i>Nouveau compte</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('user_list') }}" class="waves-effect"><i class="far fa-list-alt gold-text"></i>Liste des comptes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                {% if app.user.roles.0 in ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] %}
 
-                <li>
-                    <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fas fa-users gold-text"></i>Gestion des partenaires <i class="fas fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li>
-                                <a href="{{ path('partner_add') }}" class="waves-effect"><i class="fas fa-user-plus gold-text"></i>Nouveau compte</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('partner_list') }}" class="waves-effect"><i class="far fa-list-alt gold-text"></i>Liste des partenaires</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-users gold-text"></i>Gestion des comptes<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ path('user_add') }}" class="waves-effect"><i class="fas fa-user-plus gold-text"></i>Nouveau compte</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('user_list') }}" class="waves-effect"><i class="far fa-list-alt gold-text"></i>Liste des comptes</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-users gold-text"></i>Gestion des partenaires <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ path('partner_add') }}" class="waves-effect"><i class="fas fa-user-plus gold-text"></i>Nouveau compte</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('partner_list') }}" class="waves-effect"><i class="far fa-list-alt gold-text"></i>Liste des partenaires</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                {% endif %}
 
                 <li>
                     <a class="collapsible-header waves-effect arrow-r">
