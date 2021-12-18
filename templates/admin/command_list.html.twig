@@ -75,8 +75,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ path('admin_detail_command', {'code_facture': cmd.numberFacture}) }}">
-                                        <i class="fas fa-eye"></i> Détails
+                                    <a href="{{ path('admin_detail_command', {'code_facture': (cmd.numberFacture|length > 0 ? cmd.numberFacture : 1)}) }}"><i class="fas fa-eye"></i> Détails
                                     </a>
                                 </td>
                             </tr>

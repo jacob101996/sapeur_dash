@@ -87,7 +87,7 @@ class CommandController extends AbstractController
         // Recuperation de la reponse du server
         $response = $request->get('responsecode');
 
-        if (!is_null($response) && intval($response) == 0)
+        if (!empty($response) && intval($response) == 0)
         {
             $chanel = $request->get('channel');
             $refNumber = $request->get('referenceNumber');
@@ -118,6 +118,10 @@ class CommandController extends AbstractController
 
                 // Destruction de la session
                 $session->remove("session_cart");
+
+                // Envoi du SMS au client
+                $msg = "Votre commande a ete effectuee avec succes et est en cours de traitement... \nPour plus d'info (+225) 01 50 50 50 23";
+                $this->sendSms($msg, $command[0]->getTelClt());
 
                 return $this->redirectToRoute('congratulation', [
                     'code' => intval($response), 'chanel' => $chanel, 'refNumber' => $refNumber,
@@ -451,5 +455,29 @@ class CommandController extends AbstractController
             "nbfavori"       => 0,
             "nbprod"         => 0,
         ]);
+    }
+
+    public function sendSms($message, $phone){
+
+        $url = "http://monalertesms.com/api";
+
+        $args = [
+            'userid'    => $_ENV['USER_ID'],
+            'password'  => $_ENV['USER_PWD'],
+            'message'   => urlencode($message),
+            'phone'     => $phone,
+            'sender'    => urlencode("SAPEUR2BABY") ,
+        ];
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($args));
+
+        $response = curl_exec($ch);
+
+        //dd($head);*/
+
+        curl_close($ch);
+
+        //return $this->redirect($urlApi);
     }
 }

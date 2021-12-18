@@ -284,6 +284,9 @@ class HomeController extends AbstractController
         $totalItems         = null;
         $dixPourcent        = null;
 
+        // Envoi du SMS au client
+        //$msg = "Votre commande à ete effectuee avec succes et est en cours de traitement ... \nPour plus d'info (+225) 01 50 50 50 23";
+        //$this->sendSms($msg, "0747454766");
 
         foreach ($panier as $id => $quantity)
         {

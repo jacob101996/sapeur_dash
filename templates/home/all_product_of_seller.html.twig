@@ -24,33 +24,67 @@
 
                 <aside class="col-md-3 col-sm-4 has_mega_menu">
 
-                    <!-- - - - - - - - - - - - - - Categories - - - - - - - - - - - - - - - - -->
-
                     <section class="section_offset">
 
-                        <h3>Categories</h3>
+                        <h4>Produits aléatoires</h4>
 
-                        <ul class="theme_menu cats">
+                        <ul class="products_list_widget">
 
-                            {% if cats is defined and cats is not null %}
+                            <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
 
-                                {% for cat in cats %}
+                            {% for item in prod  %}
 
-                                    {% for subcat in cat.subCategory%}
+                                <li>
 
-                                        <li><a href="{{ path('view_product_by_cat_and_sub', {'cat': cat.libelleFr, 'sub': subcat.libelleFr}) }}">{{ subcat.libelleFr }}</a></li>
+                                    <a href="#" class="product_thumb">
 
-                                    {% endfor %}
-                                {% endfor %}
-                            {% endif %}
+                                        <a href="{{ path('view_product_detail', {'id': item.id }) }}">
+                                            <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt=""
+                                                 style="">
+                                        </a>
 
-                        </ul>
+                                        {% if item.productReduction is defined and item.productReduction
+                                            is not null and item.productReduction|length != 0 %}
+                                            <div style="color: #ff4557; font-weight: bold">{{ item.productReduction }}% OFF</div>
+                                        {% endif %}
 
-                    </section><!--/ .animated.transparent-->
+                                    </a>
 
-                    <!-- - - - - - - - - - - - - - End of categories - - - - - - - - - - - - - - - - -->
+                                    <div class="wrapper">
+                                        <div class="clearfix product_info" style="margin-top: 10px">
 
-                    <!-- - - - - - - - - - - - - - Filter - - - - - - - - - - - - - - - - -->
+                                            {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
+                                                <small class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 12px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</s>
+                                                    <b style="font-size: 17px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice)|number_format(0, " ", " ") }} CFA</b></small>
+                                            {% else %}
+                                                <small class="product_price alignleft"><b style="font-size: 17px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</b></small>
+                                            {% endif %}
+
+                                            <ul class="rating alignright">
+
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li class="active"></li>
+                                                <li></li>
+
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+                                </li>
+
+                            {% endfor %}
+
+
+                            <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
+
+                        </ul><!--/ .list_of_products-->
+
+
+                    </section>
 
                     <section class="section_offset">
 
@@ -121,69 +155,6 @@
                     </div>
 
                     <!-- - - - - - - - - - - - - - End of banner - - - - - - - - - - - - - - - - -->
-
-                    <section class="section_offset">
-
-                        <h4>Produits aléatoires</h4>
-
-                        <ul class="products_list_widget">
-
-                            <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
-
-                            {% for item in prod  %}
-
-                                <li>
-
-                                    <a href="#" class="product_thumb">
-
-                                        <a href="{{ path('view_product_detail', {'id': item.id }) }}">
-                                            <img src="{{ asset('sapeuradmin/product/')~item.productImage }}" alt=""
-                                                 style="">
-                                        </a>
-
-                                        {% if item.productReduction is defined and item.productReduction
-                                            is not null and item.productReduction|length != 0 %}
-                                            <div style="color: #ff4557; font-weight: bold">{{ item.productReduction }}% OFF</div>
-                                        {% endif %}
-
-                                    </a>
-
-                                    <div class="wrapper">
-                                        <div class="clearfix product_info" style="margin-top: 10px">
-
-                                            {% if item.productReduction is defined and item.productReduction is not null and item.productReduction|length != 0 %}
-                                                <small class="product_price alignleft"><s style="margin-right: 10px!important; font-size: 12px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</s>
-                                                    <b style="font-size: 17px">{{ (((item.productPrice * item.productReduction)/100) +   item.productPrice)|number_format(0, " ", " ") }} CFA</b></small>
-                                            {% else %}
-                                                <small class="product_price alignleft"><b style="font-size: 17px">{{ item.productPrice|number_format(0, " ", " ") }} CFA</b></small>
-                                            {% endif %}
-
-                                            <ul class="rating alignright">
-
-                                                <li class="active"></li>
-                                                <li class="active"></li>
-                                                <li class="active"></li>
-                                                <li class="active"></li>
-                                                <li></li>
-
-                                            </ul>
-
-                                        </div>
-
-                                    </div>
-
-                                </li>
-
-                            {% endfor %}
-
-
-                            <!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
-
-                        </ul><!--/ .list_of_products-->
-
-
-                    </section>
-
                 </aside>
 
                 <main class="col-md-9 col-sm-8">
