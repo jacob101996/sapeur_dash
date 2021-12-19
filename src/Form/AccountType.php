@@ -29,7 +29,7 @@ class AccountType extends AbstractType
                     'class'         =>'browser-default custom-select'
                 ],
                 "choices"           => [
-                    'Commercial'    => 'ROLE_COMMERCIAL',
+                    'Editeur'       => 'ROLE_EDITEUR',
                     'Admin'         => 'ROLE_ADMIN',
                     'Super Admin'   => 'ROLE_SUPER_ADMIN',
                 ],

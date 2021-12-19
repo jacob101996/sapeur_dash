@@ -7,7 +7,8 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
-        ROLE_COMMERCIAL: ROLE_USER
+        #ROLE_COMMERCIAL: ROLE_USER
+        ROLE_EDITEUR: ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
     providers:
         from_database:
@@ -34,6 +35,9 @@ security:
                 check_path: security_login
                 #require_previous_session: false
             #logout_on_user_change: true
+            logout:
+                path: security_logout
+                target: security_login #home_index
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -46,5 +50,5 @@ security:
     access_control:
     #- { path: ^/$, roles: ROLE_USER }
     #- { path: ^/profile, roles: ROLE_USER }
-    - { path: ^/$, roles: ROLE_USER }
+    - { path: ^/$, roles: ROLE_ADMIN }
 
