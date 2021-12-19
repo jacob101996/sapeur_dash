@@ -35,9 +35,9 @@ security:
                 check_path: security_login
                 #require_previous_session: false
             #logout_on_user_change: true
-            #logout:
-                #path: security_logout
-                #target: security_login #home_index
+            logout:
+                path: security_logout
+                target: security_login #home_index
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
